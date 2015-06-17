@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyString
+  title: Explore Basecamp! — Some quick things to explore in Basecamp
+  description: A nice way to get acclimated.
 
 two:
-  title: MyString
-  description: MyString
+  title: Explore Basecamp! — To-do list basics
+  description:

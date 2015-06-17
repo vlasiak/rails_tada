@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  text: MyString
+  text: This to-do has a due date.
 
 two:
-  text: MyString
+  text: Click me > here < to see a discussion on a to-do.

@@ -1,1 +1,6 @@
 <h1>All to-do lists</h1>
+<hr/>
+
+<% @lists.each do |list| %>
+    <div class="list"><%= render partial: 'list', locals: {list: list} %></div>
+<% end %>

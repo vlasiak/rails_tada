@@ -35,6 +35,9 @@ gem 'activerecord-session_store'
 # Use FactoryGirl
 gem 'factory_girl_rails', '~> 4.0'
 
+# Use Twitter Bootstrap
+gem 'twitter-bootstrap-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

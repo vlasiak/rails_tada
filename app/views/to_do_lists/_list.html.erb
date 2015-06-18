@@ -4,9 +4,15 @@
 </div>
 <ul class="list-items">
   <% list.items.each do |item| %>
-      <li class="list-item">
-        <%= check_box_tag(item.id) %>
-        <%= label_tag(item.id, item.text) %>
-      </li>
+    <li class="list-item">
+      <%= check_box_tag(item.id) %>
+      <%= label_tag(item.id, item.text) %>
+    </li>
   <% end %>
 </ul>
+<%= link_to 'Add a to-do', '#' %>
+<%= form_tag to_do_items_path, method: :post, remote: true do %>
+  <%= text_field_tag :item %>
+  <%= submit_tag 'Submit' %>
+  <%= button_tag 'Reset', type: :reset %>
+<% end %>

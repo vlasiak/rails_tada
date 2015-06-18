@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TaDa</title>
+  <title><%= t 'tada.title' %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<div class="header"></div>
-
-<div class="container">
+  <div class="header"></div>
+  <div class="container">
     <%= yield %>
-</div>
-
-<div class="footer"></div>
-
+  </div>
+  <div class="footer"></div>
 </body>
 </html>

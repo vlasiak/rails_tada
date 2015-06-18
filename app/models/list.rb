@@ -3,4 +3,6 @@ class List < ActiveRecord::Base
 
   validates :title, presence: true
   validates :title, uniqueness: true
+
+  scope :including_items, -> { includes(:items).all }
 end

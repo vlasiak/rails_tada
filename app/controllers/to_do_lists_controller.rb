@@ -1,5 +1,5 @@
 class ToDoListsController < ApplicationController
   def index
-    @lists = List.includes(:items).all
+    @lists = List.including_items
   end
 end

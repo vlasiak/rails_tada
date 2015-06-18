@@ -1,0 +1,63 @@
+// Place all the styles related to the to_do_lists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background-color: #f5efe6;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 5px;
+  font-family: "ProximaNova", "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 14px;
+  margin: 0 auto;
+  line-height: 20px;
+  height: 1000px;
+  padding: 10px 30px;
+  text-align: left;
+  width: 900px;
+
+  h1 {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+
+  hr {
+    background: #CCCCCC;
+    border: 0 none;
+    height: 1px;
+  }
+
+  .list {
+    .list-items {
+      list-style-type: none;
+      padding-left: 5px;
+      padding-right: 100px;
+    }
+
+    .list-header {
+      h3 {
+        color: #1c5c76;
+        font-size: 15px;
+        margin-bottom: 0px;
+        margin-top: 30px;
+      }
+
+      div {
+        color: #808080;
+        font-size: 12px;
+        font-style: italic;
+      }
+    }
+
+    .list-item {
+      margin-bottom: 5px;
+      label {
+        position: relative;
+        top: -1px;
+      }
+    }
+  }
+}

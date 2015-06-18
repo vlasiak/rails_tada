@@ -1,0 +1,12 @@
+<div class="list-header" xmlns="http://www.w3.org/1999/html">
+  <h3><%= list.title %></h3>
+  <div><%= list.description %></div>
+</div>
+<ul class="list-items">
+  <% list.items.each do |item| %>
+      <li class="list-item">
+        <%= check_box_tag(item.id) %>
+        <%= label_tag(item.id, item.text) %>
+      </li>
+  <% end %>
+</ul>

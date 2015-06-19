@@ -1,0 +1,7 @@
+$('#list-<%=params[:id] %>').
+    html("<%=j render partial: 'to_do_lists/list', locals: {list: @list} %>");
+
+$('#current-item').css({'background-color':'#ffffe0'}).
+    animate({'background-color':'#fff'}, 2000);
+
+$("#form-<%=params[:id] %> input[type='text']").focus();

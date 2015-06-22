@@ -1,0 +1,6 @@
+<div class="bs-callout bs-callout-danger">
+  <h4>Sorry, but it can't be saved</h4>
+    <% item.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+</div>

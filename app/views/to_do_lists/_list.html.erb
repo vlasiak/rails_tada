@@ -2,20 +2,14 @@
   <h3><%= list.title %></h3>
   <div><%= list.description %></div>
 </div>
+
 <ul class="list-items">
   <% list.items.each do |item| %>
     <%= render partial: 'to_do_items/item', locals: {item: item} %>
   <% end %>
 </ul>
+
 <%= link_to 'Add a to-do', '#' %>
-<%= form_for list.items.new,
-             url: to_do_items_path(id: list.id),
-             method: :post,
-             remote: true,
-             html: { id: "form-#{list.id}" } do |f| %>
-  <div class="form-group">
-    <%= f.text_field :text %>
-  </div>
-  <%= submit_tag 'Submit', class: 'btn btn-success' %>
-  <%= button_tag 'Reset', class: 'btn btn-default', type: :reset %>
-<% end %>
+
+<%= render partial: 'to_do_items/form', locals: {list: list} %>
+

@@ -9,7 +9,7 @@ $('#list-<%=params[:id] %> div.bs-callout').remove();
     $('#current-item').css({'background-color':'#ffffe0'}).
             animate({'background-color':'#fff'}, 2000);
 
-    $("#form-<%=params[:id] %> input[type='text']").val("").focus();
+    $("#form-<%=params[:id] %> input[type='text']").val('').focus();
 <% else %>
     $('#list-<%=params[:id] %> ul').
         append("<%=j render partial: 'to_do_items/form_errors', locals: {item: @item} %>");

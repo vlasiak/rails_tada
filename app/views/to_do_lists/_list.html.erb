@@ -9,7 +9,7 @@
   <% end %>
 </ul>
 
-<%= link_to 'Add a to-do', '#', data: { 'behavior' => 'expand_on_click' } %>
+<%= link_to "#{t 'tada.add-item-link'}", '#', data: { 'behavior' => 'expand_on_click' } %>
 
 <%= render partial: 'to_do_items/form', locals: {list: list} %>
 

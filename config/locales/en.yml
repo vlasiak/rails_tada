@@ -23,3 +23,7 @@ en:
   tada:
     title: TaDa
     all-lists: All to-do lists
+    add-item-link: Add a to-do
+    add-item-button: Add a new item
+    clear-item-button: Clear
+    add-item-placeholder: Add a new to-do...

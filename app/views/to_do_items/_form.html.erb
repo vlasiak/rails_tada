@@ -5,9 +5,9 @@
              html: { id: "form-#{list.id}", class: 'hidden' } do |f| %>
 
     <div class="form-group">
-      <%= f.text_field :text, placeholder: 'Add a new to-do...' %>
+      <%= f.text_field :text, placeholder: "#{t 'tada.add-item-placeholder'}" %>
     </div>
 
-    <%= submit_tag 'Submit', class: 'btn btn-success btn-sm' %>
-    <%= button_tag 'Close', class: 'btn btn-default btn-sm', type: :button, data: {'behavior' => 'collapse_on_click'} %>
+    <%= submit_tag "#{t 'tada.add-item-button'}", class: 'btn btn-success btn-sm' %>
+    <%= button_tag "#{t 'tada.clear-item-button'}", class: 'btn btn-default btn-sm', type: :button, data: {'behavior' => 'collapse_on_click'} %>
 <% end %>

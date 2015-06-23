@@ -19,7 +19,7 @@ body {
   width: 900px;
 
   .bs-callout {
-    margin: 20px 0;
+    margin: 20px 4px;
     padding: 15px 30px 15px 15px;
     border-radius: 3px;
     border-style: solid;
@@ -27,8 +27,13 @@ body {
   }
 
   .bs-callout h4 {
-    margin-top: 0;
     color: #aa6708;
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  .bs-callout p {
+    font-size: 12px;
   }
 
   .bs-callout p:last-child {
@@ -45,7 +50,7 @@ body {
   }
 
   h1 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: normal;
     margin-bottom: 20px;
   }
@@ -59,7 +64,9 @@ body {
   .list {
     a {
       color: #1c5c76;
-      padding-left: 20px;
+      font-size: 13px;
+      font-style: italic;
+      padding-left: 22px;
       text-decoration: underline;
     }
 
@@ -67,9 +74,10 @@ body {
       background: #fafafa;
       border: 1px solid #e7e7e7;
       border-radius: 5px;
-      margin-left: 8px;
+      margin-left: 9px;
+      margin-top: 20px;
       max-width: 585px;
-      padding: 15px 5px 8px 20px;
+      padding: 15px 5px 8px 15px;
 
       input[type='text'] {
         border: 1px solid #bbb;
@@ -79,7 +87,7 @@ body {
       }
 
       input[type='submit'], button {
-        margin-top: -10px;
+        margin: -5px 10px 3px 0px;
       }
     }
 
@@ -87,7 +95,7 @@ body {
       list-style-type: none;
       padding-left: 5px;
       padding-right: 100px;
-      margin-bottom: 0;
+      margin-bottom: -5px;
       margin-top: 10px;
     }
 

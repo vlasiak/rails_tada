@@ -15,7 +15,7 @@ show_element = (element) ->
 
 #make focus on element
 make_focus_on = (element) ->
-  element.focus()
+  element.val('').focus()
 
 # expand a form and hide a button
 expand_on_click = (element) ->
@@ -56,7 +56,7 @@ $('document').ready () ->
 
 # attach esc key pressing on input
 $('document').ready () ->
-  $("form input[type='text']").keyup (event) ->
+  $("form input[type='text']").keypress (event) ->
     that = this
     if event.keyCode == 27
       $(that).parents('form').find('button').click()

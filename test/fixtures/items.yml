@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 first:
-  text: Click me > here < to see a discussion on a to-do.
+  id: 1
+  text: Read 'The PickAxe'.
   list_id: 1
 
 second:
+  id: 2
   text: Click me > here < to see a full list with items
   list_id: 1

@@ -1,5 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 first:
+  id: 1
   title: Explore Basecamp! — Some quick things to explore in Basecamp
   description: A nice way to get acclimated.

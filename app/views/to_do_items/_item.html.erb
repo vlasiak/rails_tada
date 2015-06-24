@@ -1,8 +1,4 @@
-<% if item == @current_item %>
-  <li class="list-item" id="current-item">
-<% else %>
-  <li class="list-item">
-<% end %>
-  <%= check_box_tag(item.id) %>
-  <%= label_tag(item.id, item.text) %>
+<li class="list-item current-item">
+  <%= check_box_tag "item-#{item.id}" %>
+  <%= label_tag "item-#{item.id}", item.text %>
 </li>

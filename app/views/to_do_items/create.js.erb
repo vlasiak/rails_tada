@@ -1,12 +1,12 @@
 $('#list-<%=params[:id] %> div.bs-callout').remove();
 
-<% if @result %>
-    $('#current-item').removeAttr('id');
+<% if @item.persisted? %>
+    $('.current-item').removeClass('current-item');
 
     $('#list-<%=params[:id] %> ul').
             append("<%=j render partial: 'to_do_items/item', locals: {item: @item} %>");
 
-    $('#current-item').css({'background-color':'#ffffe0'}).
+    $('.current-item').css({'background-color':'#ffffe0'}).
             animate({'background-color':'#fff'}, 2000);
 
     $("#form-<%=params[:id] %> input[type='text']").val('').focus();

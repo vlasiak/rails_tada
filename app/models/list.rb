@@ -1,8 +1,8 @@
 class List < ActiveRecord::Base
-  has_many :items
+  has_many :items, -> { order(:created_at) }
 
   validates :title, presence: true
   validates :title, uniqueness: true
 
-  scope :including_items, -> { includes(:items).all }
+  scope :including_items, -> { includes(:items).order(:created_at) }
 end

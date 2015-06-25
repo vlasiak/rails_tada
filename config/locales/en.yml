@@ -29,5 +29,5 @@ en:
       link: Add a to-do
       button: Add a new item
       placeholder: Add a new to-do...
-    save_error: Sorry, but it can't be saved
+    save_error: Sorry, but it cannot be saved
     cancel_button: Cancel

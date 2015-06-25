@@ -33,13 +33,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'activerecord-session_store'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+# Use Respond_to
+gem 'responders', '~> 2.0'
 # Use FactoryGirl
 gem 'factory_girl_rails', '~> 4.0'
-
 # Use Twitter Bootstrap
 gem 'twitter-bootstrap-rails'
-
 # Use Unicorn as the app server
 # gem 'unicorn'
 

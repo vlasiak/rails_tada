@@ -1,12 +1,14 @@
-todoItem = new TodoItem(<%=@item.list_id%>)
-todoItem.removeCallout()
+var options = {
+    <% if @item.persisted? %>
+        html: "<%=j render partial: 'to_do_items/item', locals: {item: @item} %>",
+        id: <%= @item.id %>,
+    <% else %>
+        html: "<%= j render partial: 'to_do_items/form_errors', locals: {item: @item} %>",
+    <% end %>
+    listId: <%= @item.list_id %>
+};
 
-<% if @item.persisted? %>
-    todoItem.add("<%=j render partial: 'to_do_items/item', locals: {item: @item} %>")
+var todoItem = new TodoItem();
+todoItem.onCreate(options);
 
-    todoItem.highlightNewOne(<%=@item.id %>)
 
-    todoItem.focusOn()
-<% else %>
-    todoItem.add("<%=j render partial: 'to_do_items/form_errors', locals: {item: @item} %>")
-<% end %>

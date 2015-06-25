@@ -3,27 +3,30 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 class @TodoItem
-  constructor: (@listId = null) ->
-
   initialize: () ->
     bindAddEvents()
     bindCancelEvents()
     bindEscKeyEvents()
 
-  add: (html) ->
-    $('#list-' + @listId + ' ul').append(html)
+  onCreate: (options) ->
+    removeCallout(options.listId)
+    appendNewOne(options.listId, options.html)
+    focusOn(options.listId)
+    highlightNewOne(options.id) if options.id
 
-  focusOn: () ->
-    makeFocusOn $('#form-' + @listId + " input[type='text']")
 
-  highlightNewOne: (id) ->
+  appendNewOne = (listId, html) ->
+    $('#list-' + listId + ' ul').append(html)
+
+  focusOn = (listId) ->
+    makeFocusOn $('#form-' + listId + " input[type='text']")
+
+  highlightNewOne = (id) ->
     $('#item-' + id).css({'background-color':'#ffffe0'}).
       animate({'background-color':'#fff'}, 2000)
 
-  removeCallout: () ->
-    $('#list-' + @listId + ' div.bs-callout').remove()
-
-
+  removeCallout = (listId ) ->
+    $('#list-' + listId + ' div.bs-callout').remove()
 
   bindAddEvents = () ->
     $.each $('div.list a'), (_, value) =>

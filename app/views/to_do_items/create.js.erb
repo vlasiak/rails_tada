@@ -1,16 +1,12 @@
-$('#list-<%=params[:id] %> div.bs-callout').remove();
+todoItem = new TodoItem(<%=@item.list_id%>)
+todoItem.removeCallout()
 
 <% if @item.persisted? %>
-    $('.current-item').removeClass('current-item');
+    todoItem.add("<%=j render partial: 'to_do_items/item', locals: {item: @item} %>")
 
-    $('#list-<%=params[:id] %> ul').
-            append("<%=j render partial: 'to_do_items/item', locals: {item: @item} %>");
+    todoItem.highlightNewOne(<%=@item.id %>)
 
-    $('.current-item').css({'background-color':'#ffffe0'}).
-            animate({'background-color':'#fff'}, 2000);
-
-    $("#form-<%=params[:id] %> input[type='text']").val('').focus();
+    todoItem.focusOn()
 <% else %>
-    $('#list-<%=params[:id] %> ul').
-        append("<%=j render partial: 'to_do_items/form_errors', locals: {item: @item} %>");
+    todoItem.add("<%=j render partial: 'to_do_items/form_errors', locals: {item: @item} %>")
 <% end %>

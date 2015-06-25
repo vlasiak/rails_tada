@@ -10,6 +10,8 @@ class ToDoItemsController < ApplicationController
     @item = list.items.new item_params
 
     @item.save
+
+    @options = @item.to_json
   end
 
   private

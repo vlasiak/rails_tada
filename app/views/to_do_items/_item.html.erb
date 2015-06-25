@@ -1,4 +1,4 @@
-<li class="list-item current-item">
-  <%= check_box_tag "item-#{item.id}" %>
-  <%= label_tag "item-#{item.id}", item.text %>
+<li id="item-<%= item.id %>" class="list-item">
+  <%= check_box_tag "item-cb-#{item.id}" %>
+  <%= label_tag "item-cb-#{item.id}", item.text %>
 </li>

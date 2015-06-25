@@ -2,51 +2,58 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-class TodoItem
+class @TodoItem
+  constructor: (@listId = null) ->
+
   initialize: () ->
-    @bindAddEvents()
-    @bindCancelEvents()
-    @bindKeyPressEvents()
+    bindAddEvents()
+    bindCancelEvents()
+    bindEscKeyEvents()
 
-  bindAddEvents: () ->
+  add: (html) ->
+    $('#list-' + @listId + ' ul').append(html)
+
+  focusOn: () ->
+    makeFocusOn $('#form-' + @listId + " input[type='text']")
+
+  highlightNewOne: (id) ->
+    $('#item-' + id).css({'background-color':'#ffffe0'}).
+      animate({'background-color':'#fff'}, 2000)
+
+  removeCallout: () ->
+    $('#list-' + @listId + ' div.bs-callout').remove()
+
+
+
+  bindAddEvents = () ->
     $.each $('div.list a'), (_, value) =>
-      @expandOnClick value
+      expandOnClick value
 
-  bindCancelEvents: () ->
+  bindCancelEvents = () ->
     $.each $('div.list form button'), (_, value) =>
-      @collapseOnClick value
+      collapseOnClick value
 
-  bindKeyPressEvents: () ->
+  bindEscKeyEvents = () ->
     $("form input[type='text']").keypress (event) ->
-      self = this
       if event.keyCode == 27
-        $(self).parents('form').find('button').click()
+        $(this).parents('form').find('button').click()
 
-  expandOnClick: (element) ->
+  expandOnClick = (element) ->
     $(element).click (event) =>
       event.preventDefault()
       $container = $(element).parent()
 
       $(element).toggle()
       $container.find('form').toggle()
-      @makeFocusOn $container.find("input[type='text']")
+      makeFocusOn $container.find("input[type='text']")
 
-  collapseOnClick: (element) ->
+  collapseOnClick = (element) ->
     $(element).click (event) ->
       $(this).closest('div').find('a').toggle()
       $(this).closest('form').toggle()
 
-  makeFocusOn: (element) ->
+  makeFocusOn = (element) ->
     element.val('').focus()
-
-
-  # it is possible that you would need this method
-  add: () ->
-    #...
-
-  create: () ->
-    # a set of method to handle adding of a just saved item
-
 
 $ ->
   todoItem = new TodoItem

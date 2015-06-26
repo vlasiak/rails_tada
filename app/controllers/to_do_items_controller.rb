@@ -1,21 +1,21 @@
 class ToDoItemsController < ApplicationController
 
   def new
-    # list = List.find params[:id]
-    # @item = list.items.new item_params
+    list = List.find params[:id]
+    @item = list.items.new
+
+    render partial: 'to_do_items/form', locals: {item: @item}
   end
 
   def create
-    list = List.find params[:id]
-    @item = list.items.new item_params
-
+    @item = Item.new item_params
     @item.save
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:text)
+    params.require(:item).permit(:text, :list_id)
   end
 
 end

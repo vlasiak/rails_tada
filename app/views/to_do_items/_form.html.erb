@@ -1,13 +1,14 @@
-<%= form_for @item = list.items.new,
-             url: to_do_items_path(id: list.id),
+<%= form_for @item,
+             url: to_do_items_path,
              method: :post,
              remote: true,
-             html: { id: "form-#{list.id}", style: 'display:none' } do |f| %>
+             html: { id: "form-#{@item.list_id}" } do |f| %>
 
     <div class="form-group">
-      <%= f.text_field :text, id: "item-input-#{list.id}", placeholder: "#{t 'item.add.placeholder'}" %>
+      <%= f.text_field :text, id: "item-input-#{@item.list_id}", placeholder: "#{t 'item.add.placeholder'}" %>
+      <%= f.hidden_field :list_id, value: @item.list_id %>
     </div>
 
-    <%= submit_tag "#{t 'item.add.button'}", class: 'btn btn-success btn-sm' %>
-    <%= button_tag "#{t 'item.cancel_button'}", class: 'btn btn-default btn-sm', type: :button %>
+    <%= f.submit "#{t 'item.add.button'}", class: 'btn btn-success btn-sm' %>
+    <%= f.button "#{t 'item.cancel_button'}", class: 'btn btn-default btn-sm', type: :button %>
 <% end %>

@@ -5,8 +5,6 @@
 class @TodoItem
   initialize: () ->
     bindAddEvents()
-    bindCancelEvents()
-    bindEscKeyEvents()
 
   onCreate: (options) ->
     removeCallout(options.listId)
@@ -32,23 +30,34 @@ class @TodoItem
     $.each $('div.list a'), (_, value) =>
       expandOnClick value
 
-  bindCancelEvents = () ->
-    $.each $('div.list form button'), (_, value) =>
-      collapseOnClick value
+  bindCancelEvent = (form) ->
+    collapseOnClick form.find('button')
 
-  bindEscKeyEvents = () ->
-    $("form input[type='text']").keypress (event) ->
-      if event.keyCode == 27
-        $(this).parents('form').find('button').click()
+  bindEscKeyEvent = (form) ->
+    form.find("input[type='text']").keypress (event) ->
+      form.find('button').click() if event.keyCode == 27
+
+  initializeForm = (form) ->
+    makeFocusOn form.find("input[type='text']")
+    bindCancelEvent(form)
+    bindEscKeyEvent(form)
+
+  drawForm = (url, container) ->
+    $.get(url).complete (response) =>
+      container.append(response.responseText)
+      initializeForm container.find('form')
 
   expandOnClick = (element) ->
-    $(element).click (event) =>
+    $(element).click (event) ->
       event.preventDefault()
       $container = $(element).parent()
-
+      $form = $container.find('form')
       $(element).toggle()
-      $container.find('form').toggle()
-      makeFocusOn $container.find("input[type='text']")
+      if $form.length
+        $form.toggle()
+        makeFocusOn $form.find("input[type='text']")
+      else
+        drawForm($(this).attr('href'), $container)
 
   collapseOnClick = (element) ->
     $(element).click (event) ->

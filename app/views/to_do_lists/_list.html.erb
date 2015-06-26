@@ -9,7 +9,5 @@
   <% end %>
 </ul>
 
-<%= link_to "#{t 'item.add.link'}", '#' %>
-
-<%= render partial: 'to_do_items/form', locals: {list: list} %>
+<%= link_to "#{t 'item.add.link'}", new_to_do_item_path(id: list.id) %>
 

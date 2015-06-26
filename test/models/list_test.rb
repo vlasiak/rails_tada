@@ -19,6 +19,12 @@ class ListTest < ActiveSupport::TestCase
 
   test "list has items" do
     list = FactoryGirl.build(:with_items)
-    assert_equal [items(:first), items(:second)], list.items
+    assert_includes list.items, items(:first)
+    assert_includes list.items, items(:second)
+  end
+
+  test "list items ordered by created_at column" do
+    list = FactoryGirl.build(:with_items)
+    assert_equal [items(:second), items(:first)], list.items
   end
 end

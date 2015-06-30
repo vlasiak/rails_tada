@@ -5,6 +5,7 @@
 class @TodoItem
   initialize: () ->
     bindAddEvents()
+    bindCheckEvents()
 
   onCreate: (options) ->
     removeCallout options.listId
@@ -40,13 +41,31 @@ class @TodoItem
   detectCancelFormButton = (id) ->
     $("#cancel-item-button-#{id}")
 
+  extractId = (str) ->
+    str.split('-').pop()
+
   removeCallout = (listId) ->
     detectList(listId).find('div.bs-callout').remove()
 
+  saveOnClick = (item) ->
+    $(item).click () ->
+      updateItem extractId item['id']
+
+  updateItem = (id) ->
+    $.ajax({
+      method: 'PUT',
+      url: "to_do_items/#{id}"
+    }).done (msg) ->
+      console.log msg
+
   bindAddEvents = () ->
     $.each $('div.list a'), (_, value) =>
-      id = value['id'].split('-').pop()
+      id = extractId value['id']
       expandOnClick id
+
+  bindCheckEvents = () ->
+    $.each $("div.list input[type='checkbox']"), (_, value) =>
+      saveOnClick value
 
   bindCancelEvent = (id) ->
     collapseOnClick id

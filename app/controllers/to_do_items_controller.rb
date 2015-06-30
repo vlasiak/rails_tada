@@ -12,6 +12,12 @@ class ToDoItemsController < ApplicationController
     @item.save
   end
 
+  def update
+    item = Item.find params[:id]
+    item.update_attribute 'done', !item.done
+    render plain: item.inspect
+  end
+
   private
 
   def item_params

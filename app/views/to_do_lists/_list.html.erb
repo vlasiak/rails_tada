@@ -1,12 +1,12 @@
-<div class="list-header" xmlns="http://www.w3.org/1999/html">
+<div class="list-header">
   <h3><%= list.title %></h3>
   <div><%= list.description %></div>
 </div>
+
 <ul class="list-items">
   <% list.items.each do |item| %>
-      <li class="list-item">
-        <%= check_box_tag(item.id) %>
-        <%= label_tag(item.id, item.text) %>
-      </li>
+    <%= render partial: 'to_do_items/item', locals: {item: item} %>
   <% end %>
 </ul>
+
+<%= link_to "#{t 'item.add.link'}", new_to_do_item_path(id: list.id), id: "add-item-link-#{list.id}" %>

@@ -1,6 +1,8 @@
-<h1> <%= t 'tada.all-lists' %></h1>
+<h1> <%= t 'list.all' %></h1>
 <hr/>
 
 <% @lists.each do |list| %>
-    <div class="list"><%= render partial: 'list', locals: {list: list} %></div>
+    <div class="list" id="list-<%= list.id %>">
+      <%= render partial: 'list', locals: {list: list} %>
+    </div>
 <% end %>

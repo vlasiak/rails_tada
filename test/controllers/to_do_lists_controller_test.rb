@@ -6,5 +6,4 @@ class ToDoListsControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:lists)
   end
-
 end

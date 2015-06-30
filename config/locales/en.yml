@@ -20,6 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  tada:
+  project:
     title: TaDa
-    all-lists: All to-do lists
+  list:
+    all: All to-do lists
+  item:
+    add:
+      link: Add a to-do
+      button: Add a new item
+      placeholder: Add a new to-do...
+    save_error: Sorry, but it cannot be saved
+    cancel_button: Cancel

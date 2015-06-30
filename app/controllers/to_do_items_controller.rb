@@ -4,7 +4,7 @@ class ToDoItemsController < ApplicationController
     list = List.find params[:id]
     @item = list.items.new
 
-    render partial: 'to_do_items/form', locals: {item: @item}
+    render partial: 'new'
   end
 
   def create

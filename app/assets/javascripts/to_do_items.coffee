@@ -7,65 +7,81 @@ class @TodoItem
     bindAddEvents()
 
   onCreate: (options) ->
-    removeCallout(options.listId)
-    appendNewOne(options.listId, options.html)
-    focusOn(options.listId)
-    highlightNewOne(options.id) if options.id
-
+    removeCallout options.listId
+    appendNewOne options.listId, options.html
+    focusOn options.listId
+    highlightNewOne options.id if options.id
 
   appendNewOne = (listId, html) ->
-    $('#list-' + listId + ' ul').append(html)
+    detectList(listId).find('ul').append html
 
   focusOn = (listId) ->
-    makeFocusOn $('#form-' + listId + " input[type='text']")
+    detectFormInput(listId).val('').focus()
 
   highlightNewOne = (id) ->
-    $('#item-' + id).css({'background-color':'#ffffe0'}).
+    detectItem(id).css({'background-color':'#ffffe0'}).
       animate({'background-color':'#fff'}, 2000)
 
-  removeCallout = (listId ) ->
-    $('#list-' + listId + ' div.bs-callout').remove()
+  detectList = (id) ->
+    $("#list-#{id}")
+
+  detectItem = (id) ->
+    $("#item-#{id}")
+
+  detectAddLink = (id) ->
+    $("#add-item-link-#{id}")
+
+  detectForm = (id) ->
+    $("#form-#{id}")
+
+  detectFormInput = (id) ->
+    $("#item-input-#{id}")
+
+  detectCancelFormButton = (id) ->
+    $("#cancel-item-button-#{id}")
+
+  removeCallout = (listId) ->
+    detectList(listId).find('div.bs-callout').remove()
 
   bindAddEvents = () ->
     $.each $('div.list a'), (_, value) =>
-      expandOnClick value
+      id = value['id'].split('-').pop()
+      expandOnClick id
 
-  bindCancelEvent = (form) ->
-    collapseOnClick form.find('button')
+  bindCancelEvent = (id) ->
+    collapseOnClick id
 
-  bindEscKeyEvent = (form) ->
-    form.find("input[type='text']").keypress (event) ->
-      form.find('button').click() if event.keyCode == 27
+  bindEscKeyEvent = (id) ->
+    detectFormInput(id).keypress (event) ->
+      detectCancelFormButton(id).click() if event.keyCode == 27
 
-  initializeForm = (form) ->
-    makeFocusOn form.find("input[type='text']")
-    bindCancelEvent(form)
-    bindEscKeyEvent(form)
+  initializeForm = (id, html) ->
+    detectList(id).append html
+    focusOn id
+    bindCancelEvent id
+    bindEscKeyEvent id
 
-  drawForm = (url, container) ->
+  drawForm = (url, id) ->
     $.get(url).complete (response) =>
-      container.append(response.responseText)
-      initializeForm container.find('form')
+      initializeForm id, response.responseText
 
-  expandOnClick = (element) ->
-    $(element).click (event) ->
-      event.preventDefault()
-      $container = $(element).parent()
-      $form = $container.find('form')
-      $(element).toggle()
+  expandOnClick = (id) ->
+    $addItemLink = detectAddLink(id)
+    $addItemLink.click () ->
+      $addItemLink.toggle()
+      $form = detectForm id
       if $form.length
         $form.toggle()
-        makeFocusOn $form.find("input[type='text']")
+        focusOn id
       else
-        drawForm($(this).attr('href'), $container)
+        drawForm $addItemLink.attr('href'), id
+      return false
 
-  collapseOnClick = (element) ->
-    $(element).click (event) ->
-      $(this).closest('div').find('a').toggle()
-      $(this).closest('form').toggle()
-
-  makeFocusOn = (element) ->
-    element.val('').focus()
+  collapseOnClick = (id) ->
+    detectCancelFormButton(id).click (event) =>
+      removeCallout id
+      detectAddLink(id).toggle()
+      detectForm(id).toggle()
 
 $ ->
   todoItem = new TodoItem

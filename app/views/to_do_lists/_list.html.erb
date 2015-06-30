@@ -9,5 +9,4 @@
   <% end %>
 </ul>
 
-<%= link_to "#{t 'item.add.link'}", new_to_do_item_path(id: list.id) %>
-
+<%= link_to "#{t 'item.add.link'}", new_to_do_item_path(id: list.id), id: "add-item-link-#{list.id}" %>

@@ -9,6 +9,6 @@
       <%= f.hidden_field :list_id, value: @item.list_id %>
     </div>
 
-    <%= f.submit "#{t 'item.add.button'}", class: 'btn btn-success btn-sm' %>
-    <%= f.button "#{t 'item.cancel_button'}", class: 'btn btn-default btn-sm', type: :button %>
+    <%= f.submit "#{t 'item.add.button'}", id: "add-item-button-#{@item.list_id}", class: 'btn btn-success btn-sm' %>
+    <%= f.button "#{t 'item.cancel_button'}", id: "cancel-item-button-#{@item.list_id}", class: 'btn btn-default btn-sm', type: :button %>
 <% end %>

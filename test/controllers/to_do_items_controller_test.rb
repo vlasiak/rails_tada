@@ -20,4 +20,14 @@ class ToDoItemsControllerTest < ActionController::TestCase
 
     assert_response :success
   end
+
+  test "should mark item as done" do
+    item = items(:first)
+    assert_not item.done
+
+    put :update, id: item.id
+
+    item.reload
+    assert item.done
+  end
 end

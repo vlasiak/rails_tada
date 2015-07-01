@@ -14,7 +14,7 @@ class @TodoItem
     highlightNewOne options.id if options.id
 
   appendNewOne = (listId, html) ->
-    detectList(listId).find('ul').append html
+    detectList(listId).find('ul.incomplete').append html
 
   focusOn = (listId) ->
     detectFormInput(listId).val('').focus()
@@ -51,12 +51,25 @@ class @TodoItem
     $(item).click () ->
       updateItem extractId item['id']
 
+  markAsDone = (id, listId) ->
+    completeList = detectList(listId).find('ul.complete')
+    detectItem(id).appendTo completeList
+
+  unmark = (id, listId) ->
+    incompleteList = detectList(listId).find('ul.incomplete')
+    detectItem(id).appendTo incompleteList
+
   updateItem = (id) ->
-    $.ajax({
-      method: 'PUT',
+    $.ajax
       url: "to_do_items/#{id}"
-    }).done (msg) ->
-      console.log msg
+      method: 'PUT'
+      error: (response) ->
+        console.log 'fail'
+      success: (response) ->
+        if response.done == true
+          markAsDone id, response.list_id
+        else
+          unmark id, response.list_id
 
   bindAddEvents = () ->
     $.each $('div.list a'), (_, value) =>
@@ -75,7 +88,7 @@ class @TodoItem
       detectCancelFormButton(id).click() if event.keyCode == 27
 
   initializeForm = (id, html) ->
-    detectList(id).append html
+    detectList(id).find('ul.incomplete').after html
     focusOn id
     bindCancelEvent id
     bindEscKeyEvent id

@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  has_many :items, -> { order(:created_at) }
+  has_many :items, -> { order(:updated_at) }
 
   validates :title, presence: true
   validates :title, uniqueness: true

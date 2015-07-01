@@ -15,7 +15,7 @@ class ToDoItemsController < ApplicationController
   def update
     item = Item.find params[:id]
     item.update_attribute 'done', !item.done
-    render plain: item.inspect
+    render json: item
   end
 
   private

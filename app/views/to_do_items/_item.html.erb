@@ -1,4 +1,4 @@
 <li id="item-<%= item.id %>" class="list-item">
-  <%= check_box_tag "item-cb-#{item.id}", '_', item.done %>
+  <%= check_box_tag "item-cb-#{item.id}", item.list_id, item.done %>
   <%= label_tag "item-cb-#{item.id}", item.text %>
 </li>

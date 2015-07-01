@@ -30,4 +30,5 @@ en:
       button: Add a new item
       placeholder: Add a new to-do...
     save_error: Sorry, but it cannot be saved
+    mark_error: Oops, couldn't mark/unmark item. Please try again later
     cancel_button: Cancel

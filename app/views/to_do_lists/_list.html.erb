@@ -5,7 +5,7 @@
 
 <%= render partial: 'incomplete_list', locals: {items: list.items.select {|item| item.done == false}} %>
 
-<!--<div class="alert alert-danger" role="alert">Oops, cannot be saved</div>-->
+<%= render partial: 'to_do_items/add_alert', locals: {id: list.id} %>
 
 <%= link_to "#{t 'item.add.link'}", new_to_do_item_path(id: list.id), id: "add-item-link-#{list.id}" %>
 

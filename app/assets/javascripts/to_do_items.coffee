@@ -49,7 +49,7 @@ class @TodoItem
 
   saveOnClick = (item) ->
     $(item).click () ->
-      updateItem extractId item['id']
+      updateItem extractId(item['id']), item['value']
 
   markAsDone = (id, listId) ->
     completeList = detectList(listId).find('ul.complete')
@@ -59,17 +59,28 @@ class @TodoItem
     incompleteList = detectList(listId).find('ul.incomplete')
     detectItem(id).appendTo incompleteList
 
-  updateItem = (id) ->
+  cancelChecking = (id) ->
+    currentCheckbox = detectItem(id).find("input[type='checkbox']")
+    currentCheckbox.prop "checked", !currentCheckbox.prop("checked")
+
+  showCheckAlert = (listId) ->
+    alertBox = detectList(listId).find('div.alert')
+    alertBox.fadeIn 'slow'
+    alertBox.delay 2000
+    alertBox.fadeOut 'slow'
+
+  updateItem = (id, listId) ->
     $.ajax
       url: "to_do_items/#{id}"
       method: 'PUT'
-      error: (response) ->
-        console.log 'fail'
+      error: () ->
+        cancelChecking id
+        showCheckAlert listId
       success: (response) ->
         if response.done == true
-          markAsDone id, response.list_id
+          markAsDone id, listId
         else
-          unmark id, response.list_id
+          unmark id, listId
 
   bindAddEvents = () ->
     $.each $('div.list a'), (_, value) =>
@@ -88,7 +99,7 @@ class @TodoItem
       detectCancelFormButton(id).click() if event.keyCode == 27
 
   initializeForm = (id, html) ->
-    detectList(id).find('ul.incomplete').after html
+    detectList(id).find('div.alert').after html
     focusOn id
     bindCancelEvent id
     bindEscKeyEvent id

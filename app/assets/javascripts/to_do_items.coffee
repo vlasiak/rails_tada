@@ -12,6 +12,7 @@ class @TodoItem
     appendNewOne options.listId, options.html
     focusOn options.listId
     highlightNewOne options.id if options.id
+    checkOnClick detectCheckbox(options.id)[0]
 
   appendNewOne = (listId, html) ->
     detectList(listId).find('ul.incomplete').append html
@@ -29,6 +30,9 @@ class @TodoItem
   detectItem = (id) ->
     $("#item-#{id}")
 
+  detectCheckbox = (id) ->
+    $("#item-cb-#{id}")
+
   detectAddLink = (id) ->
     $("#add-item-link-#{id}")
 
@@ -41,46 +45,45 @@ class @TodoItem
   detectCancelFormButton = (id) ->
     $("#cancel-item-button-#{id}")
 
-  extractId = (str) ->
-    str.split('-').pop()
+  extractId = (itemId) ->
+    itemId.split('-').pop()
 
   removeCallout = (listId) ->
     detectList(listId).find('div.bs-callout').remove()
 
-  saveOnClick = (item) ->
+  checkOnClick = (item) ->
     $(item).click () ->
-      updateItem extractId(item['id']), item['value']
+      doCheckRequest $(item)
 
-  markAsDone = (id, listId) ->
-    completeList = detectList(listId).find('ul.complete')
-    detectItem(id).appendTo completeList
+  toggle = (options) ->
+    list = detectList options.list_id
+    destinationList =
+      if options.done
+        list.find('ul.complete')
+      else
+        list.find('ul.incomplete')
+    detectItem(options.id).appendTo destinationList
 
-  unmark = (id, listId) ->
-    incompleteList = detectList(listId).find('ul.incomplete')
-    detectItem(id).appendTo incompleteList
-
-  cancelChecking = (id) ->
-    currentCheckbox = detectItem(id).find("input[type='checkbox']")
-    currentCheckbox.prop "checked", !currentCheckbox.prop("checked")
+  revertChecking = (id) ->
+    currentCheckbox = detectCheckbox id
+    currentCheckbox.prop 'checked', !currentCheckbox.prop 'checked'
 
   showCheckAlert = (listId) ->
     alertBox = detectList(listId).find('div.alert')
-    alertBox.fadeIn 'slow'
-    alertBox.delay 2000
-    alertBox.fadeOut 'slow'
+    if alertBox.css('display') == 'none'
+      alertBox.fadeIn 'slow'
+      alertBox.delay 3000
+      alertBox.fadeOut 'slow'
 
-  updateItem = (id, listId) ->
+  doCheckRequest = (item) ->
     $.ajax
-      url: "to_do_items/#{id}"
+      url: item.attr('url')
       method: 'PUT'
       error: () ->
-        cancelChecking id
-        showCheckAlert listId
+        revertChecking item.attr('id')
+        showCheckAlert item.attr('value')
       success: (response) ->
-        if response.done == true
-          markAsDone id, listId
-        else
-          unmark id, listId
+        toggle response
 
   bindAddEvents = () ->
     $.each $('div.list a'), (_, value) =>
@@ -89,7 +92,7 @@ class @TodoItem
 
   bindCheckEvents = () ->
     $.each $("div.list input[type='checkbox']"), (_, value) =>
-      saveOnClick value
+      checkOnClick value
 
   bindCancelEvent = (id) ->
     collapseOnClick id

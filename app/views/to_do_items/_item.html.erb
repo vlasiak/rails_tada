@@ -1,4 +1,5 @@
 <li id="item-<%= item.id %>" class="list-item">
-  <%= check_box_tag "item-cb-#{item.id}", item.list_id, item.done %>
+  <%= check_box_tag "item-cb-#{item.id}", item.list_id, item.done,
+    url: to_do_item_path(id: item.id), autocomplete: 'off' %>
   <%= label_tag "item-cb-#{item.id}", item.text %>
 </li>

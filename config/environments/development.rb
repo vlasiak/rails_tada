@@ -36,10 +36,6 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
-  # config.assets.cache_store = :null_store  # Disables the Asset cache
-  # config.sass.cache = false  # Disable the SASS compiler cache
-  # config.action_view.cache_template_loading = false
-
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

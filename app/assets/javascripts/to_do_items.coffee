@@ -65,7 +65,7 @@ class @TodoItem
     detectItem(options.id).appendTo destinationList
 
   revertChecking = (id) ->
-    currentCheckbox = detectCheckbox id
+    currentCheckbox = $("##{id}")
     currentCheckbox.prop 'checked', !currentCheckbox.prop 'checked'
 
   showCheckAlert = (listId) ->

@@ -21,14 +21,22 @@
 
 en:
   project:
-    title: TaDa
+    title: ToDo
   list:
-    all: All TaDa lists
+    all: All ToDo lists
+    new:
+      title: New ToDo List
+      name_field: NAME
+      description_field: DESCRIPTION
+      notice: Create the list and start adding a new ToDo items.
+      create_button: Create New ToDo List
+      submit_button: CREATE LIST
+      cancel_button: CANCEL
   item:
     add:
       link: Add a to-do
       button: Add a new item
       placeholder: Add a new to-do...
-    save_error: Sorry, but it cannot be saved
-    mark_error: Oops, couldn't mark/unmark item. Please try again later
+    save_error: Sorry, but it cannot be saved.
+    mark_error: Oops, couldn't mark/unmark item. Please try again later.
     cancel_button: Cancel

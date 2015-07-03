@@ -23,7 +23,7 @@ en:
   project:
     title: TaDa
   list:
-    all: All to-do lists
+    all: All TaDa lists
   item:
     add:
       link: Add a to-do

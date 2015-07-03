@@ -1,5 +1,8 @@
 <h1> <%= t 'list.all' %></h1>
+<input id="add-list-button" class="btn btn-warning" type="button" value="createNewToDoList">
 <hr/>
+
+<%= render partial: 'new' %>
 
 <% @lists.each do |list| %>
     <div class="list" id="list-<%= list.id %>">

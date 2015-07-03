@@ -6,18 +6,29 @@ class @TodoList
   initialize: () ->
     bindAddEvent()
 
+  onCreate: (html) ->
+    $('div.container').append html
+
   detectAddButton = () ->
     $('#add-list-button')
 
   bindAddEvent = () ->
-    expandOnClick()
+    expandOnClick detectAddButton()
 
   showPopUp = () ->
     $('#add-list-modal').modal()
 
-  expandOnClick = () ->
-    detectAddButton().click () ->
-      showPopUp()
+  expandOnClick = (element) ->
+    element.click () ->
+      $.ajax
+        url: this['href']
+        method: 'GET'
+        error: () ->
+          console.log 'error'
+        success: (response) ->
+          $('div.container').append response
+          showPopUp()
+      return false
 
 $ ->
   todoList = new TodoList

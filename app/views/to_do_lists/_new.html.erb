@@ -1,21 +1,7 @@
 <div class="modal fade" id="add-list-modal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><%= t 'list.new.title' %></h4>
-      </div>
-      <div class="modal-body">
-        <label for="modal-input-name"><%= t 'list.new.name_field' %></label>
-        <input id="modal-input-name" class="text-input" type="text" />
-        <label for="modal-input-description"><%= t 'list.new.description_field' %></label>
-        <textarea id="modal-input-description" rows="3" cols="65"></textarea>
-        <span><p><%= t 'list.new.notice' %></p></span>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning"><%= t 'list.new.submit_button' %></button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'list.new.cancel_button' %></button>
-      </div>
+      <%= render partial: 'form' %>
     </div>
   </div>
 </div>

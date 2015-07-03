@@ -1,0 +1,6 @@
+$('#close-new-list-form').click();
+
+html = "<%=j render partial: 'article', locals: {list: @list} %>";
+
+var todoList = new TodoList();
+todoList.onCreate(html);

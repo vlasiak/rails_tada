@@ -4,12 +4,18 @@ class ToDoItemsController < ApplicationController
     list = List.find params[:id]
     @item = list.items.new
 
-    render partial: 'to_do_items/form', locals: {item: @item}
+    render partial: 'new'
   end
 
   def create
     @item = Item.new item_params
     @item.save
+  end
+
+  def update
+    item = Item.find params[:id]
+    item.update_attribute 'done', !item.done
+    render json: item
   end
 
   private

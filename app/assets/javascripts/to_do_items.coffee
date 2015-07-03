@@ -5,15 +5,17 @@
 class @TodoItem
   initialize: () ->
     bindAddEvents()
+    bindCheckEvents()
 
   onCreate: (options) ->
     removeCallout options.listId
     appendNewOne options.listId, options.html
     focusOn options.listId
     highlightNewOne options.id if options.id
+    checkOnClick detectCheckbox(options.id)[0]
 
   appendNewOne = (listId, html) ->
-    detectList(listId).find('ul').append html
+    detectList(listId).find('ul.incomplete').append html
 
   focusOn = (listId) ->
     detectFormInput(listId).val('').focus()
@@ -28,6 +30,9 @@ class @TodoItem
   detectItem = (id) ->
     $("#item-#{id}")
 
+  detectCheckbox = (id) ->
+    $("#item-cb-#{id}")
+
   detectAddLink = (id) ->
     $("#add-item-link-#{id}")
 
@@ -40,13 +45,54 @@ class @TodoItem
   detectCancelFormButton = (id) ->
     $("#cancel-item-button-#{id}")
 
+  extractId = (itemId) ->
+    itemId.split('-').pop()
+
   removeCallout = (listId) ->
     detectList(listId).find('div.bs-callout').remove()
 
+  checkOnClick = (item) ->
+    $(item).click () ->
+      doCheckRequest $(item)
+
+  toggle = (options) ->
+    list = detectList options.list_id
+    destinationList =
+      if options.done
+        list.find('ul.complete')
+      else
+        list.find('ul.incomplete')
+    detectItem(options.id).appendTo destinationList
+
+  revertChecking = (id) ->
+    currentCheckbox = $("##{id}")
+    currentCheckbox.prop 'checked', !currentCheckbox.prop 'checked'
+
+  showCheckAlert = (listId) ->
+    alertBox = detectList(listId).find('div.alert')
+    if alertBox.css('display') == 'none'
+      alertBox.fadeIn 'slow'
+      alertBox.delay 3000
+      alertBox.fadeOut 'slow'
+
+  doCheckRequest = (item) ->
+    $.ajax
+      url: item.attr('url')
+      method: 'PUT'
+      error: () ->
+        revertChecking item.attr('id')
+        showCheckAlert item.attr('value')
+      success: (response) ->
+        toggle response
+
   bindAddEvents = () ->
     $.each $('div.list a'), (_, value) =>
-      id = value['id'].split('-').pop()
+      id = extractId value['id']
       expandOnClick id
+
+  bindCheckEvents = () ->
+    $.each $("div.list input[type='checkbox']"), (_, value) =>
+      checkOnClick value
 
   bindCancelEvent = (id) ->
     collapseOnClick id
@@ -56,7 +102,7 @@ class @TodoItem
       detectCancelFormButton(id).click() if event.keyCode == 27
 
   initializeForm = (id, html) ->
-    detectList(id).append html
+    detectList(id).find('div.alert').after html
     focusOn id
     bindCancelEvent id
     bindEscKeyEvent id

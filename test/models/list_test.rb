@@ -29,7 +29,7 @@ class ListTest < ActiveSupport::TestCase
     assert_includes list.items, items(:second)
   end
 
-  test "list items are ordered by created_at column" do
+  test "list items are ordered by updated_at column" do
     list = FactoryGirl.build(:with_items)
     assert_equal [items(:second), items(:first)], list.items
   end

@@ -1,6 +1,11 @@
-$('#close-new-list-form').click();
-
-html = "<%=j render partial: 'article', locals: {list: @list} %>";
+var options = {
+    <% if @list.persisted? %>
+        html: "<%=j render partial: 'article', locals: {list: @list} %>",
+        id: <%= @list.id %>,
+    <% else %>
+        html: 'error'
+    <% end %>
+};
 
 var todoList = new TodoList();
-todoList.onCreate(html);
+todoList.onCreate(options);

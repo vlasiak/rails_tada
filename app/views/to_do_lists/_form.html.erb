@@ -18,7 +18,7 @@
     </div>
 
     <div class="modal-footer">
-      <%= f.submit t('list.new.submit_button'), class: 'btn btn-warning' %> <!--disabled-->
+      <%= f.submit t('list.new.submit_button'), id: 'new-list-submit-button', class: 'btn btn-warning disabled' %>
       <%= f.button t('list.new.cancel_button'), class: 'btn btn-default', type: :button, data: {dismiss: 'modal'} %>
     </div>
 <% end %>

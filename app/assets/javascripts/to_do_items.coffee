@@ -4,7 +4,7 @@
 
 class @TodoItem
   initialize: () ->
-    bindAddEvents()
+    bindAddEvents this
     bindCheckEvents()
 
   onCreate: (options) ->
@@ -13,6 +13,18 @@ class @TodoItem
     focusOn options.listId
     highlightNewOne options.id if options.id
     checkOnClick detectCheckbox(options.id)[0]
+
+  expandOnClick: (id) ->
+    $addItemLink = detectAddLink id
+    $addItemLink.click () ->
+      $addItemLink.toggle()
+      $form = detectForm id
+      if $form.length
+        $form.toggle()
+        focusOn id
+      else
+        drawForm $addItemLink.attr('href'), id
+      return false
 
   appendNewOne = (listId, html) ->
     detectList(listId).find('ul.incomplete').append html
@@ -85,10 +97,10 @@ class @TodoItem
       success: (response) ->
         toggle response
 
-  bindAddEvents = () ->
+  bindAddEvents = (self) ->
     $.each $('div.list a'), (_, value) =>
       id = extractId value['id']
-      expandOnClick id
+      self.expandOnClick id
 
   bindCheckEvents = () ->
     $.each $("div.list input[type='checkbox']"), (_, value) =>
@@ -110,18 +122,6 @@ class @TodoItem
   drawForm = (url, id) ->
     $.get(url).complete (response) =>
       initializeForm id, response.responseText
-
-  expandOnClick = (id) ->
-    $addItemLink = detectAddLink(id)
-    $addItemLink.click () ->
-      $addItemLink.toggle()
-      $form = detectForm id
-      if $form.length
-        $form.toggle()
-        focusOn id
-      else
-        drawForm $addItemLink.attr('href'), id
-      return false
 
   collapseOnClick = (id) ->
     detectCancelFormButton(id).click (event) =>

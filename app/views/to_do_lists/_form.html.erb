@@ -3,6 +3,8 @@
   <h4 class="modal-title"><%= t 'list.new.title' %></h4>
 </div>
 
+<%= render partial: 'to_do_items/check_error_alert', locals: {id: 'create-list', message: t('list.create_error') } %>
+
 <%= form_for @list,
              url: to_do_lists_path,
              method: :post,

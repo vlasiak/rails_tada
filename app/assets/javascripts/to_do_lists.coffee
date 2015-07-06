@@ -7,10 +7,13 @@ class @TodoList
     bindAddEvent()
 
   onCreate: (options) ->
-    closePopUp()
-    appendNewOne options.html
-    scrollToNewOne options.id
-    bindAddItemEvent options.id
+    if options.error
+      showCheckAlert detectCreateListAlertMessage()
+    else
+      closePopUp()
+      appendNewOne options.html
+      scrollToNewOne options.id
+      bindAddItemEvent options.id
 
   detectAddButton = () ->
     $('#add-list-button')
@@ -36,8 +39,20 @@ class @TodoList
   detectNewListCloseButton = () ->
     $('#close-new-list-form')
 
+  detectNewListAlertMessage = () ->
+    $('#alert-box-new-list')
+
+  detectCreateListAlertMessage = () ->
+    $('#alert-box-create-list')
+
   appendNewOne = (html) ->
     detectContainer().append html
+
+  showCheckAlert = (alertBox) ->
+    if alertBox.css('display') == 'none'
+      alertBox.fadeIn 'slow'
+      alertBox.delay 3000
+      alertBox.fadeOut 'slow'
 
   scrollToNewOne = (id) ->
     $('html').animate({
@@ -93,7 +108,7 @@ class @TodoList
       url: url
       method: 'GET'
       error: () ->
-        console.log 'error'
+        showCheckAlert detectNewListAlertMessage()
       success: (response) ->
         detectContainer().append response
         bindModalShownEvent()

@@ -3,7 +3,7 @@ var options = {
         html: "<%=j render partial: 'article', locals: {list: @list} %>",
         id: <%= @list.id %>,
     <% else %>
-        html: 'error'
+        error: true
     <% end %>
 };
 

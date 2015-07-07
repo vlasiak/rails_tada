@@ -110,7 +110,7 @@ class @TodoItem
     collapseOnClick id
 
   bindEscKeyEvent = (id) ->
-    detectFormInput(id).keypress (event) ->
+    detectFormInput(id).keydown (event) ->
       detectCancelFormButton(id).click() if event.keyCode == 27
 
   initializeForm = (id, html) ->

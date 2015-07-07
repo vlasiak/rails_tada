@@ -1,18 +1,29 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 class @TodoItem
-  initialize: () ->
+
+  @initialize: () ->
     bindAddEvents()
     bindCheckEvents()
 
   onCreate: (options) ->
-    removeCallout options.listId
-    appendNewOne options.listId, options.html
-    focusOn options.listId
-    highlightNewOne options.id if options.id
-    checkOnClick detectCheckbox(options.id)[0]
+    renderItem options
+
+  @startAdding: (listId) ->
+    @expandOnClick listId
+    @renderForm listId
+
+  @expandOnClick = (id) ->
+    $addItemLink = detectAddLink id
+    $addItemLink.click () =>
+      @renderForm id
+      return false
+
+  @renderForm = (id) ->
+    $addItemLink = detectAddLink id
+    $addItemLink.toggle()
+    $form = detectForm id
+    return drawForm $addItemLink.attr('href'), id unless $form.length
+    $form.toggle()
+    focusOn id
 
   appendNewOne = (listId, html) ->
     detectList(listId).find('ul.incomplete').append html
@@ -23,6 +34,13 @@ class @TodoItem
   highlightNewOne = (id) ->
     detectItem(id).css({'background-color':'#ffffe0'}).
       animate({'background-color':'#fff'}, 2000)
+
+  renderItem = (options) ->
+    removeCallout options.listId
+    appendNewOne options.listId, options.html
+    focusOn options.listId
+    highlightNewOne options.id if options.id
+    checkOnClick detectCheckbox(options.id)[0]
 
   detectList = (id) ->
     $("#list-#{id}")
@@ -70,25 +88,26 @@ class @TodoItem
 
   showCheckAlert = (listId) ->
     alertBox = detectList(listId).find('div.alert')
-    if alertBox.css('display') == 'none'
-      alertBox.fadeIn 'slow'
-      alertBox.delay 3000
-      alertBox.fadeOut 'slow'
+    return unless alertBox.css('display') == 'none'
+    alertBox.fadeIn('slow').delay(3000).fadeOut('slow')
+
+  renderCheckError = (item) ->
+    revertChecking item.attr('id')
+    showCheckAlert item.attr('value')
 
   doCheckRequest = (item) ->
     $.ajax
       url: item.attr('url')
       method: 'PUT'
       error: () ->
-        revertChecking item.attr('id')
-        showCheckAlert item.attr('value')
+        renderCheckError item
       success: (response) ->
         toggle response
 
-  bindAddEvents = () ->
+  bindAddEvents = () =>
     $.each $('div.list a'), (_, value) =>
       id = extractId value['id']
-      expandOnClick id
+      @expandOnClick id
 
   bindCheckEvents = () ->
     $.each $("div.list input[type='checkbox']"), (_, value) =>
@@ -98,7 +117,7 @@ class @TodoItem
     collapseOnClick id
 
   bindEscKeyEvent = (id) ->
-    detectFormInput(id).keypress (event) ->
+    detectFormInput(id).keydown (event) ->
       detectCancelFormButton(id).click() if event.keyCode == 27
 
   initializeForm = (id, html) ->
@@ -111,24 +130,14 @@ class @TodoItem
     $.get(url).complete (response) =>
       initializeForm id, response.responseText
 
-  expandOnClick = (id) ->
-    $addItemLink = detectAddLink(id)
-    $addItemLink.click () ->
-      $addItemLink.toggle()
-      $form = detectForm id
-      if $form.length
-        $form.toggle()
-        focusOn id
-      else
-        drawForm $addItemLink.attr('href'), id
-      return false
+  collapseForm = (id) ->
+    removeCallout id
+    detectAddLink(id).toggle()
+    detectForm(id).toggle()
 
   collapseOnClick = (id) ->
     detectCancelFormButton(id).click (event) =>
-      removeCallout id
-      detectAddLink(id).toggle()
-      detectForm(id).toggle()
+      collapseForm id
 
 $ ->
-  todoItem = new TodoItem
-  todoItem.initialize()
+  TodoItem.initialize()

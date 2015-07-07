@@ -59,6 +59,19 @@ body {
     border-left-color: #aa6708;
   }
 
+  .empty {
+    text-align: center;
+
+    h2 {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    h4 {
+      font-family: sans-serif;
+    }
+  }
+
   h1 {
     font-size: 18px;
     font-weight: normal;

@@ -24,6 +24,9 @@ en:
     title: TaDa
   list:
     all: All to-do lists
+    new:
+      empty: No ToDo lists have been added yet.
+      invitation: You can create your first one right now.
   item:
     add:
       link: Add a to-do

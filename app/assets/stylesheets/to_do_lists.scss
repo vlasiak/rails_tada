@@ -21,8 +21,7 @@ body {
   .alert {
     font-size: 12px;
     display: none;
-    margin-bottom: 10px;
-    margin-left: 6px;
+    margin: 5px 0 10px 6px;
     max-width: 585px;
     padding: 10px;
   }
@@ -61,7 +60,6 @@ body {
 
   .empty {
     text-align: center;
-
     h2 {
       font-size: 26px;
       font-weight: bold;
@@ -72,16 +70,77 @@ body {
     }
   }
 
+  .btn {
+    margin-bottom: 4px;
+  }
+
+  .modal {
+    max-width: 600px;
+    margin: 0 auto;
+    .modal-header {
+      border: none;
+      text-align: center;
+      h4 {
+        font-weight: bold;
+        margin-bottom: -10px;
+      }
+    }
+
+    .alert {
+      margin: 5px 0 -20px 15px;
+      max-width: 550px;
+    }
+
+    .modal-footer {
+      border: none;
+      text-align: left;
+    }
+
+    .btn {
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+
+    form {
+      label {
+        display: block;
+        font-size: 12px;
+        margin-bottom: -1px;
+        margin-top: 20px;
+        text-transform: uppercase;
+      }
+
+      textarea {
+        max-width: 100%;
+        width: 550px;
+      }
+
+      p {
+        color: #999;
+        font-size: 11px;
+        margin: 20px 0 -20px;
+      }
+    }
+  }
+
   h1 {
+    display: inline-block;
     font-size: 18px;
-    font-weight: normal;
-    margin-bottom: 20px;
+    margin-right: 20px;
   }
 
   hr {
     background: #CCCCCC;
     border: 0 none;
     height: 1px;
+  }
+
+  .text-input {
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    padding: 5px 7px 3px;
+    width: 550px;
+    max-width: 100%;
   }
 
   .list {
@@ -104,14 +163,6 @@ body {
       margin-top: 10px;
       max-width: 585px;
       padding: 15px 5px 8px 15px;
-
-      input[type='text'] {
-        border: 1px solid #bbb;
-        border-radius: 5px;
-        padding: 5px 7px 3px;
-        width: 550px;
-      }
-
       input[type='submit'], button {
         margin: -5px 10px 3px 0px;
       }

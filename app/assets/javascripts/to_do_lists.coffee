@@ -7,13 +7,9 @@ class @TodoList
     bindAddEvent()
 
   onCreate: (options) ->
-    if options.error
-      showCheckAlert detectCreateListAlertMessage()
-    else
-      closePopUp()
-      appendNewOne options.html
-      scrollToNewOne options.id
-      bindAddItemEvent options.id
+    return renderList options unless options.error
+    message = detectCreateListAlertMessage()
+    showCheckAlert message
 
   detectAddButton = () ->
     $('#add-list-button')
@@ -49,15 +45,19 @@ class @TodoList
     detectContainer().append html
 
   showCheckAlert = (alertBox) ->
-    if alertBox.css('display') == 'none'
-      alertBox.fadeIn 'slow'
-      alertBox.delay 3000
-      alertBox.fadeOut 'slow'
+    return unless alertBox.css('display') == 'none'
+    alertBox.fadeIn('slow').delay(3000).fadeOut('slow')
 
   scrollToNewOne = (id) ->
     $('html').animate({
       scrollTop: detectList(id).offset().top
     }, 1000);
+
+  renderList = (options) ->
+    closePopUp()
+    appendNewOne options.html
+    scrollToNewOne options.id
+    bindAddItemEvent options.id
 
   initializeFields = () ->
     detectNewListSubmitButton().addClass('disabled')
@@ -71,15 +71,14 @@ class @TodoList
     validateOnInput detectNewListTitle()
 
   bindAddItemEvent = (id) ->
-    todoItem = new TodoItem
-    todoItem.expandOnClick id
+    TodoItem.startAdding id
 
   bindModalShownEvent = () ->
     $('.modal').on 'shown.bs.modal', () ->
       detectNewListTitle().focus()
 
   validateOnInput = (element) ->
-    element.change () ->
+    element.keyup () ->
       $submitButton = detectNewListSubmitButton()
       if detectNewListTitle().val().trim()
         $submitButton.removeClass('disabled')
@@ -90,9 +89,14 @@ class @TodoList
     detectNewListCloseButton().click()
 
   showPopUp = () ->
-    $('#add-list-modal').modal()
+    detectPopUp().modal()
     bindinputValidationEvent()
     initializeFields()
+
+  renderPopUp = (list) ->
+    detectContainer().append list
+    bindModalShownEvent()
+    showPopUp()
 
   expandOnClick = (element) ->
     element.click () ->
@@ -108,11 +112,10 @@ class @TodoList
       url: url
       method: 'GET'
       error: () ->
-        showCheckAlert detectNewListAlertMessage()
+        message = detectNewListAlertMessage()
+        showCheckAlert message
       success: (response) ->
-        detectContainer().append response
-        bindModalShownEvent()
-        showPopUp()
+        renderPopUp response
 
 $ ->
   todoList = new TodoList

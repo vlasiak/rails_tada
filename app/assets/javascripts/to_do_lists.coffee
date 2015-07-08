@@ -54,7 +54,8 @@ class @TodoList
     }, 1000);
 
   removeInvitation = () ->
-    $('div.empty').remove()
+    invitation = $('div.empty')
+    invitation.remove()
 
   renderList = (options) ->
     removeInvitation()

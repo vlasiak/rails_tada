@@ -33,4 +33,11 @@ class ListTest < ActiveSupport::TestCase
     list = FactoryGirl.build(:with_items)
     assert_equal [items(:second), items(:first)], list.items
   end
+
+  test "list items are destroyed when destroy list" do
+    list = FactoryGirl.build(:with_items)
+    list.destroy
+
+    assert_equal [], list.items
+  end
 end

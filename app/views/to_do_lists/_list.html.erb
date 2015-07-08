@@ -1,5 +1,16 @@
-<ul class="list-items <%= other_classes %>">
-  <% items.each do |item| %>
-      <%= render partial: 'to_do_items/item', locals: {item: item} %>
-  <% end %>
-</ul>
+<div class="list" id="list-<%= list.id %>">
+    <div class="list-header">
+      <h3><%= list.title %></h3>
+      <div><%= list.description %></div>
+    </div>
+
+    <%= render partial: 'list_items_container', locals: {items: list.incompleted_items, other_classes: 'incomplete' } %>
+
+    <%= render partial: 'to_do_items/check_error_alert', locals: {id: list.id, message: t('item.mark_error') } %>
+
+    <%= link_to "#{t 'item.add.link'}", new_to_do_item_path(id: list.id), id: "add-item-link-#{list.id}" %>
+
+    <div class="complete">
+        <%= render partial: 'list_items_container', locals: {items: list.completed_items, other_classes: 'complete' } %>
+    </div>
+</div>

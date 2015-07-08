@@ -4,7 +4,7 @@ class ListsPresentation
     @lists = lists
   end
 
-  def all
+  def partial
     return 'no_lists' if lists.blank?
     'lists'
   end

@@ -2,7 +2,7 @@ class ToDoListsController < ApplicationController
 
   def index
     @lists = List.including_items
-    @listsPresentation = ListsPresentation.new @lists
+    @lists_presentation = ListsPresentation.new @lists
   end
 
   def new

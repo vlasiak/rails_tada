@@ -4,6 +4,4 @@
 <%= render partial: 'to_do_items/check_error_alert', locals: {id: 'new-list', message: t('list.new_error') } %>
 <hr/>
 
-<% @lists.each do |list| %>
-    <%= render partial: 'article', locals: {list: list} %>
-<% end %>
+<%= render partial: @lists_presentation.partial %>

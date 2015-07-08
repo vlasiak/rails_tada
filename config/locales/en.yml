@@ -32,6 +32,8 @@ en:
       create_button: Create New ToDo List
       submit_button: Create List
       cancel_button: Cancel
+      empty: No ToDo lists have been added yet.
+      invitation: You can create your first one right now.
     new_error: Oops, couldn't open a new list window. Please try again later.
     create_error: Oops, couldn't create a new list. Please try again later.
   item:

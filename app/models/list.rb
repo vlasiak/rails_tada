@@ -14,4 +14,8 @@ class List < ActiveRecord::Base
     items.reject { |item| item.done? }
   end
 
+  def has_items?
+    !items.empty?
+  end
+
 end

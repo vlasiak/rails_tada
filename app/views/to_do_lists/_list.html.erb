@@ -8,7 +8,9 @@
 
     <%= render partial: 'to_do_items/check_error_alert', locals: {id: list.id, message: t('item.mark_error') } %>
 
-    <%= link_to "#{t 'item.add.link'}", new_to_do_item_path(id: list.id), id: "add-item-link-#{list.id}" %>
+    <% link_name = list.has_items? ? t('item.add.link') : t('item.first.link') %>
+
+    <%= link_to link_name, new_to_do_item_path(id: list.id), id: "add-item-link-#{list.id}" %>
 
     <div class="complete">
         <%= render partial: 'list_items_container', locals: {items: list.completed_items, other_classes: 'complete' } %>

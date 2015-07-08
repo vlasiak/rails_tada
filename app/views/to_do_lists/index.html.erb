@@ -4,12 +4,4 @@
 <%= render partial: 'to_do_items/check_error_alert', locals: {id: 'new-list', message: t('list.new_error') } %>
 <hr/>
 
-<% if @lists.blank? %>
-    <%= render partial: 'no_lists' %>
-<% else %>
-    <% @lists.each do |list| %>
-        <div class="list" id="list-<%= list.id %>">
-            <%= render partial: 'article', locals: {list: list} %>
-        </div>
-    <% end %>
-<% end %>
+<%= render partial: @listsPresentation.all %>

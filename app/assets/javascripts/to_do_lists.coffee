@@ -53,7 +53,11 @@ class @TodoList
       scrollTop: detectList(id).offset().top
     }, 1000);
 
+  removeInvitation = () ->
+    $('div.empty').remove()
+
   renderList = (options) ->
+    removeInvitation()
     closePopUp()
     appendNewOne options.html
     scrollToNewOne options.id

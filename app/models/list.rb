@@ -15,7 +15,7 @@ class List < ActiveRecord::Base
   end
 
   def has_items?
-    !items.empty?
+    items.present?
   end
 
 end

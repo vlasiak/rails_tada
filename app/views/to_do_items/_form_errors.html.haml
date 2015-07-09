@@ -1,0 +1,4 @@
+.bs-callout.bs-callout-warning
+  %h4= t 'item.save_error'
+  - item.errors.full_messages.each do |message|
+    %p= message

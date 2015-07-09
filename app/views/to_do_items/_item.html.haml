@@ -1,0 +1,3 @@
+%li.list-item{id: "item-#{item.id}"}
+  = check_box_tag "item-cb-#{item.id}", item.list_id, item.done, url: to_do_item_path(id: item.id), autocomplete: 'off'
+  = label_tag "item-cb-#{item.id}", item.text

@@ -43,6 +43,9 @@ gem 'twitter-bootstrap-rails'
 # Use simplecov code coverage
 gem 'simplecov', :require => false, :group => :test
 
+# Use Haml as a template markup
+gem 'haml'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

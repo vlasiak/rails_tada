@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  has_many :items, -> { order(:updated_at) }
+  has_many :items, -> { order(:updated_at) }, dependent: :destroy
 
   validates :title, presence: true
   validates :title, uniqueness: true
@@ -12,6 +12,10 @@ class List < ActiveRecord::Base
 
   def incompleted_items
     items.reject { |item| item.done? }
+  end
+
+  def has_items?
+    items.present?
   end
 
 end

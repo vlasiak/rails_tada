@@ -35,9 +35,13 @@ class @TodoItem
     detectItem(id).css({'background-color':'#ffffe0'}).
       animate({'background-color':'#fff'}, 2000)
 
+  renameLink = (id, name) ->
+    detectAddLink(id).text(name)
+
   renderItem = (options) ->
     removeCallout options.listId
     appendNewOne options.listId, options.html
+    renameLink options.listId, options.newLinkName
     focusOn options.listId
     highlightNewOne options.id if options.id
     checkOnClick detectCheckbox(options.id)[0]

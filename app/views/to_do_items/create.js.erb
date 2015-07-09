@@ -5,7 +5,8 @@ var options = {
     <% else %>
         html: "<%= j render partial: 'to_do_items/form_errors', locals: {item: @item} %>",
     <% end %>
-    listId: <%= @item.list_id %>
+    listId: <%= @item.list_id %>,
+    newLinkName: "<%= t 'item.add.link' %>"
 };
 
 var todoItem = new TodoItem();

@@ -1,0 +1,17 @@
+.modal-header
+  %button.close#close-new-list-form{data: {dismiss: 'modal'}} &times;
+  %h4.modal-title= t 'list.new.title'
+
+= render partial: 'to_do_items/check_error_alert', locals: {id: 'create-list', message: t('list.create_error')}
+
+= form_for @list, url: to_do_lists_path, method: :post, remote: true, html: {id: 'new-list-form'} do |f|
+  .modal-body
+    = f.label :title, t('list.new.name_field')
+    = f.text_field :title, class: 'text-input'
+    = f.label :description, t('list.new.description_field')
+    = f.text_area :description, size: '65x3'
+    = content_tag :p, content_tag(:span, t('list.new.notice'))
+
+  .modal-footer
+    = f.submit t('list.new.submit_button'), id: 'new-list-submit-button', class: 'btn btn-warning disabled'
+    = f.button t('list.new.cancel_button'), class: 'btn btn-default', type: :button, data: {dismiss: 'modal'}

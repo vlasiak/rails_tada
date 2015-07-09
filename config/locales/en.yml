@@ -41,6 +41,8 @@ en:
       link: Add a to-do
       button: Add a new item
       placeholder: Add a new to-do...
+    first:
+      link: Create first item
     save_error: Sorry, but it cannot be saved.
     mark_error: Oops, couldn't mark/unmark item. Please try again later.
     cancel_button: Cancel

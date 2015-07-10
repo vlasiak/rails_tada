@@ -3,6 +3,7 @@ class @TodoItem
   @initialize: () ->
     bindAddEvents()
     bindCheckEvents()
+    bindDraggingEvents()
 
   onCreate: (options) ->
     renderItem options
@@ -108,6 +109,10 @@ class @TodoItem
       success: (response) ->
         toggle response
 
+  makeDraggable = (element) ->
+    element.sortable
+      stop: (event, ui) -> console.log ui.item.index() + 1
+
   bindAddEvents = () =>
     $.each $('div.list a'), (_, value) =>
       id = extractId value['id']
@@ -116,6 +121,10 @@ class @TodoItem
   bindCheckEvents = () ->
     $.each $("div.list input[type='checkbox']"), (_, value) =>
       checkOnClick value
+
+  bindDraggingEvents = () ->
+    $.each $('ul.incomplete'), (_, value) ->
+      makeDraggable $(value)
 
   bindCancelEvent = (id) ->
     collapseOnClick id

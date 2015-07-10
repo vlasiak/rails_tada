@@ -40,6 +40,9 @@ gem 'twitter-bootstrap-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use simplecov code coverage
+gem 'simplecov', :require => false, :group => :test
+
 # Use Haml as a template markup
 gem 'haml'
 

@@ -2,8 +2,9 @@ deployment:
   staging:
     branch: master
     commands:
-      - heroku maintenance:on --app tada-project
-      - git push git@heroku.com:tada-project.git $CIRCLE_SHA1:refs/heads/master
-      - heroku run rake db:migrate --app tada-project
-      - heroku run rake db:seed --app tada-project
-      - heroku maintenance:off --app tada-project
+      - heroku maintenance:on --app ci-tada
+      - git pull
+      - git push git@heroku.com:ci-tada.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app ci-tada
+      - heroku run rake db:seed --app ci-tada
+      - heroku maintenance:off --app ci-tada

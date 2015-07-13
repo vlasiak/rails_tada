@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20150710133328) do
     t.datetime "updated_at",                 null: false
     t.integer  "list_id"
     t.boolean  "done",       default: false
-    t.integer  "position",   default: 1
+    t.integer  "position"
   end
 
   create_table "lists", force: :cascade do |t|

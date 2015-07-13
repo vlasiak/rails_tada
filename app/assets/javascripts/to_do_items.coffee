@@ -109,9 +109,24 @@ class @TodoItem
       success: (response) ->
         toggle response
 
+  changePositionRequest = (item) ->
+    id = extractId item.attr('id')
+    $.ajax
+      url: 'move'
+      data: {id: id, position: item.index() + 1}
+      method: 'PUT'
+      error: (l, f, message) ->
+        console.log message
+      success: (response) ->
+        highlightNewOne id
+
+  updatePosition = (item) ->
+    changePositionRequest item
+
   makeDraggable = (element) ->
     element.sortable
-      stop: (event, ui) -> console.log ui.item.index() + 1
+      stop: (event, ui) ->
+        updatePosition ui.item
 
   bindAddEvents = () =>
     $.each $('div.list a'), (_, value) =>

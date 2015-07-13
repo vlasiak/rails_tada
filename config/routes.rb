@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :to_do_lists, only: [:index, :new, :create]
   resources :to_do_items, only: [:new, :create, :update]
 
+  put 'move' => 'to_do_items#move'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

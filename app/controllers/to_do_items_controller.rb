@@ -18,6 +18,20 @@ class ToDoItemsController < ApplicationController
     render json: item
   end
 
+  def move
+    item = Item.find params[:id]
+    current_list = List.find item.list_id
+
+    if item.position < params[:position].to_i
+      current_list.items.where('position > ? and position < ?', item.position, params[:position].to_i).update_all('position = position + 1')
+    else
+      current_list.items.where('position > ? and position < ?', params[:position].to_i, item.position).update_all('position = position - 1')
+    end
+    item.update_attribute(:position, params[:position])
+
+    render json: item
+  end
+
   private
 
   def item_params

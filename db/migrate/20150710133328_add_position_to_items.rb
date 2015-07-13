@@ -1,5 +1,21 @@
 class AddPositionToItems < ActiveRecord::Migration
-  def change
-    add_column :items, :position, :integer, :default => 1
+  def up
+    add_column :items, :position, :integer
+
+    ActiveRecord::Base.transaction do
+      Item.reset_column_information
+
+      lists = List.including_items
+      lists.each do |list|
+        items = list.items
+        items.each_with_index do |item, index|
+          item.update_attribute(:position, index + 1)
+        end
+      end
+    end
+  end
+
+  def down
+    remove_column :items, :position
   end
 end

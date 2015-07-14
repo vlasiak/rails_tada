@@ -1,0 +1,9 @@
+var options = {
+    <% if @error %>
+        html: "<%= t 'item.move_error' %>",
+        listId: <%= @item.list_id %>
+    <% end %>
+};
+
+var todoItem = new TodoItem();
+todoItem.onMoveError(options);

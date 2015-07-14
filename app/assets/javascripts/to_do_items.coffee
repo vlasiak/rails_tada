@@ -8,6 +8,10 @@ class @TodoItem
   onCreate: (options) ->
     renderItem options
 
+  onMoveError: (options) ->
+    revertMoving options.listId
+    showReplacedCheckAlert options
+
   @startAdding: (listId) ->
     @expandOnClick listId
     @renderForm listId
@@ -35,6 +39,16 @@ class @TodoItem
   highlightNewOne = (id) ->
     detectItem(id).css({'background-color':'#ffffe0'}).
       animate({'background-color':'#fff'}, 2000)
+
+  revertMoving = (listId) ->
+    detectList(listId).find('ul.incomplete').sortable('cancel')
+
+  showReplacedCheckAlert = (options) ->
+    alertBox = detectList(options.listId).find('div.alert')
+    originalMessage = alertBox.html()
+    alertBox.html(options.html)
+    $.when(showCheckAlert options.listId).then () ->
+      alertBox.html(originalMessage)
 
   renameLink = (id, name) ->
     detectAddLink(id).text(name)
@@ -104,7 +118,7 @@ class @TodoItem
     $.ajax
       url: item.attr('url')
       method: 'PUT'
-      error: () ->
+      error: (response) ->
         renderCheckError item
       success: (response) ->
         toggle response
@@ -112,19 +126,16 @@ class @TodoItem
   changePositionRequest = (item) ->
     id = extractId item.attr('id')
     $.ajax
-      url: 'move'
+      url: item.attr('move')
       data: {id: id, position: item.index() + 1}
       method: 'PUT'
-      error: (l, f, message) ->
-        console.log message
-      success: (response) ->
-        highlightNewOne id
 
   updatePosition = (item) ->
     changePositionRequest item
 
   makeDraggable = (element) ->
     element.sortable
+      handle: '.glyphicon-sort'
       stop: (event, ui) ->
         updatePosition ui.item
 

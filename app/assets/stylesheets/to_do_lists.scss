@@ -58,6 +58,11 @@ body {
     border-left-color: #aa6708;
   }
 
+  .glyphicon {
+    color: #999;
+    top: 0;
+  }
+
   .empty {
     text-align: center;
     h2 {
@@ -173,6 +178,9 @@ body {
 
     .incomplete {
       margin-bottom: 0;
+      span:hover {
+        cursor: pointer;
+      }
     }
 
     .complete {
@@ -180,8 +188,13 @@ body {
       font-size: 11px;
       margin-top: 15px;
 
+      .glyphicon {
+        display: none;
+      }
+
       .list-item {
         margin-bottom: 0;
+        margin-left: 18px;
         line-height: 12px;
         label {
           top: -2px;

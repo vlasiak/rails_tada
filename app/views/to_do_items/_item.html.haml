@@ -1,3 +1,4 @@
-%li.list-item{id: "item-#{item.id}"}
+%li.list-item{id: "item-#{item.id}", move: "#{move_path}"}
+  %span.glyphicon.glyphicon-sort
   = check_box_tag "item-cb-#{item.id}", item.list_id, item.done, url: to_do_item_path(id: item.id), autocomplete: 'off'
   = label_tag "item-cb-#{item.id}", item.text

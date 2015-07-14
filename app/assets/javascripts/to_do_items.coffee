@@ -118,7 +118,7 @@ class @TodoItem
     $.ajax
       url: item.attr('url')
       method: 'PUT'
-      error: (response) ->
+      error: () ->
         renderCheckError item
       success: (response) ->
         toggle response

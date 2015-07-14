@@ -30,4 +30,32 @@ class ToDoItemsControllerTest < ActionController::TestCase
     item.reload
     assert item.done
   end
+
+  test "should change position of item on item moving" do
+    first_item = items(:first)
+    new_item_position = items(:fourth).position
+
+    xhr :put, :move, {id: first_item.id, position: new_item_position}
+
+    first_item.reload
+    assert_equal new_item_position, first_item.position
+  end
+
+  test "should change position of item on item checking" do
+    first_item = items(:first)
+
+    xhr :put, :update, id: first_item.id
+
+    first_item.reload
+    assert_nil first_item.position
+  end
+
+  test "should change position of item on item unchecking" do
+    second_item = items(:second)
+
+    xhr :put, :update, id: second_item.id
+
+    second_item.reload
+    assert_equal second_item.list.incompleted_items.size, second_item.position
+  end
 end

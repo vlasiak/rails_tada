@@ -36,7 +36,7 @@ class ListTest < ActiveSupport::TestCase
     assert_includes list_with_items.items, items(:second)
   end
 
-  test "list items are ordered by updated_at column" do
+  test "list items are ordered by position column" do
     assert_equal [items(:second), items(:first)], list_with_items.items
   end
 

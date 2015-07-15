@@ -19,7 +19,7 @@ class ToDoItemsController < ApplicationController
     if item.done
       item.position = item.list.incompleted_items.size + 1
     else
-      item.list.items.where('position > ? and done = ?', item.position, false).
+      item.associated_list_items.incompleted.where('position > ?', item.position).
           update_all('position = position - 1')
       item.position = nil
     end
@@ -31,14 +31,13 @@ class ToDoItemsController < ApplicationController
   def move
     begin
       @item = Item.find params[:id]
-      current_list = List.find @item.list_id
 
       ActiveRecord::Base.transaction do
         if @item.position < params[:position].to_i
-          current_list.items.where('position > ? and position <= ? and done = ?', @item.position, params[:position].to_i, false).
+          @item.associated_list_items.incompleted.where('position > ? and position <= ?', @item.position, params[:position].to_i).
             update_all('position = position - 1')
         else
-          current_list.items.where('position >= ? and position < ? and done = ?', params[:position].to_i, @item.position, false).
+          @item.associated_list_items.incompleted.where('position >= ? and position < ?', params[:position].to_i, @item.position).
             update_all('position = position + 1')
         end
         @item.update_attribute(:position, params[:position])

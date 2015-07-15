@@ -116,7 +116,7 @@ class @TodoItem
 
   doCheckRequest = (item) ->
     $.ajax
-      url: item.attr('urjjjl')
+      url: item.attr('url')
       method: 'PUT'
       error: () ->
         onCheckError item
@@ -126,7 +126,7 @@ class @TodoItem
   changePositionRequest = (item) ->
     id = extractId item.attr('id')
     $.ajax
-      url: item.attr('moved')
+      url: item.attr('move')
       data: {id: id, position: item.index() + 1}
       method: 'PUT'
       error: () ->

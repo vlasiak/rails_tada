@@ -8,10 +8,6 @@ class @TodoItem
   onCreate: (options) ->
     renderItem options
 
-  onMoveError: (options) ->
-    revertMoving options.listId
-    showReplacedCheckAlert options
-
   @startAdding: (listId) ->
     @expandOnClick listId
     @renderForm listId
@@ -48,13 +44,6 @@ class @TodoItem
 
   revertMoving = (listId) ->
     detectList(listId).find('ul.incomplete').sortable('cancel')
-
-  showReplacedCheckAlert = (options) ->
-    alertBox = detectList(options.listId).find('div.alert')
-    originalMessage = alertBox.html()
-    alertBox.html(options.html)
-    $.when(showCheckAlert options.listId).then () ->
-      alertBox.html(originalMessage)
 
   renameLink = (id, name) ->
     detectAddLink(id).text(name)
@@ -111,32 +100,37 @@ class @TodoItem
     currentCheckbox = $("##{id}")
     currentCheckbox.prop 'checked', !currentCheckbox.prop 'checked'
 
-  showCheckAlert = (listId) ->
-    alertBox = detectList(listId).find('div.alert')
+  showAlert = (listId, typeError) ->
+    alertBox = detectList(listId).find("div.#{typeError}")
     return unless alertBox.css('display') == 'none'
     alertBox.fadeIn('slow').delay(3000).fadeOut('slow')
 
-  renderCheckError = (item) ->
+  onCheckError = (item) ->
     revertChecking item.attr('id')
-    showCheckAlert item.attr('value')
+    showAlert item.attr('value'), 'mark-error'
+
+  onMoveError = (item) ->
+    listId = item.find("input[type='checkbox']").attr('value')
+    revertMoving listId
+    showAlert listId, 'move-error'
 
   doCheckRequest = (item) ->
     $.ajax
-      url: item.attr('url')
+      url: item.attr('urjjjl')
       method: 'PUT'
       error: () ->
-        renderCheckError item
+        onCheckError item
       success: (response) ->
         toggle response
 
   changePositionRequest = (item) ->
     id = extractId item.attr('id')
     $.ajax
-      url: item.attr('move')
+      url: item.attr('moved')
       data: {id: id, position: item.index() + 1}
       method: 'PUT'
       error: () ->
-        console.log 'error'
+        onMoveError item
       success: () ->
         highlightNewOne extractId item.attr('id')
 

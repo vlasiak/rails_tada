@@ -30,6 +30,12 @@ class @TodoItem
     $form.toggle()
     focusOn id
 
+  @makeDraggable = (element) ->
+    element.sortable
+      handle: '.glyphicon-sort'
+      update: (event, ui) ->
+        updatePosition ui.item
+
   appendNewOne = (listId, html) ->
     detectList(listId).find('ul.incomplete').append html
 
@@ -129,15 +135,13 @@ class @TodoItem
       url: item.attr('move')
       data: {id: id, position: item.index() + 1}
       method: 'PUT'
+      error: () ->
+        console.log 'error'
+      success: () ->
+        highlightNewOne extractId item.attr('id')
 
   updatePosition = (item) ->
     changePositionRequest item
-
-  makeDraggable = (element) ->
-    element.sortable
-      handle: '.glyphicon-sort'
-      stop: (event, ui) ->
-        updatePosition ui.item
 
   bindAddEvents = () =>
     $.each $('div.list a'), (_, value) =>
@@ -148,9 +152,9 @@ class @TodoItem
     $.each $("div.list input[type='checkbox']"), (_, value) =>
       checkOnClick value
 
-  bindDraggingEvents = () ->
-    $.each $('ul.incomplete'), (_, value) ->
-      makeDraggable $(value)
+  bindDraggingEvents = () =>
+    $.each $('ul.incomplete'), (_, value) =>
+      @makeDraggable $(value)
 
   bindCancelEvent = (id) ->
     collapseOnClick id

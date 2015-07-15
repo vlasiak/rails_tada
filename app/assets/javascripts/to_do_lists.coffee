@@ -63,6 +63,7 @@ class @TodoList
     appendNewOne options.html
     scrollToNewOne options.id
     bindAddItemEvent options.id
+    bindSortEvent detectList options.id
 
   initializeFields = () ->
     detectNewListSubmitButton().addClass('disabled')
@@ -77,6 +78,9 @@ class @TodoList
 
   bindAddItemEvent = (id) ->
     TodoItem.startAdding id
+
+  bindSortEvent = (list) ->
+    TodoItem.makeDraggable list.find('ul.incomplete')
 
   bindModalShownEvent = () ->
     $('.modal').on 'shown.bs.modal', () ->

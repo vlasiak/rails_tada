@@ -60,7 +60,8 @@ body {
 
   .glyphicon {
     color: #999;
-    top: 0;
+    font-size: 12px;
+    top: -2px;
   }
 
   .empty {
@@ -179,7 +180,7 @@ body {
     .incomplete {
       margin-bottom: 0;
       span:hover {
-        cursor: pointer;
+        cursor: move;
       }
     }
 

@@ -41,13 +41,23 @@ class ToDoItemsControllerTest < ActionController::TestCase
     assert_equal new_item_position, first_item.position
   end
 
+  test "should add last position to new item" do
+    item = items(:first)
+
+    xhr :post, :create, item: {text: item.text, list_id: item.list_id}
+    new_item = assigns(:item)
+
+    assert_response :success
+    assert_equal new_item.list.items.size, new_item.position
+  end
+
   test "should change position of item on item checking" do
     first_item = items(:first)
 
     xhr :put, :update, id: first_item.id
 
     first_item.reload
-    assert_nil first_item.position
+    assert_equal first_item.list.items.size, first_item.position
   end
 
   test "should change position of item on item unchecking" do
@@ -56,6 +66,6 @@ class ToDoItemsControllerTest < ActionController::TestCase
     xhr :put, :update, id: second_item.id
 
     second_item.reload
-    assert_equal second_item.list.incompleted_items.size, second_item.position
+    assert_equal second_item.list.items.size, second_item.position
   end
 end

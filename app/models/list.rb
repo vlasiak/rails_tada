@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  has_many :items, -> { order(:position, :updated_at) }, dependent: :destroy
+  has_many :items, -> { order(:position) }, dependent: :destroy
 
   validates :title, presence: true
   validates :title, uniqueness: true

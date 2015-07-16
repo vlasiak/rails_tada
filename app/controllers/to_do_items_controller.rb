@@ -9,20 +9,19 @@ class ToDoItemsController < ApplicationController
 
   def create
     @item = Item.new item_params
-    @item.position = @item.incompleted_count + 1
     @item.save
   end
 
   def update
     item = Item.find params[:id]
+    item.update_attribute 'done', !item.done
 
     if item.done?
-      item.insert_at item.incompleted_count + 1
+      item.remove_from_list
     else
       item.move_to_bottom
     end
 
-    item.update_attribute 'done', !item.done
     render json: item
   end
 

@@ -7,19 +7,16 @@ class List < ActiveRecord::Base
   scope :including_items, -> { includes(:items).order(:created_at) }
 
   def completed_items
-    sort_items items.select { |item| item.done? }
+    completed_items = items.select { |item| item.done? }
+    completed_items.sort_by { |item| item.updated_at }
   end
 
   def incompleted_items
-    sort_items items.reject { |item| item.done? }
+    incompleted_items = items.reject { |item| item.done? }
+    incompleted_items.sort_by { |item| item.position }
   end
 
   def has_items?
     items.present?
   end
-
-  def sort_items items
-    items.sort_by {|item| item.position}
-  end
-
 end

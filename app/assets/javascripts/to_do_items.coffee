@@ -85,7 +85,7 @@ class @TodoItem
 
   checkOnClick = (item) ->
     $(item).click () ->
-      doCheckRequest $(item)
+      makeCheckRequest $(item)
 
   toggle = (options) ->
     list = detectList options.list_id
@@ -109,12 +109,11 @@ class @TodoItem
     revertChecking item.attr('id')
     showAlert item.attr('value'), 'mark-error'
 
-  onMoveError = (item) ->
-    listId = item.find("input[type='checkbox']").attr('value')
+  onMoveError = (listId) ->
     revertMoving listId
     showAlert listId, 'move-error'
 
-  doCheckRequest = (item) ->
+  makeCheckRequest = (item) ->
     $.ajax
       url: item.attr('url')
       method: 'PUT'
@@ -123,19 +122,23 @@ class @TodoItem
       success: (response) ->
         toggle response
 
-  changePositionRequest = (item) ->
-    id = extractId item.attr('id')
+  makeMoveRequest = (options) ->
     $.ajax
-      url: item.attr('move')
-      data: {id: id, position: item.index() + 1}
-      method: 'PUT'
+      url: options.moveUrl
+      data: {id: options.id, position: options.position}
+      method: 'PATCH'
       error: () ->
-        onMoveError item
+        onMoveError options.listId
       success: () ->
-        highlightNewOne extractId item.attr('id')
+        highlightNewOne options.id
 
   updatePosition = (item) ->
-    changePositionRequest item
+    options = {}
+    options.id = extractId item.attr('id')
+    options.listId = item.find("input[type='checkbox']").attr('value')
+    options.moveUrl = item.attr('move-url')
+    options.position = item.index() + 1
+    makeMoveRequest options
 
   bindAddEvents = () =>
     $.each $('div.list a'), (_, value) =>

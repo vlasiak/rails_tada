@@ -7,7 +7,7 @@ class AddPositionToItems < ActiveRecord::Migration
 
       lists = List.including_items
       lists.each do |list|
-        list.items.each_with_index do |item, index|
+        list.items.order(:done, :updated_at).each_with_index do |item, index|
           item.update_attribute(:position, index + 1)
         end
       end

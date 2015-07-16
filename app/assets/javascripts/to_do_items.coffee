@@ -158,7 +158,7 @@ class @TodoItem
       detectCancelFormButton(id).click() if event.keyCode == 27
 
   initializeForm = (id, html) ->
-    detectList(id).find('div.alert').after html
+    detectList(id).find('div.complete').before html
     focusOn id
     bindCancelEvent id
     bindEscKeyEvent id

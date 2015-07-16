@@ -48,7 +48,7 @@ class ToDoItemsControllerTest < ActionController::TestCase
     new_item = assigns(:item)
 
     assert_response :success
-    assert_equal new_item.list.items.size, new_item.position
+    assert_equal new_item.incompleted_count + 1, new_item.position
   end
 
   test "should change position of item on item checking" do
@@ -66,6 +66,6 @@ class ToDoItemsControllerTest < ActionController::TestCase
     xhr :put, :update, id: second_item.id
 
     second_item.reload
-    assert_equal second_item.list.items.size, second_item.position
+    assert_equal second_item.incompleted_count, second_item.position
   end
 end

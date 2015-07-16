@@ -34,22 +34,22 @@ Item.create(text: %{Click the name of the project ("Explore Basecamp") in the to
 
 
 Item.create(text: %{This to-do has a due date.}, list_id: second_list.id,
-    done: true, position: 1)
+    done: false, position: 1)
 
 Item.create(text: %{Click me > here < to see a discussion on a to-do.}, list_id: second_list.id,
-    done: true, position: 2)
+    done: false, position: 2)
 
 Item.create(text: %{< Click the box to my left to check me off as done.}, list_id: second_list.id,
-    done: true, position: 3)
+    done: false, position: 3)
 
 Item.create(text: %{Click and hold me anywhere on this line and drag me up to reorder.}, list_id: second_list.id,
-    done: false, position: 4)
+    done: true, position: 4)
 
 Item.create(text: %{Hover over me and click the button to my right to assign a due date >}, list_id: second_list.id,
-    done: false, position: 5)
+    done: true, position: 5)
 
 Item.create(text: %{Click the name of this to-do list to focus just on this list.}, list_id: second_list.id,
-    done: false, position: 6)
+    done: true, position: 6)
 
 Item.create(text: %{Click the "Add a to-do" link right below me to add your own to-do.}, list_id: second_list.id,
-    done: false, position: 7)
+    done: true, position: 7)

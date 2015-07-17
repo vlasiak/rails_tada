@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'acts_as_list'
+gem 'devise'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use jqueru ui
@@ -28,7 +29,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # The ActiveRecord session store
 gem 'activerecord-session_store'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 # Use Respond_to
 gem 'responders', '~> 2.0'
 # Use FactoryGirl

@@ -33,21 +33,10 @@ class ToDoItemsControllerTest < ActionController::TestCase
 
   test "should change position of item on moving" do
     first_item = items(:first)
-    new_item_position = items(:fourth).position
 
-    xhr :put, :move, {id: first_item.id, position: new_item_position}
+    xhr :put, :move, {id: first_item.id, position: 5}
 
     first_item.reload
-    assert_equal new_item_position, first_item.position
-  end
-
-  test "should move newly created item to the bottom" do
-    item = items(:first)
-
-    xhr :post, :create, item: {text: item.text, list_id: item.list_id}
-    new_item = assigns(:item)
-
-    assert_response :success
-    assert_equal new_item.list.incompleted_items.count, new_item.position
+    assert_equal 5, first_item.position
   end
 end

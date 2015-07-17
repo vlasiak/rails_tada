@@ -5,14 +5,20 @@ class Item < ActiveRecord::Base
   validates :text, :list_id, presence: true
 
   def mark
-    Item.transaction do
+    transaction do
       update_attributes done: !done
 
-      done? ? remove_from_list : add_to_list
+      done? ? unset_position : set_highest_position
     end
   end
 
-  def add_to_list
+  private
+
+  def unset_position
+    remove_from_list
+  end
+
+  def set_highest_position
     update_attributes position: list.items.where(done: false).count
   end
 end

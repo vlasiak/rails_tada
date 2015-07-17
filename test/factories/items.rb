@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :with_valid_attributes, class: Item do
+    text '< Click the box to my left to check me off as done.'
+    list_id 1
+  end
+
   factory :without_text, class: Item do
     list_id 1
   end

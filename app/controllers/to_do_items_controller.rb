@@ -14,8 +14,16 @@ class ToDoItemsController < ApplicationController
 
   def update
     item = Item.find params[:id]
-    item.update_attribute 'done', !item.done
+    item.mark
+
     render json: item
+  end
+
+  def move
+    @item = Item.find params[:id]
+    @item.insert_at params[:position].to_i
+
+    render nothing: true
   end
 
   private

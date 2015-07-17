@@ -2,10 +2,11 @@
 
 first:
   id: 1
-  text: Read 'The PickAxe'.
+  text: Read 'The PickAxe'
   list_id: 1
   done: false
   updated_at: 2015-06-26 12:25:07
+  position: 2
 
 second:
   id: 2
@@ -13,3 +14,20 @@ second:
   list_id: 1
   done: true
   updated_at: 2015-05-25 11:04:55
+  position: null
+
+third:
+  id: 3
+  text: Click me > there < to see a part of a list with items
+  list_id: 1
+  done: true
+  updated_at: 2015-04-25 16:09:34
+  position: null
+
+fourth:
+  id: 4
+  text: Read another book
+  list_id: 1
+  done: false
+  updated_at: 2015-09-25 22:55:09
+  position: 1

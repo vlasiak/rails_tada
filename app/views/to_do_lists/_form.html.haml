@@ -2,7 +2,7 @@
   %button.close#close-new-list-form{data: {dismiss: 'modal'}} &times;
   %h4.modal-title= t 'list.new.title'
 
-= render partial: 'to_do_items/check_error_alert', locals: {id: 'create-list', message: t('list.create_error')}
+= render partial: 'to_do_items/error_alert', locals: {id: 'create-list', type:'', message: t('list.create_error')}
 
 = form_for @list, url: to_do_lists_path, method: :post, remote: true, html: {id: 'new-list-form'} do |f|
   .modal-body

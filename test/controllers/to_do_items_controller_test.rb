@@ -30,4 +30,13 @@ class ToDoItemsControllerTest < ActionController::TestCase
     item.reload
     assert item.done
   end
+
+  test "should change position of item on moving" do
+    first_item = items(:first)
+
+    xhr :put, :move, {id: first_item.id, position: 5}
+
+    first_item.reload
+    assert_equal 5, first_item.position
+  end
 end

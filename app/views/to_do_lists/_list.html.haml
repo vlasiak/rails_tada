@@ -4,7 +4,8 @@
     %div= list.description
 
   = render partial: 'list_items_container', locals: {items: list.incompleted_items, other_classes: 'incomplete'}
-  = render partial: 'to_do_items/check_error_alert', locals: {id: list.id, message: t('item.mark_error')}
+  = render partial: 'to_do_items/error_alert', locals: {id: list.id, type: 'mark-error', message: t('item.mark_error')}
+  = render partial: 'to_do_items/error_alert', locals: {id: list.id, type: 'move-error', message: t('item.move_error')}
 
   - link_name = list.has_items? ? t('item.add.link') : t('item.first.link')
   = link_to link_name, new_to_do_item_path(id: list.id), id: "add-item-link-#{list.id}"

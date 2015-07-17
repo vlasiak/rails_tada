@@ -3,6 +3,7 @@ class @TodoItem
   @initialize: () ->
     bindAddEvents()
     bindCheckEvents()
+    bindDraggingEvents()
 
   onCreate: (options) ->
     renderItem options
@@ -25,6 +26,12 @@ class @TodoItem
     $form.toggle()
     focusOn id
 
+  @makeDraggable = (element) ->
+    element.sortable
+      handle: '.glyphicon-sort'
+      update: (event, ui) ->
+        updatePosition ui.item
+
   appendNewOne = (listId, html) ->
     detectList(listId).find('ul.incomplete').append html
 
@@ -34,6 +41,9 @@ class @TodoItem
   highlightNewOne = (id) ->
     detectItem(id).css({'background-color':'#ffffe0'}).
       animate({'background-color':'#fff'}, 2000)
+
+  revertMoving = (listId) ->
+    detectList(listId).find('ul.incomplete').sortable('cancel')
 
   renameLink = (id, name) ->
     detectAddLink(id).text(name)
@@ -75,7 +85,7 @@ class @TodoItem
 
   checkOnClick = (item) ->
     $(item).click () ->
-      doCheckRequest $(item)
+      makeCheckRequest $(item)
 
   toggle = (options) ->
     list = detectList options.list_id
@@ -90,23 +100,45 @@ class @TodoItem
     currentCheckbox = $("##{id}")
     currentCheckbox.prop 'checked', !currentCheckbox.prop 'checked'
 
-  showCheckAlert = (listId) ->
-    alertBox = detectList(listId).find('div.alert')
+  showAlert = (listId, typeError) ->
+    alertBox = detectList(listId).find("div.#{typeError}")
     return unless alertBox.css('display') == 'none'
     alertBox.fadeIn('slow').delay(3000).fadeOut('slow')
 
-  renderCheckError = (item) ->
+  onCheckError = (item) ->
     revertChecking item.attr('id')
-    showCheckAlert item.attr('value')
+    showAlert item.attr('value'), 'mark-error'
 
-  doCheckRequest = (item) ->
+  onMoveError = (listId) ->
+    revertMoving listId
+    showAlert listId, 'move-error'
+
+  makeCheckRequest = (item) ->
     $.ajax
       url: item.attr('url')
       method: 'PUT'
       error: () ->
-        renderCheckError item
+        onCheckError item
       success: (response) ->
         toggle response
+
+  makeMoveRequest = (options) ->
+    $.ajax
+      url: options.moveUrl
+      data: {id: options.id, position: options.position}
+      method: 'PATCH'
+      error: () ->
+        onMoveError options.listId
+      success: () ->
+        highlightNewOne options.id
+
+  updatePosition = (item) ->
+    options = {}
+    options.id = extractId item.attr('id')
+    options.listId = item.find("input[type='checkbox']").attr('value')
+    options.moveUrl = item.attr('move-url')
+    options.position = item.index() + 1
+    makeMoveRequest options
 
   bindAddEvents = () =>
     $.each $('div.list a'), (_, value) =>
@@ -117,6 +149,10 @@ class @TodoItem
     $.each $("div.list input[type='checkbox']"), (_, value) =>
       checkOnClick value
 
+  bindDraggingEvents = () =>
+    $.each $('ul.incomplete'), (_, value) =>
+      @makeDraggable $(value)
+
   bindCancelEvent = (id) ->
     collapseOnClick id
 
@@ -125,7 +161,7 @@ class @TodoItem
       detectCancelFormButton(id).click() if event.keyCode == 27
 
   initializeForm = (id, html) ->
-    detectList(id).find('div.alert').after html
+    detectList(id).find('div.complete').before html
     focusOn id
     bindCancelEvent id
     bindEscKeyEvent id

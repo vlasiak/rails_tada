@@ -23,7 +23,7 @@ Item.create(text: %{ Click the "Invite more people" link at the top right corner
 Item.create(text: %{Upload a file to this project by just dragging a file
   (a picture, a Word doc, a PDF, whatever)
   right into your web browser and dropping it anywhere into this project.},
-            list_id: first_list.id, done: true, position: 4)
+            list_id: first_list.id, done: true)
 
 Item.create(text: %{Explore Basecamp's totally unique page stacking interface. Click me to see how it works.},
             list_id: first_list.id, done: false, position: 2)
@@ -43,13 +43,13 @@ Item.create(text: %{< Click the box to my left to check me off as done.}, list_i
     done: false, position: 3)
 
 Item.create(text: %{Click and hold me anywhere on this line and drag me up to reorder.}, list_id: second_list.id,
-    done: true, position: 4)
+    done: true)
 
 Item.create(text: %{Hover over me and click the button to my right to assign a due date >}, list_id: second_list.id,
-    done: true, position: 5)
+    done: true)
 
 Item.create(text: %{Click the name of this to-do list to focus just on this list.}, list_id: second_list.id,
-    done: true, position: 6)
+    done: true)
 
 Item.create(text: %{Click the "Add a to-do" link right below me to add your own to-do.}, list_id: second_list.id,
-    done: true, position: 7)
+    done: true)

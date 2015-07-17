@@ -36,9 +36,14 @@ class ListTest < ActiveSupport::TestCase
     assert_includes list_with_items.items, items(:second)
   end
 
-  test "list's items are ordered by position column" do
-    assert_equal [items(:fourth), items(:first), items(:second), items(:third)],
-      list_with_items.items.sort_by {|item| item.position}
+  test "list's incompleted items are sorted by position column" do
+    assert_equal [items(:fourth), items(:first)],
+      lists(:first).incompleted_items
+  end
+
+  test "list's completed items are sorted by updated_at column" do
+    assert_equal [items(:third), items(:second)],
+      lists(:first).completed_items
   end
 
   test "list items are destroyed when destroy list" do

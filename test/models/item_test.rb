@@ -14,4 +14,20 @@ class ItemTest < ActiveSupport::TestCase
     assert !item.save
     assert_equal "can't be blank", item.errors[:list_id].join('; ')
   end
+
+  test "should remove item position on checking" do
+    first_item = items(:first)
+    first_item.mark
+
+    first_item.reload
+    assert_nil first_item.position
+  end
+
+  test "should move item to the bottom on unchecking" do
+    second_item = items(:second)
+    second_item.mark
+
+    second_item.reload
+    assert_equal second_item.list.incompleted_items.count, second_item.position
+  end
 end

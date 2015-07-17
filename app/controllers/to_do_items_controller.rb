@@ -14,13 +14,7 @@ class ToDoItemsController < ApplicationController
 
   def update
     item = Item.find params[:id]
-    item.update_attribute 'done', !item.done
-
-    if item.done?
-      item.remove_from_list
-    else
-      item.move_to_bottom
-    end
+    item.mark
 
     render json: item
   end

@@ -14,7 +14,7 @@ second:
   list_id: 1
   done: true
   updated_at: 2015-05-25 11:04:55
-  position: 3
+  position: null
 
 third:
   id: 3
@@ -22,7 +22,7 @@ third:
   list_id: 1
   done: true
   updated_at: 2015-04-25 16:09:34
-  position: 4
+  position: null
 
 fourth:
   id: 4

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'users/index'
+
   root 'to_do_lists#index'
 
+  resources :users, only: :index
   resources :to_do_lists, only: [:index, :new, :create]
   resources :to_do_items, only: [:new, :create, :update] do
     patch 'move', on: :member

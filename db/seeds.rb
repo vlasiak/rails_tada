@@ -8,6 +8,9 @@
 
 List.delete_all
 Item.delete_all
+User.delete_all
+
+User.create(email: 'isnull29@gmail.com', password_digest: 'secret')
 
 first_list = List.create(title: 'Explore Basecamp! — Some quick things to explore in Basecamp',
   description: 'A nice way to get acclimated.'

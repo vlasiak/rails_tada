@@ -3,8 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .container {
-  .alert {
-    margin-left: 0;
+  .login-error {
+    .alert {
+      display: block;
+      margin-left: 0;
+    }
+  }
+
+  .auth-info {
+    color: #767676;
+    float: right;
+    font-size: 12px;
+    margin-top: 20px;
   }
 
   .login {

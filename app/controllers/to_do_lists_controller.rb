@@ -1,5 +1,6 @@
 class ToDoListsController < ApplicationController
 
+  before_action :authenticate_user!
   def index
     @lists = List.including_items
     @lists_presentation = ListsPresentation.new @lists

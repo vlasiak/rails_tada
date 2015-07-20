@@ -1,8 +1,8 @@
 .login
-  .login-error
-    = render partial: 'to_do_items/error_alert', locals: {id: 'login', type: '',
-      message: t('devise.failure.invalid', authentication_keys: 'email')}
+  - unless flash.empty?
+    .login-error
+      = render partial: 'to_do_items/error_alert', locals: {id: 'login', type: '', message: flash[:alert]}
   .login-header
-    %p= 'Sign in'
+    %p= t 'user.login'
   .login-body
     = render partial: 'users/new'

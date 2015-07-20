@@ -2,6 +2,8 @@
   .list-header
     %h3= list.title
     %div= list.description
+    %p= list.user.email
+    %p= list.created_at
 
   = render partial: 'list_items_container', locals: {items: list.incompleted_items, other_classes: 'incomplete'}
   = render partial: 'to_do_items/error_alert', locals: {id: list.id, type: 'mark-error', message: t('item.mark_error')}

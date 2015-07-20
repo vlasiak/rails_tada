@@ -1,7 +1,7 @@
 class ToDoListsController < ApplicationController
 
   def index
-    @lists = List.including_items
+    @lists = List.including_items.with_creator
     @lists_presentation = ListsPresentation.new @lists
   end
 

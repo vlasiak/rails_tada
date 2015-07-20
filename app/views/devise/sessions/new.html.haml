@@ -1,5 +1,5 @@
 .login
-  - unless flash.empty?
+  - unless flash[:alert].blank?
     .login-error
       = render partial: 'to_do_items/error_alert', locals: {id: 'login', type: '', message: flash[:alert]}
   .login-header

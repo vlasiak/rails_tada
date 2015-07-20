@@ -3,6 +3,18 @@ require 'test_helper'
 class ToDoListsControllerTest < ActionController::TestCase
   fixtures :lists
 
+  def setup
+    @user = FactoryGirl.create(:valid_user)
+    sign_in @user
+  end
+
+  test "blocks unauthenticated access" do
+    sign_out @user
+    get :index
+
+    assert_redirected_to new_user_session_path
+  end
+
   test "should get index" do
     get :index
     assert_response :success

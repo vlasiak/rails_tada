@@ -1,0 +1,8 @@
+.login
+  .login-error
+    = render partial: 'to_do_items/error_alert', locals: {id: 'login', type: '',
+      message: t('devise.failure.invalid', authentication_keys: 'email')}
+  .login-header
+    %p= 'Sign in'
+  .login-body
+    = render partial: 'users/new'

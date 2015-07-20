@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
   root 'to_do_lists#index'
 
-  resources :users, only: :index
+  devise_for :users, path: 'auth', path_names: {sign_in: 'login', sign_out: 'logout'}
   resources :to_do_lists, only: [:index, :new, :create]
   resources :to_do_items, only: [:new, :create, :update] do
     patch 'move', on: :member

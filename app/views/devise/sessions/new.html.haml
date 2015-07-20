@@ -1,7 +1,7 @@
 .login
   - unless flash[:alert].blank?
-    .login-error
-      = render partial: 'to_do_items/error_alert', locals: {id: 'login', type: '', message: flash[:alert]}
+    .bs-callout.bs-callout-warning
+      %h4= flash[:alert]
   .login-header
     %p= t 'user.login'
   .login-body

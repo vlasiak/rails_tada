@@ -8,12 +8,17 @@ class @User
     clearLogoutStorage()
     bindLogoutListener()
     bindLogoutEvent()
+    bindErrorDisplaying()
 
   detectLogoutLink = () ->
     $('a#logout')
 
   clearLogoutStorage = () ->
     window.localStorage.removeItem 'logout'
+
+  bindErrorDisplaying = () ->
+    callout = $('.bs-callout')
+    callout.toggle() if callout.find('h4').html()
 
   bindLogoutListener = () ->
     window.addEventListener 'storage', storageChange

@@ -1,7 +1,6 @@
 .login
-  - unless flash[:alert].blank?
-    .bs-callout.bs-callout-warning
-      %h4= flash[:alert]
+  .bs-callout.bs-callout-warning
+    %h4= @flash_message.alert
   .login-header
     %p= t 'user.login'
   .login-body

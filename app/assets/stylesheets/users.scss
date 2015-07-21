@@ -8,11 +8,19 @@
     float: right;
     font-size: 12px;
     margin-top: 20px;
+
+    a {
+      text-transform: lowercase;
+    }
   }
 
   .login {
     margin: 0 auto;
     width: 400px;
+
+    .bs-callout {
+      display: none;
+    }
 
     .login-header {
       background-color: #829aa8;

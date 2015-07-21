@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :valid_user, class: User do
-    email 'some_user@gmail.com'
-    password 'some_password'
+    email 'dave@tada.com'
+    password 'QSAkVWduOr56'
   end
 end

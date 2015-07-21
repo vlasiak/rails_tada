@@ -8,7 +8,22 @@ class ToDoListsControllerTest < ActionController::TestCase
     sign_in @user
   end
 
-  test "blocks unauthenticated access" do
+  test "redirect to root path after login" do
+    sign_out @user
+    sign_in @user
+
+    assert_redirected_to root_path
+  end
+
+  test "redirect to login page after logout" do
+    sign_out @user
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    get :new
+
+    assert_redirected_to new_user_session_path
+  end
+
+  test "redirect to login page on unauthenticated access" do
     sign_out @user
     get :index
 

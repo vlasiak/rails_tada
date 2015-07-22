@@ -1,5 +1,6 @@
 .login
-  = devise_error_messages!
+  - if @flash.alert_present?
+    .bs-callout.bs-callout-warning= @flash.alert
   .login-header
     %p= t 'user.login'
   .login-body

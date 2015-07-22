@@ -9,7 +9,7 @@ class Notifier
   end
 
   def alert
-    flash[:alert] unless flash[:alert].blank?
+    flash[:alert]
   end
 
   private

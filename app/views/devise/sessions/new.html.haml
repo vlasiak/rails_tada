@@ -1,6 +1,5 @@
 .login
-  .bs-callout.bs-callout-warning
-    %h4= @flash_message.alert
+  = devise_error_messages!
   .login-header
     %p= t 'user.login'
   .login-body

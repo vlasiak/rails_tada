@@ -26,6 +26,7 @@ class @User
   bindLogoutEvent = () ->
     logoutLink = detectLogoutLink()
     logoutLink.click () ->
+      window.location = logoutLink.attr('href')
       logoutEverywhere()
       return false
 
@@ -33,8 +34,7 @@ class @User
     window.localStorage.setItem 'logout', true
 
   storageChange = (event) ->
-    if event.key == 'logout'
-      window.location = detectLogoutLink().attr('href')
+    location.reload() if event.key == 'logout'
 
 $ ->
   User.initialize()

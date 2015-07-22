@@ -1,0 +1,6 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+first:
+  id: 1
+  email: vasyll@tada.com
+  encrypted_password: password

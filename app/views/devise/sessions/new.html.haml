@@ -1,7 +1,5 @@
 .login
-  - unless flash[:alert].blank?
-    .login-error
-      = render partial: 'to_do_items/error_alert', locals: {id: 'login', type: '', message: flash[:alert]}
+  = devise_error_messages!
   .login-header
     %p= t 'user.login'
   .login-body

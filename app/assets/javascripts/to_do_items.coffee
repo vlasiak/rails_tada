@@ -167,8 +167,11 @@ class @TodoItem
     bindEscKeyEvent id
 
   drawForm = (url, id) ->
-    $.get(url).complete (response) =>
-      initializeForm id, response.responseText
+    $.ajax
+      url: url
+      method: 'GET'
+      success: (response) ->
+        initializeForm id, response
 
   collapseForm = (id) ->
     removeCallout id

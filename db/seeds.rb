@@ -13,10 +13,11 @@ User.delete_all
 User.create(email: 'vasyll@interlink-ua.com', password: 'password')
 
 first_list = List.create(title: 'Explore Basecamp! — Some quick things to explore in Basecamp',
-  description: 'A nice way to get acclimated.'
+  description: 'A nice way to get acclimated.',
+  user_id: 3
 )
 
-second_list = List.create(title: 'Explore Basecamp! — To-do list basics ')
+second_list = List.create(title: 'Explore Basecamp! — To-do list basics', user_id: 3)
 
 
 Item.create(text: %{ Click the "Invite more people" link at the top right corner

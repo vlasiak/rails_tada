@@ -34,6 +34,7 @@ en:
       cancel_button: Cancel
       empty: No ToDo lists have been added yet.
       invitation: You can create your first one right now.
+    create_info_html: Created by <span>%{user}</span> on %{date}
     new_error: Oops, couldn't open a new list window. Please try again later.
     create_error: Oops, couldn't create a new list. Please try again later.
   item:

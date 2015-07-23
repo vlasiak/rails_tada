@@ -47,3 +47,7 @@ en:
     mark_error: Oops, couldn't mark/unmark item. Please try again later.
     move_error: Oops, could not change the position of the item. Please try again later.
     cancel_button: Cancel
+  user:
+    login: Log in
+    logout: Log out
+    signed_in_as: Logged in as %{user},

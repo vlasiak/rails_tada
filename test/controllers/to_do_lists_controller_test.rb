@@ -3,6 +3,11 @@ require 'test_helper'
 class ToDoListsControllerTest < ActionController::TestCase
   fixtures :lists
 
+  def setup
+    @user = FactoryGirl.create(:valid_user)
+    sign_in @user
+  end
+
   test "should get index" do
     get :index
     assert_response :success

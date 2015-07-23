@@ -1,0 +1,7 @@
+.login
+  - if @notification.alert_present?
+    .bs-callout.bs-callout-warning= @notification.alert
+  .login-header
+    %p= t 'user.login'
+  .login-body
+    = render partial: 'users/new'

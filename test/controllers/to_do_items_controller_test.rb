@@ -3,6 +3,11 @@ require 'test_helper'
 class ToDoItemsControllerTest < ActionController::TestCase
   fixtures :items
 
+  def setup
+    user = FactoryGirl.create(:valid_user)
+    sign_in user
+  end
+
   test "should instantiate a new item in the list" do
     get :new, id: items(:first).id
     item = FactoryGirl.build(:only_with_list_reference)

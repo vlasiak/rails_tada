@@ -21,7 +21,7 @@ class SingleListPresenterTest < ActiveSupport::TestCase
   end
 
   test "list date creation presence" do
-    assert_equal list_with_items.created_at, list.created_at
+    assert_equal 'July 23, 2015', list.created_at
   end
 
   test "list creator presence" do

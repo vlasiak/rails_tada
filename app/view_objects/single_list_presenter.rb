@@ -17,7 +17,8 @@ class SingleListPresenter
   end
 
   def created_at
-    list.created_at
+    date = list.created_at
+    date.strftime('%B %d, %Y')
   end
 
   def created_by

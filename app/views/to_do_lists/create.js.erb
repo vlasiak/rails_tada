@@ -1,7 +1,7 @@
 var options = {
     <% if @list.persisted? %>
-        html: "<%=j render partial: 'list', locals: {list: @list_presenter} %>",
-        id: <%= @list_presenter.id %>,
+        html: "<%=j render partial: 'list', locals: {list: @list} %>",
+        id: <%= @list.id %>,
     <% else %>
         error: true
     <% end %>

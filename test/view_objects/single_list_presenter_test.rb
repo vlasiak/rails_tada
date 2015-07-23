@@ -21,11 +21,18 @@ class SingleListPresenterTest < ActiveSupport::TestCase
   end
 
   test "list date creation presence" do
-    assert_equal 'July 23, 2015', list.created_at
+    assert_equal 'July 23, 2015', list.created_on
   end
 
   test "list creator presence" do
     assert_equal list_with_items.user.email, list.created_by
+  end
+
+  test "list should be persisted" do
+    user = FactoryGirl.create(:valid_user)
+    @user = SingleListPresenter.new user
+
+    assert @user.persisted?
   end
 
   test "list has items" do

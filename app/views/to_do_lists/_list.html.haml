@@ -1,8 +1,8 @@
 .list{id: "list-#{list.id}"}
   .list-header
-    %span.glyphicon.glyphicon-time
-    %p= t 'list.create_info_html', user: list.created_by, date: list.created_at
     %h3= list.title
+    %span.glyphicon.glyphicon-time
+    %p= t 'list.create_info_html', user: content_tag(:span, list.created_by), date: list.created_on
     %div= list.description
 
   = render partial: 'list_items_container', locals: {items: list.incompleted_items, other_classes: 'incomplete'}

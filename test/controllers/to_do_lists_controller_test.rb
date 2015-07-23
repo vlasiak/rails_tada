@@ -34,6 +34,6 @@ class ToDoListsControllerTest < ActionController::TestCase
   test "newly created list belongs to current user" do
     xhr :post, :create, list: {title: 'title', description: 'description'}
 
-    assert_equal @user, assigns(:list).user
+    assert_equal @user.email, assigns(:list).created_by
   end
 end

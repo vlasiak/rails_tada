@@ -23,6 +23,11 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal lists(:first), item.list
   end
 
+  test "should return incompleted items" do
+    assert_equal [items(:first), items(:fourth)],
+      lists(:first).items.incompleted
+  end
+
   test "should unset item position on checking" do
     first_item = items(:first)
     first_item.mark
@@ -36,11 +41,11 @@ class ItemTest < ActiveSupport::TestCase
     second_item.mark
 
     second_item.reload
-    assert_equal second_item.list.items.where(done: false).count, second_item.position
+    assert_equal second_item.list.items.incompleted.count, second_item.position
   end
 
   test "should move newly created item to the bottom" do
     item = FactoryGirl.create(:with_valid_attributes)
-    assert_equal item.list.items.where(done: false).count, item.position
+    assert_equal item.list.items.incompleted.count, item.position
   end
 end

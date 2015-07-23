@@ -4,6 +4,8 @@ class Item < ActiveRecord::Base
 
   validates :text, :list_id, presence: true
 
+  scope :incompleted, -> { where.not('done') }
+
   def mark
     transaction do
       update_attributes done: !done
@@ -19,6 +21,6 @@ class Item < ActiveRecord::Base
   end
 
   def set_highest_position
-    update_attributes position: list.items.where(done: false).count
+    update_attributes position: list.items.incompleted.count
   end
 end

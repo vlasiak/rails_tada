@@ -16,13 +16,17 @@ class SingleListPresenter
     list.description
   end
 
-  def created_at
+  def created_on
     date = list.created_at
-    date.strftime('%B %d, %Y')
+    date.strftime I18n.t 'formats.date'
   end
 
   def created_by
     list.user.email
+  end
+
+  def persisted?
+    list.persisted?
   end
 
   def has_items?

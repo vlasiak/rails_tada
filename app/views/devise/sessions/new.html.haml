@@ -1,6 +1,6 @@
 .login
   - if @notification.alert_present?
-    .bs-callout.bs-callout-warning= @flash.alert
+    .bs-callout.bs-callout-warning= @notification.alert
   .login-header
     %p= t 'user.login'
   .login-body

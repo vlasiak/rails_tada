@@ -14,8 +14,8 @@ class ToDoListsController < ApplicationController
   end
 
   def create
-    @list = List.new list_params
-    @list.save
+    @list = current_user.lists.create list_params
+    @list_presenter= SingleListPresenter.new @list
   end
 
   private

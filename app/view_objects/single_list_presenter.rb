@@ -1,7 +1,5 @@
 class SingleListPresenter
 
-  # attr_reader :id, :title, :description, :created_at
-
   def initialize list
     @list = list
   end

@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "user has lists" do
-    user = FactoryGirl.build(:valid_user)
+    user = users(:first)
     assert_equal [lists(:first), lists(:second)], user.lists
   end
 end

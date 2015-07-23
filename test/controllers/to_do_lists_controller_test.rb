@@ -24,10 +24,16 @@ class ToDoListsControllerTest < ActionController::TestCase
 
   test "should create a new list" do
     assert_difference('List.count') do
-      xhr :post, :create, list: {title: 'list title', description: 'list description'}
+      xhr :post, :create, list: {title: 'title', description: 'description'}
     end
 
     assert_response :success
     assert_not_nil assigns(:list)
+  end
+
+  test "newly created list belongs to current user" do
+    xhr :post, :create, list: {title: 'title', description: 'description'}
+
+    assert_equal @user, assigns(:list).user
   end
 end

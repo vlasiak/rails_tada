@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class ListTest < ActiveSupport::TestCase
+  fixtures :users
+  fixtures :lists
+  fixtures :items
 
   def setup
     @list_with_items = FactoryGirl.build(:with_items)
@@ -31,7 +34,6 @@ class ListTest < ActiveSupport::TestCase
   end
 
   test "list belongs to user" do
-    # user = FactoryGirl.build(:valid_user)
     assert_equal users(:first), list_with_items.user
   end
 

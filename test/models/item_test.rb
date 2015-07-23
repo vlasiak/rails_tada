@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
+  fixtures :lists
+  fixtures :items
+
   test "item cannot be saved without text" do
     item = FactoryGirl.build(:without_text)
     assert item.invalid?

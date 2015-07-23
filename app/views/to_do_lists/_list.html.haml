@@ -1,7 +1,7 @@
 .list{id: "list-#{list.id}"}
   .list-header
     %span.glyphicon.glyphicon-time
-    %p= t 'list.create_info_html', user: list.user.email, date: list.created_at
+    %p= t 'list.create_info_html', user: list.created_by, date: list.created_at
     %h3= list.title
     %div= list.description
 

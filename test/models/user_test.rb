@@ -2,6 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   fixtures :users
+  fixtures :lists
 
   test "validate email presence" do
     user = FactoryGirl.build(:without_email)
@@ -23,5 +24,10 @@ class UserTest < ActiveSupport::TestCase
 
     assert user.invalid?
     assert_equal "is too short (minimum is 8 characters)", user.errors[:password].join('; ')
+  end
+
+  test "user has lists" do
+    user = FactoryGirl.build(:valid_user)
+    assert_equal [lists(:first), lists(:second)], user.lists
   end
 end

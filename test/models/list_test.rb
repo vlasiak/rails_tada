@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class ListTest < ActiveSupport::TestCase
-  fixtures :lists
-  fixtures :items
 
   def setup
     @list_with_items = FactoryGirl.build(:with_items)
@@ -27,23 +25,14 @@ class ListTest < ActiveSupport::TestCase
     assert_equal [lists(:second), lists(:first)], lists
   end
 
-  test "list has items" do
-    assert list_with_items.has_items?
-  end
-
   test "list contains it's items" do
     assert_includes list_with_items.items, items(:first)
     assert_includes list_with_items.items, items(:second)
   end
 
-  test "list's incompleted items are sorted by position column" do
-    assert_equal [items(:fourth), items(:first)],
-      lists(:first).incompleted_items
-  end
-
-  test "list's completed items are sorted by updated_at column" do
-    assert_equal [items(:third), items(:second)],
-      lists(:first).completed_items
+  test "list belongs to user" do
+    # user = FactoryGirl.build(:valid_user)
+    assert_equal users(:first), list_with_items.user
   end
 
   test "list items are destroyed when destroy list" do

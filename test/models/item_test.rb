@@ -15,6 +15,11 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal "can't be blank", item.errors[:list_id].join('; ')
   end
 
+  test "item belongs to list" do
+    item = items(:second)
+    assert_equal lists(:first), item.list
+  end
+
   test "should unset item position on checking" do
     first_item = items(:first)
     first_item.mark
@@ -28,11 +33,11 @@ class ItemTest < ActiveSupport::TestCase
     second_item.mark
 
     second_item.reload
-    assert_equal second_item.list.incompleted_items.count, second_item.position
+    assert_equal second_item.list.items.where(done: false).count, second_item.position
   end
 
   test "should move newly created item to the bottom" do
     item = FactoryGirl.create(:with_valid_attributes)
-    assert_equal item.list.incompleted_items.count, item.position
+    assert_equal item.list.items.where(done: false).count, item.position
   end
 end

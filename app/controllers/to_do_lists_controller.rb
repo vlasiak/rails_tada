@@ -1,8 +1,10 @@
 class ToDoListsController < ApplicationController
 
   def index
-    @lists = List.including_items.with_creator
-    @lists_presentation = ListsPresentation.new @lists
+    all_lists = List.including_items.with_creator
+    @lists_presentation = ListsPresentation.new all_lists
+
+    @lists = all_lists.map { |list| SingleListPresenter.new list }
   end
 
   def new

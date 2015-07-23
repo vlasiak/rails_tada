@@ -21,12 +21,15 @@ class @User
   bindLogoutEvent = () ->
     logoutLink = detectLogoutLink()
     logoutLink.click () ->
-      logoutEverywhere logoutLink.attr('href')
+      makeLogoutRequest logoutLink.attr('href')
       return false
 
-  logoutEverywhere = (url) ->
-    window.location = url
-    window.localStorage.setItem 'logout', true
+  makeLogoutRequest = (url) ->
+    $.ajax
+      url: url
+      method: 'GET'
+      success: () ->
+        window.localStorage.setItem 'logout', true
 
   storageChange = (event) ->
     location.reload() if event.key == 'logout'

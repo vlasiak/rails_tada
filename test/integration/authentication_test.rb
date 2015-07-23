@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AuthorisationTest < ActionDispatch::IntegrationTest
+class AuthenticationTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = FactoryGirl.create(:valid_user)

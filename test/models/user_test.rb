@@ -8,7 +8,7 @@ class UserTest < ActiveSupport::TestCase
     user = FactoryGirl.build(:without_email)
 
     assert user.invalid?
-    assert_equal "can't be blank", user.errors[:email].join('; ')
+    assert_equal ["can't be blank"], user.errors[:email]
   end
 
   test "validate email uniqueness" do
@@ -16,14 +16,14 @@ class UserTest < ActiveSupport::TestCase
     new_user = User.new(email: user.email)
 
     assert new_user.invalid?
-    assert_equal "has already been taken", new_user.errors[:email].join('; ')
+    assert_equal ["has already been taken"], new_user.errors[:email]
   end
 
   test "validate password min length" do
     user = User.new(password: '1234')
 
     assert user.invalid?
-    assert_equal "is too short (minimum is 8 characters)", user.errors[:password].join('; ')
+    assert_equal ["is too short (minimum is 8 characters)"], user.errors[:password]
   end
 
   test "user has lists" do

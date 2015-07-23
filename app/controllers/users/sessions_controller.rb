@@ -4,6 +4,6 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def set_flash
-    @flash = Notifier.new flash
+    @notification = FlashNotification.new flash
   end
 end

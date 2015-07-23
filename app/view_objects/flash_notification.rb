@@ -1,4 +1,4 @@
-class Notifier
+class FlashNotification
 
   def initialize flash
     @flash = flash

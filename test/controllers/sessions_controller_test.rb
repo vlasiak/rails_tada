@@ -9,6 +9,6 @@ class SessionsControllerTest < ActionController::TestCase
 
   test "should set flash on new" do
     get :new
-    assert_not_nil assigns(:flash)
+    assert_not_nil assigns(:notification)
   end
 end

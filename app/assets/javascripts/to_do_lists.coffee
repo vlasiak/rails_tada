@@ -86,13 +86,16 @@ class @TodoList
     $('.modal').on 'shown.bs.modal', () ->
       detectNewListTitle().focus()
 
+  toggleSubmitActivity = () ->
+    $submitButton = detectNewListSubmitButton()
+    if detectNewListTitle().val().trim()
+      $submitButton.removeClass('disabled')
+    else
+      $submitButton.addClass('disabled')
+
   validateOnInput = (element) ->
-    element.keyup () ->
-      $submitButton = detectNewListSubmitButton()
-      if detectNewListTitle().val().trim()
-        $submitButton.removeClass('disabled')
-      else
-        $submitButton.addClass('disabled')
+    element.on('keyup', () -> toggleSubmitActivity())
+      .on('select', () -> toggleSubmitActivity())
 
   closePopUp = () ->
     detectNewListCloseButton().click()

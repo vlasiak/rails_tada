@@ -13,5 +13,7 @@ FactoryGirl.define do
     id 1
     title 'Some quick things to explore in Basecamp'
     description 'To-do list basics'
+    created_at '2015-07-23 13:15:16'
+    user_id 1
   end
 end

@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
+  fixtures :lists
+  fixtures :items
+
   test "item cannot be saved without text" do
     item = FactoryGirl.build(:without_text)
     assert item.invalid?
@@ -13,6 +16,16 @@ class ItemTest < ActiveSupport::TestCase
     assert item.invalid?
     assert !item.save
     assert_equal ["can't be blank"], item.errors[:list_id]
+  end
+
+  test "item belongs to list" do
+    item = items(:second)
+    assert_equal lists(:first), item.list
+  end
+
+  test "should return incompleted items" do
+    assert_equal [items(:first), items(:fourth)],
+      lists(:first).items.incompleted
   end
 
   test "should unset item position on checking" do
@@ -28,11 +41,11 @@ class ItemTest < ActiveSupport::TestCase
     second_item.mark
 
     second_item.reload
-    assert_equal second_item.list.incompleted_items.count, second_item.position
+    assert_equal second_item.list.items.incompleted.count, second_item.position
   end
 
   test "should move newly created item to the bottom" do
     item = FactoryGirl.create(:with_valid_attributes)
-    assert_equal item.list.incompleted_items.count, item.position
+    assert_equal item.list.items.incompleted.count, item.position
   end
 end

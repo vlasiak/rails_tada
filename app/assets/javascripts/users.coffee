@@ -30,6 +30,7 @@ class @User
       method: 'GET'
       success: () ->
         window.localStorage.setItem 'logout', true
+        window.location.reload()
 
   storageChange = (event) ->
     location.reload() if event.key == 'logout'

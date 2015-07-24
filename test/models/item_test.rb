@@ -28,6 +28,11 @@ class ItemTest < ActiveSupport::TestCase
       lists(:first).items.incompleted
   end
 
+  test "should return completed items" do
+    assert_equal [items(:second), items(:third)],
+      lists(:first).items.completed
+  end
+
   test "should unset item position on checking" do
     first_item = items(:first)
     first_item.mark

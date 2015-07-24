@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
   validates :text, :list_id, presence: true
 
   scope :incompleted, -> { where.not('done') }
+  scope :completed, -> { where('done') }
 
   def mark
     transaction do

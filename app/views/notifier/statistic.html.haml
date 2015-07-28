@@ -1,12 +1,12 @@
 %div{style: 'margin: 0 auto; width: 90%;'}
   %div{style: 'color: #1e8cd4;'}
     %h1{style: 'text-align: center;'}
-      Daily Digest
+      = t 'digest.email_body.title'
     %hr{style: 'background: #CCCCCC; border: 0 none; height: 1px; width: 100%;'}
     %div{style: 'background: #fff; padding-left: 35px; position: relative; margin: 0 auto; top: -18px; width: 150px;'}
-      %span= Date.today.strftime I18n.t 'formats.date'
+      %span= @daily_statistic.for_yesterday
   %div
     = render partial: 'statistic_container'
   %div{style: 'color: #1e8cd4; clear: both; padding-top: 50px;'}
     %hr{style: 'background: #CCCCCC; border: 0 none; height: 1px; width: 100%;'}
-    TaDa &copy;2015
+    = t 'digest.email_footer_html'

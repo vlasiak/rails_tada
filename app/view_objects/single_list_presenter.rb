@@ -18,7 +18,7 @@ class SingleListPresenter
 
   def created_on
     date = list.created_at
-    date.strftime I18n.t 'formats.date'
+    date.strftime I18n.t 'formats.list_creation_date'
   end
 
   def created_by

@@ -1,9 +1,12 @@
-Daily Digest
-= Date.today.strftime I18n.t 'formats.date'
+= t 'digest.email_body.title'
+= @daily_statistic.for_yesterday
 
 - if @daily_statistic.all_items_completed?
-  = render plain: 'Everything is completed, nothing to do.'
+  = t 'digest.email_body.everything_completed'
+  = t 'digest.email_body.nothing_to_do'
 - elsif @daily_statistic.no_items_done?
-  = render plain: "Nothing was done today. #{@daily_statistic.remaining_number} todos remaining."
+  = t 'digest.email_body.nothing_was_done'
+  = t 'digest.email_body.remaining', count: @daily_statistic.remaining_number
 - else
-  = render plain: "#{@daily_statistic.completed_number} todos completed. #{@daily_statistic.remaining_number} todos remaining."
+  = t 'digest.email_body.completed', count: @daily_statistic.completed_number
+  = t 'digest.email_body.remaining', count: @daily_statistic.remaining_number

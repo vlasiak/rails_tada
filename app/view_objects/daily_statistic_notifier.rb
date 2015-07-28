@@ -1,7 +1,7 @@
 class DailyStatisticNotifier
 
   def initialize
-    @a = 4
+    @a = 7
     @b = 2
   end
 
@@ -19,6 +19,11 @@ class DailyStatisticNotifier
 
   def remaining_number
     @b
+  end
+
+  def for_yesterday
+    date = Date.yesterday
+    date.strftime I18n.t 'formats.email_digest_date'
   end
 
 end

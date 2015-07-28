@@ -1,2 +1,9 @@
-Notifier#statistic
-Statistic here
+Daily Digest
+= Date.today.strftime I18n.t 'formats.date'
+
+- if @daily_statistic.all_items_completed?
+  = render plain: 'Everything is completed, nothing to do.'
+- elsif @daily_statistic.no_items_done?
+  = render plain: "Nothing was done today. #{@daily_statistic.remaining_number} todos remaining."
+- else
+  = render plain: "#{@daily_statistic.completed_number} todos completed. #{@daily_statistic.remaining_number} todos remaining."

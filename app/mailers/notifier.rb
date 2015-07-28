@@ -1,6 +1,7 @@
 class Notifier < ActionMailer::Base
 
   def statistic
+    @daily_statistic = DailyStatisticNotifier.new
     mail :subject => 'TaDa daily digest for today',
          :to      => 'isnull29@gmail.com',
          :from    => 'no-reply@tada.com'

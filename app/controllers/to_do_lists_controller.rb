@@ -16,9 +16,6 @@ class ToDoListsController < ApplicationController
   def create
     list = current_user.lists.create list_params
     @list= SingleListPresenter.new list
-
-    daily_statistic = DailyStatisticNotifier.new
-    Notifier.statistic(daily_statistic).deliver
   end
 
   private

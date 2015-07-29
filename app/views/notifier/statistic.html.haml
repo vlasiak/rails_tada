@@ -4,8 +4,8 @@
       = t 'digest.email_body.title'
     %hr{style: 'background: #CCCCCC; border: 0 none; height: 1px; width: 100%;'}
     %div{style: 'background: #fff; padding-left: 35px; position: relative; margin: 0 auto; top: -18px; width: 150px;'}
-      %span= @daily_statistic.for_yesterday
-  %div
+      %span= @daily_statistic.for_today
+  %div{style: 'min-width: 800px;'}
     = render partial: 'statistic_container'
   %div{style: 'color: #1e8cd4; clear: both; padding-top: 50px;'}
     %hr{style: 'background: #CCCCCC; border: 0 none; height: 1px; width: 100%;'}

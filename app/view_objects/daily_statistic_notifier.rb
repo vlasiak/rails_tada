@@ -1,29 +1,33 @@
 class DailyStatisticNotifier
 
-  def initialize
-    @a = 7
-    @b = 2
+  def initialize statistic
+    @completed = statistic[:completed]
+    @remaining = statistic[:remaining]
   end
 
   def all_items_completed?
-    @b == 0
+    remaining == 0
   end
 
   def no_items_done?
-    @a == 0
+    completed == 0
   end
 
   def completed_number
-    @a
+    completed
   end
 
   def remaining_number
-    @b
+    remaining
   end
 
-  def for_yesterday
-    date = Date.yesterday
+  def for_today
+    date = Date.today
     date.strftime I18n.t 'formats.email_digest_date'
   end
+
+  private
+
+  attr_reader :completed, :remaining
 
 end

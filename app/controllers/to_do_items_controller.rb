@@ -26,6 +26,19 @@ class ToDoItemsController < ApplicationController
     render nothing: true
   end
 
+  def statistic
+    completed = Item.where('updated_at >= ? AND updated_at <= ?',
+      Date.today.to_time.beginning_of_day,
+      Date.today.to_time.end_of_day).count
+    remaining = Item.where(done: false).count
+
+    statistic = Hash(completed: completed, remaining: remaining)
+
+    daily_statistic = DailyStatisticNotifier.new statistic
+    Notifier.statistic(daily_statistic).deliver
+    flash[:notice] = 'Email has been sent'
+  end
+
   private
 
   def item_params

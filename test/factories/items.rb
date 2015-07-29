@@ -15,4 +15,12 @@ FactoryGirl.define do
   factory :only_with_list_reference, class: Item do
     list_id 1
   end
+
+  factory :completed_today, class: Item do
+    text 'Read this book again'
+    list_id 1
+    done true
+    completed_at Date.today
+  end
+
 end

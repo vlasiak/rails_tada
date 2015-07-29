@@ -6,38 +6,46 @@ class Item < ActiveRecord::Base
 
   scope :incompleted, -> { where.not('done') }
   scope :completed, -> { where('done') }
+  scope :for_today, -> {
+    where('completed_at >= ? AND completed_at <= ?',
+    Date.today.to_time.beginning_of_day,
+    Date.today.to_time.end_of_day)
+  }
 
   def mark
     transaction do
       update_attributes done: !done
 
-      if done?
-        unset_position
-        set_completed_at
-      else
-        set_highest_position
-        unset_completed_at
-      end
-
+      done? ? move_to_completed : move_to_incompleted
     end
   end
 
   private
 
-  def unset_position
-    remove_from_list
+  def move_to_completed
+    unset_position
+    set_completed_at
+  end
+
+  def move_to_incompleted
+    set_highest_position
+    unset_completed_at
   end
 
   def set_highest_position
     update_attributes position: list.items.incompleted.count
   end
 
-  def unset_completed_at
-    update_attributes completed_at: nil
+  def unset_position
+    remove_from_list
   end
 
   def set_completed_at
     update_attributes completed_at: DateTime.now
+  end
+
+  def unset_completed_at
+    update_attributes completed_at: nil
   end
 
 end

@@ -40,7 +40,7 @@ class SingleListPresenter
 
   def completed_items
     completed_items = list.items.select { |item| item.done? }
-    completed_items.sort_by { |item| item.updated_at }
+    completed_items.sort_by { |item| item.completed_at }
   end
 
   private

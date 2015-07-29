@@ -31,7 +31,6 @@ class ToDoItemsController < ApplicationController
       Date.today.to_time.beginning_of_day,
       Date.today.to_time.end_of_day).count
     remaining = Item.where(done: false).count
-
     statistic = Hash(completed: completed, remaining: remaining)
 
     daily_statistic = DailyStatisticNotifier.new statistic

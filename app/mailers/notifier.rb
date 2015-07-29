@@ -1,5 +1,4 @@
 class Notifier < ActionMailer::Base
-
   def statistic statistic
     @daily_statistic = statistic
 
@@ -8,5 +7,4 @@ class Notifier < ActionMailer::Base
          bcc:     ENV['BCC'],
          from:    t('digest.email_header.from')
   end
-
 end

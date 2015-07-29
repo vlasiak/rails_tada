@@ -11,7 +11,6 @@ class NotifierTest < ActionMailer::TestCase
   test "email headers" do
     assert_equal "TaDa daily digest for #{@daily_statistic.for_today}", mail.subject
     assert_equal ['vasyll@tada.com'], mail.to
-    assert_equal ['isnull29@gmail.com'], mail.bcc
     assert_equal ['no-reply@tada.com'], mail.from
   end
 

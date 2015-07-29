@@ -8,6 +8,11 @@ class NotifierTest < ActionMailer::TestCase
     @mail = Notifier.statistic @daily_statistic
   end
 
+  test "email delivering" do
+    @mail.deliver
+    refute ActionMailer::Base.deliveries.empty?
+  end
+
   test "email headers" do
     assert_equal "TaDa daily digest for #{@daily_statistic.for_today}", mail.subject
     assert_equal ['vasyll@tada.com'], mail.to

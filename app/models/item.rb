@@ -11,7 +11,14 @@ class Item < ActiveRecord::Base
     transaction do
       update_attributes done: !done
 
-      done? ? unset_position : set_highest_position
+      if done?
+        unset_position
+        set_completed_at
+      else
+        set_highest_position
+        unset_completed_at
+      end
+
     end
   end
 
@@ -24,4 +31,13 @@ class Item < ActiveRecord::Base
   def set_highest_position
     update_attributes position: list.items.incompleted.count
   end
+
+  def unset_completed_at
+    update_attributes completed_at: nil
+  end
+
+  def set_completed_at
+    update_attributes completed_at: DateTime.now
+  end
+
 end

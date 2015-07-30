@@ -3,9 +3,10 @@ require 'test_helper'
 class NotifierTest < ActionMailer::TestCase
 
   def setup
-    statistic = Hash(completed: 0, remaining: 5)
-    @daily_statistic = DailyStatisticNotifier.new statistic
-    @mail = Notifier.statistic @daily_statistic
+    recipients = User.all.map {|user| user.email}
+    params = Hash(recipients: recipients, completed: 0, remaining: 5)
+    @daily_statistic = DailyProgressDigest.new params
+    @mail = Notifier.digest @daily_statistic
   end
 
   test "email delivering" do

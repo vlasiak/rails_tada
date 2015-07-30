@@ -1,10 +1,10 @@
 class Notifier < ActionMailer::Base
-  def statistic statistic
-    @daily_statistic = statistic
+  def digest params
+    @daily_statistic = params
 
     mail subject: t('digest.email_header.subject', date: @daily_statistic.for_today),
-         to: User.all.map {|user| user.email},
-         bcc: ENV['BCC'],
+         to: @daily_statistic.recipients,
+         bcc: Settings.bcc,
          from: t('digest.email_header.from')
   end
 end

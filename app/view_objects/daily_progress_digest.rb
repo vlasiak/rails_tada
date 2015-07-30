@@ -1,24 +1,23 @@
-class DailyStatisticNotifier
+class DailyProgressDigest
 
-  def initialize statistic
-    @completed = statistic[:completed]
-    @remaining = statistic[:remaining]
+  def initialize params
+    @params = params
   end
 
   def all_items_completed?
-    remaining == 0
+    params[:remaining] == 0
   end
 
   def no_items_done?
-    completed == 0
+    params[:completed] == 0
   end
 
   def completed_number
-    completed
+    params[:completed]
   end
 
   def remaining_number
-    remaining
+    params[:remaining]
   end
 
   def for_today
@@ -26,8 +25,12 @@ class DailyStatisticNotifier
     date.strftime I18n.t 'formats.email_digest_date'
   end
 
+  def recipients
+    params[:recipients]
+  end
+
   private
 
-  attr_reader :completed, :remaining
+  attr_reader :params
 
 end

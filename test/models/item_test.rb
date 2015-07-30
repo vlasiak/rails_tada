@@ -53,7 +53,7 @@ class ItemTest < ActiveSupport::TestCase
     item.mark
 
     item.reload
-    assert_equal item.updated_at.to_a, item.completed_at.to_a
+    assert_equal item.updated_at.to_i, item.completed_at.to_i
   end
 
   test "should move item to the bottom on unchecking" do

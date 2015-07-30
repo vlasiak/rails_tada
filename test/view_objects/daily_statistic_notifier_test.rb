@@ -1,10 +1,11 @@
 require 'test_helper'
 
-class DailyStatisticNotifierTest < ActiveSupport::TestCase
+class DailyProgressDigestTest < ActiveSupport::TestCase
 
   def setup
-    statistic = Hash(completed: 0, remaining: 5)
-    @daily_statistic = DailyStatisticNotifier.new statistic
+    recipients = User.all.map {|user| user.email}
+    params = Hash(recipients: recipients, completed: 0, remaining: 5)
+    @daily_statistic = DailyProgressDigest.new params
   end
 
   test "not all items have been completed yet" do
@@ -26,6 +27,10 @@ class DailyStatisticNotifierTest < ActiveSupport::TestCase
   test "digest date format" do
     today = Date.today
     assert_equal today.strftime(I18n.t 'formats.email_digest_date'), daily_statistic.for_today
+  end
+
+  test "digest recipients" do
+    assert_equal ['vasyll@tada.com'], @daily_statistic.recipients
   end
 
   private

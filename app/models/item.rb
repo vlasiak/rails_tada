@@ -6,6 +6,7 @@ class Item < ActiveRecord::Base
 
   scope :incompleted, -> { where.not('done') }
   scope :completed, -> { where('done') }
+  scope :with_list, -> { includes(:list) }
   scope :for_today, -> {
     where('completed_at >= ? AND completed_at <= ?',
     Date.today.to_time.beginning_of_day,

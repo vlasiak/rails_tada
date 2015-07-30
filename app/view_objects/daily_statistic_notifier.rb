@@ -1,24 +1,25 @@
 class DailyStatisticNotifier
 
   def initialize statistic
-    @completed = statistic[:completed]
-    @remaining = statistic[:remaining]
+    @completed_todos = statistic[:completed_todos]
+    @completed_amount = statistic[:completed_amount]
+    @remaining_amount = statistic[:remaining_amount]
   end
 
   def all_items_completed?
-    remaining == 0
+    remaining_amount == 0
   end
 
   def no_items_done?
-    completed == 0
+    completed_amount == 0
   end
 
   def completed_number
-    completed
+    completed_amount
   end
 
   def remaining_number
-    remaining
+    remaining_amount
   end
 
   def for_today
@@ -28,6 +29,6 @@ class DailyStatisticNotifier
 
   private
 
-  attr_reader :completed, :remaining
+  attr_reader :completed_amount, :remaining_amount
 
 end

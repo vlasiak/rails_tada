@@ -27,12 +27,12 @@ class ToDoItemsController < ApplicationController
   end
 
   def statistic
-    completed = Item.completed.for_today.count
+    completed = Item.completed_today.count
     remaining = Item.incompleted.count
     statistic = Hash(completed: completed, remaining: remaining)
 
     daily_statistic = DailyStatisticNotifier.new statistic
-    Notifier.statistic(daily_statistic).deliver
+    # Notifier.statistic(daily_statistic).deliver
   end
 
   private

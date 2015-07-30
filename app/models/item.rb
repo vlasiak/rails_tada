@@ -6,11 +6,9 @@ class Item < ActiveRecord::Base
 
   scope :incompleted, -> { where.not('done') }
   scope :completed, -> { where('done') }
-  scope :for_today, -> {
-    where('completed_at >= ? AND completed_at <= ?',
-    Date.today.to_time.beginning_of_day,
-    Date.today.to_time.end_of_day)
-  }
+  scope :completed_today, -> do
+    where completed_at: (Time.now.beginning_of_day..Time.now.end_of_day)
+  end
 
   def mark
     transaction do

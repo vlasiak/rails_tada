@@ -24,7 +24,7 @@ en:
     title: ToDo
   digest:
     email_header:
-      subject: TaDa daily digest for %{date}
+      subject: TaDa Daily Digest for %{date}
       from: no-reply@tada.com
     email_body:
       title: Daily digest

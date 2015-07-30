@@ -79,9 +79,6 @@ GEM
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt
-    handy (0.0.28)
-      hashr
-    hashr (0.0.22)
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -196,7 +193,6 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   figaro
   haml
-  handy (= 0.0.28)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails

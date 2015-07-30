@@ -4,7 +4,7 @@ class Notifier < ActionMailer::Base
 
     mail subject: t('digest.email_header.subject', date: @daily_statistic.for_today),
          to: @daily_statistic.recipients,
-         bcc: Settings.bcc,
+         bcc: Figaro.env.bcc,
          from: t('digest.email_header.from')
   end
 end

@@ -18,7 +18,6 @@ gem 'acts_as_list'
 gem 'devise'
 gem 'mandrill-rails'
 gem 'figaro'
-gem 'handy', '0.0.28'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use jqueru ui

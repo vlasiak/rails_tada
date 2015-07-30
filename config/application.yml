@@ -11,4 +11,6 @@
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
 development:
+  MANDRILL_USERNAME: 'vasylL@interlink-ua.com'
+  MANDRILL_PASSWORD: 'vN7s2mviREi63vhYDtqMiw'
   bcc: 'isnull29@gmail.com'

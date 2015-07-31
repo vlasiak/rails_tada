@@ -1,8 +1,8 @@
 %div
   %p
     = t 'digest.email_body.completed_todos'
-  - @daily_statistic.completed_todos.map do |list, items|
-    %p= link_to list.title, root_path
+  - @daily_statistic.completed_todos.each_pair do |list, items|
+    %p= link_to list.title, root_url(:anchor => "list-#{list.id}")
     %ul
       - items.each do |item|
         %li= item.text

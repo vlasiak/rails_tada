@@ -12,7 +12,7 @@
   = t 'digest.email_body.remaining', count: @daily_statistic.remaining_number
 
   = t 'digest.email_body.completed_todos'
-  - @daily_statistic.completed_todos.map do |list, items|
+  - @daily_statistic.completed_todos.each_pair do |list, items|
     = list.title
     - items.each do |item|
       = item.text

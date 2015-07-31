@@ -16,7 +16,7 @@ class DailyDigest
       recipients: get_recipients,
       completed_todos: completed.group_by { |item| item.list },
       completed_amount: completed.size,
-      remaining_amount: incompleted.size
+      remaining_amount: incompleted
     }
   end
 
@@ -29,7 +29,7 @@ class DailyDigest
   end
 
   def incompleted
-    Item.incompleted
+    Item.incompleted.count
   end
 
 end

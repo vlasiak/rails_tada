@@ -3,9 +3,9 @@ require 'test_helper'
 class DailyProgressDigestTest < ActiveSupport::TestCase
 
   def setup
-    recipients = User.all.map {|user| user.email}
-    params = Hash(recipients: recipients, completed: 0, remaining: 5)
-    @daily_statistic = DailyProgressDigest.new params
+    recipients = User.all.pluck :email
+    options = {recipients: recipients, completed: 0, remaining: 5}
+    @daily_statistic = DailyProgressDigest.new options
   end
 
   test "not all items have been completed yet" do

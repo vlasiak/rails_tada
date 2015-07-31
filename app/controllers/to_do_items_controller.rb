@@ -27,8 +27,7 @@ class ToDoItemsController < ApplicationController
   end
 
   def statistic
-    digest = DailyDigest.new
-    digest.send
+    DailyDigest.new.perform
   end
 
   private

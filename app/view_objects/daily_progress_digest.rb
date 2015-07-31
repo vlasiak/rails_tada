@@ -1,23 +1,23 @@
 class DailyProgressDigest
 
-  def initialize params
-    @params = params
+  def initialize options
+    @options = options
   end
 
   def all_items_completed?
-    params[:remaining] == 0
+    options[:remaining] == 0
   end
 
   def no_items_done?
-    params[:completed] == 0
+    options[:completed] == 0
   end
 
   def completed_number
-    params[:completed]
+    options[:completed]
   end
 
   def remaining_number
-    params[:remaining]
+    options[:remaining]
   end
 
   def for_today
@@ -26,11 +26,11 @@ class DailyProgressDigest
   end
 
   def recipients
-    params[:recipients]
+    options[:recipients]
   end
 
   private
 
-  attr_reader :params
+  attr_reader :options
 
 end

@@ -1,8 +1,8 @@
 class DailyDigest
 
-  def send
-    params = get_statistic
-    daily_statistic = DailyProgressDigest.new params
+  def perform
+    options = get_statistic
+    daily_statistic = DailyProgressDigest.new options
 
     Notifier.digest(daily_statistic).deliver
   end
@@ -14,11 +14,11 @@ class DailyDigest
     completed = completed_amount
     remaining = incompleted_amount
 
-    Hash(recipients: recipients, completed: completed, remaining: remaining)
+    { recipients: recipients, completed: completed, remaining: remaining }
   end
 
   def get_recipients
-    User.all.map {|user| user.email}
+    User.all.pluck :email
   end
 
   def completed_amount

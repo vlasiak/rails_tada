@@ -4,6 +4,6 @@ class SetCompletedAtField < ActiveRecord::Migration
   end
 
   def down
-    Item.completed.update_all 'completed_at = null'
+    Item.completed.update_all completed_at: nil
   end
 end

@@ -4,7 +4,7 @@ class DailyDigest
     options = get_statistic
     daily_statistic = DailyProgressDigest.new options
 
-    Notifier.digest(daily_statistic).deliver
+    # Notifier.digest(daily_statistic).deliver
   end
 
   private
@@ -13,10 +13,10 @@ class DailyDigest
     completed = completed_for_today
 
     {
-        recipients: get_recipients,
-        completed_todos: completed.group_by { |item| item.list_id },
-        completed_amount: completed.size,
-        remaining_amount: incompleted.size
+      recipients: get_recipients,
+      completed_todos: completed.group_by { |item| item.list },
+      completed_amount: completed.size,
+      remaining_amount: incompleted.size
     }
   end
 

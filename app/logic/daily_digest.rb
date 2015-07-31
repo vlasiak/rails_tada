@@ -4,7 +4,7 @@ class DailyDigest
     options = get_statistic
     daily_statistic = DailyProgressDigest.new options
 
-    # Notifier.digest(daily_statistic).deliver
+    Notifier.digest(daily_statistic).deliver
   end
 
   private

@@ -3,18 +3,19 @@ require 'test_helper'
 class NotifierTest < ActionMailer::TestCase
 
   def setup
-    statistic = Hash(completed: 0, remaining: 5)
-    @daily_statistic = DailyStatisticNotifier.new statistic
-    @mail = Notifier.statistic @daily_statistic
-  end
+    options = {
+      recipients: User.all.pluck(:email),
+      completed_todos: {},
+      completed_amount: 0,
+      remaining_amount: 5
+    }
 
-  test "email delivering" do
-    @mail.deliver
-    refute ActionMailer::Base.deliveries.empty?
+    @daily_statistic = DailyProgressDigest.new options
+    @mail = Notifier.digest @daily_statistic
   end
 
   test "email headers" do
-    assert_equal "TaDa daily digest for #{@daily_statistic.for_today}", mail.subject
+    assert_equal "TaDa Daily Digest for #{@daily_statistic.for_today}", mail.subject
     assert_equal ['vasyll@tada.com'], mail.to
     assert_equal ['no-reply@tada.com'], mail.from
   end

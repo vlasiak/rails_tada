@@ -1,7 +1,13 @@
 class NotifierPreview < ActionMailer::Preview
-  def statistic
-    statistic = Hash(completed: 7, remaining: 3)
-    @daily_statistic = DailyStatisticNotifier.new statistic
-    Notifier.statistic @daily_statistic
+  def digest
+    options = {
+        recipients: User.all.pluck(:email),
+        completed_todos: {},
+        completed_amount: 0,
+        remaining_amount: 3
+    }
+
+    @daily_statistic = DailyProgressDigest.new options
+    Notifier.digest @daily_statistic
   end
 end

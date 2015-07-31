@@ -1,11 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.smtp_settings = {
-      :address   => 'smtp.mandrillapp.com',
-      :port      => 587,
-      :user_name => ENV['MANDRILL_USERNAME'],
-      :password  => ENV['MANDRILL_PASSWORD']
-  }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -38,7 +32,7 @@ Rails.application.configure do
   config.assets.compile = false
 
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
-  # yet still be able to expire them through the digest params.
+  # yet still be able to expire them through the statistic params.
   config.assets.digest = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb

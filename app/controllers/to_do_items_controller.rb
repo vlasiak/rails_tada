@@ -27,16 +27,7 @@ class ToDoItemsController < ApplicationController
   end
 
   def statistic
-    completed = Item.completed.with_list.for_today
-    remaining = Item.incompleted
-    statistic = Hash(
-      completed_todos: completed.group_by { |item| item.list_id },
-      completed_amount: completed.size,
-      remaining_amount: remaining.size
-    )
-
-    daily_statistic = DailyStatisticNotifier.new statistic
-    # Notifier.statistic(daily_statistic).deliver
+    DailyDigest.new.perform
   end
 
   private

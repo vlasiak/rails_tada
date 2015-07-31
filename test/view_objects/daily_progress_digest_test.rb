@@ -1,10 +1,16 @@
 require 'test_helper'
 
-class DailyStatisticNotifierTest < ActiveSupport::TestCase
+class DailyProgressDigestTest < ActiveSupport::TestCase
 
   def setup
-    statistic = Hash(completed: 0, remaining: 5)
-    @daily_statistic = DailyStatisticNotifier.new statistic
+    options = {
+      recipients: User.all.pluck(:email),
+      completed_todos: {},
+      completed_amount: 0,
+      remaining_amount: 5
+    }
+
+    @daily_statistic = DailyProgressDigest.new options
   end
 
   test "not all items have been completed yet" do
@@ -26,6 +32,10 @@ class DailyStatisticNotifierTest < ActiveSupport::TestCase
   test "digest date format" do
     today = Date.today
     assert_equal today.strftime(I18n.t 'formats.email_digest_date'), daily_statistic.for_today
+  end
+
+  test "digest recipients" do
+    assert_equal ['vasyll@tada.com'], @daily_statistic.recipients
   end
 
   private

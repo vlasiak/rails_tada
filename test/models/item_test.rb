@@ -36,7 +36,7 @@ class ItemTest < ActiveSupport::TestCase
   test "should return completed items for today" do
     item = FactoryGirl.create(:completed_today)
 
-    assert_equal [item], Item.completed.for_today
+    assert_equal [item], Item.completed_today
   end
 
   test "should unset item position on checking" do
@@ -53,7 +53,7 @@ class ItemTest < ActiveSupport::TestCase
     item.mark
 
     item.reload
-    assert_equal item.updated_at.to_a, item.completed_at.to_a
+    assert_equal item.updated_at.to_i, item.completed_at.to_i
   end
 
   test "should move item to the bottom on unchecking" do

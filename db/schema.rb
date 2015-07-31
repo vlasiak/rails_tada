@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720152332) do
+ActiveRecord::Schema.define(version: 20150724143942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: :cascade do |t|
-    t.string   "text",                       null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "text",                         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "list_id"
-    t.boolean  "done",       default: false
+    t.boolean  "done",         default: false
     t.integer  "position"
+    t.datetime "completed_at"
   end
 
   create_table "lists", force: :cascade do |t|

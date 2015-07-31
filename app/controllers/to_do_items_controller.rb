@@ -26,6 +26,10 @@ class ToDoItemsController < ApplicationController
     render nothing: true
   end
 
+  def statistic
+    DailyDigest.new.perform
+  end
+
   private
 
   def item_params

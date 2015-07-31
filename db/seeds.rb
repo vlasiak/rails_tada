@@ -45,7 +45,8 @@ Item.create(
     (a picture, a Word doc, a PDF, whatever)
     right into your web browser and dropping it anywhere into this project.},
   list_id: first_list.id,
-  done: true
+  done: true,
+  completed_at: '2015-04-25 11:04:02'
 )
 
 Item.create(
@@ -87,23 +88,27 @@ Item.create(
 Item.create(
   text: %{Click and hold me anywhere on this line and drag me up to reorder.},
   list_id: second_list.id,
-  done: true
+  done: true,
+  completed_at: '2015-04-25 11:03:42'
 )
 
 Item.create(
   text: %{Hover over me and click the button to my right to assign a due date >},
   list_id: second_list.id,
-  done: true
+  done: true,
+  completed_at: '2015-03-25 14:43:02'
 )
 
 Item.create(
   text: %{Click the name of this to-do list to focus just on this list.},
   list_id: second_list.id,
-  done: true
+  done: true,
+  completed_at: '2015-06-25 21:45:08'
 )
 
 Item.create(
   text: %{Click the "Add a to-do" link right below me to add your own to-do.},
   list_id: second_list.id,
-  done: true
+  done: true,
+  completed_at: '2015-08-24 17:03:55'
 )

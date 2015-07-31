@@ -18,7 +18,7 @@ class SingleListPresenter
 
   def created_on
     date = list.created_at
-    date.strftime I18n.t 'formats.date'
+    date.strftime I18n.t 'formats.list_creation_date'
   end
 
   def created_by
@@ -40,7 +40,7 @@ class SingleListPresenter
 
   def completed_items
     completed_items = list.items.select { |item| item.done? }
-    completed_items.sort_by { |item| item.updated_at }
+    completed_items.sort_by { |item| item.completed_at }
   end
 
   private

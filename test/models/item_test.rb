@@ -28,6 +28,17 @@ class ItemTest < ActiveSupport::TestCase
       lists(:first).items.incompleted
   end
 
+  test "should return completed items" do
+    assert_equal [items(:second), items(:third)],
+      lists(:first).items.completed
+  end
+
+  test "should return completed items for today" do
+    item = FactoryGirl.create(:completed_today)
+
+    assert_equal [item], Item.completed_today
+  end
+
   test "should unset item position on checking" do
     first_item = items(:first)
     first_item.mark
@@ -36,12 +47,30 @@ class ItemTest < ActiveSupport::TestCase
     assert_nil first_item.position
   end
 
+  test "should set completed_at on checking" do
+    item = items(:first)
+    assert_nil item.completed_at
+    item.mark
+
+    item.reload
+    assert_equal item.updated_at.to_i, item.completed_at.to_i
+  end
+
   test "should move item to the bottom on unchecking" do
     second_item = items(:second)
     second_item.mark
 
     second_item.reload
     assert_equal second_item.list.items.incompleted.count, second_item.position
+  end
+
+  test "should unset completed_at on unchecking" do
+    item = items(:second)
+    assert item.completed_at
+    item.mark
+
+    item.reload
+    assert_nil item.completed_at
   end
 
   test "should move newly created item to the bottom" do

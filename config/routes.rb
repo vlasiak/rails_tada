@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :to_do_lists, only: [:index, :new, :create]
   resources :to_do_items, only: [:new, :create, :update] do
     patch 'move', on: :member
+    get 'statistic', on: :collection
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

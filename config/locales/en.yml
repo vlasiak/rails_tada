@@ -22,8 +22,21 @@
 en:
   project:
     title: ToDo
+  digest:
+    email_header:
+      subject: TaDa Daily Digest for %{date}
+      from: no-reply@tada.com
+    email_body:
+      title: Daily digest
+      everything_completed: Everything is completed.
+      nothing_to_do: Nothing to do.
+      nothing_was_done: Nothing was done today.
+      remaining: '%{count} todos remaining.'
+      completed: '%{count} todos completed.'
+    email_footer_html: TaDa &copy;2015
   formats:
-    date: '%B %d, %Y'
+    list_creation_date: '%B %d, %Y'
+    email_digest_date: '%a, %e %B'
   list:
     all: All ToDo lists
     new:

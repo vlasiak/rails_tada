@@ -1,0 +1,12 @@
+%div{style: 'margin: 0 auto; width: 80%; min-width: 600px;'}
+  %div{style: 'color: #1e8cd4;'}
+    %h1{style: 'text-align: center; text-transform: capitalize;'}
+      = t 'digest.email_body.title'
+    %hr{style: 'background: #CCCCCC; border: 0 none; height: 1px; width: 100%;'}
+    %div{style: 'background: #fff; padding-left: 65px; position: relative; margin: 0 auto; top: -18px; width: 150px;'}
+      %span= @daily_statistic.for_today
+  %div
+    = render partial: 'statistic_container'
+  %div{style: 'color: #1e8cd4; clear: both; padding-top: 30px;'}
+    %hr{style: 'background: #CCCCCC; border: 0 none; height: 1px; width: 100%;'}
+    = t 'digest.email_footer_html'

@@ -1,0 +1,3 @@
+- return render partial: 'everything_done' if @daily_statistic.all_items_completed?
+- return render partial: 'nothing_done' if @daily_statistic.no_items_done?
+= render partial: 'detail_statistic'

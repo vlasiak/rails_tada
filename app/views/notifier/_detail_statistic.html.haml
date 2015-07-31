@@ -1,0 +1,11 @@
+= render partial: 'with_number',
+  locals: {color: '#34ad00',
+           number: @daily_statistic.completed_number,
+           message: t('digest.email_body.completed', count: nil),
+           float: 'left'}
+
+= render partial: 'with_number',
+  locals: {color: '#1f8cd3',
+           number: @daily_statistic.remaining_number,
+           message: t('digest.email_body.remaining', count: nil),
+           float: 'right'}

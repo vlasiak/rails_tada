@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'acts_as_list'
 gem 'devise'
+gem 'mandrill-rails'
+gem 'figaro'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use jqueru ui

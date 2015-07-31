@@ -44,7 +44,7 @@ class SingleListPresenterTest < ActiveSupport::TestCase
       list.incompleted_items
   end
 
-  test "list's completed items are sorted by updated_at column" do
+  test "list's completed items are sorted by completed_at column" do
     assert_equal [items(:third), items(:second)],
       list.completed_items
   end

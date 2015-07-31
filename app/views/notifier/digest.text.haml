@@ -1,0 +1,12 @@
+= t 'digest.email_body.title'
+= @daily_statistic.for_today
+
+- if @daily_statistic.all_items_completed?
+  = t 'digest.email_body.everything_completed'
+  = t 'digest.email_body.nothing_to_do'
+- elsif @daily_statistic.no_items_done?
+  = t 'digest.email_body.nothing_was_done'
+  = t 'digest.email_body.remaining', count: @daily_statistic.remaining_number
+- else
+  = t 'digest.email_body.completed', count: @daily_statistic.completed_number
+  = t 'digest.email_body.remaining', count: @daily_statistic.remaining_number

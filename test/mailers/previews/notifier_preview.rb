@@ -1,7 +1,7 @@
 class NotifierPreview < ActionMailer::Preview
   def digest
     options = {
-      recipients: User.all.pluck(:email),
+      recipients: ['vasyllasiak@interlink-ua.com'],
       completed_todos: {List.last => [Item.first, Item.last]},
       completed_amount: 2,
       remaining_amount: 8

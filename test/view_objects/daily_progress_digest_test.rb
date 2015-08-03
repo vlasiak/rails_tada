@@ -4,7 +4,7 @@ class DailyProgressDigestTest < ActiveSupport::TestCase
 
   def setup
     options = {
-      recipients: User.all.pluck(:email),
+      recipients: ['vasyll@tada.com'],
       completed_todos: {},
       completed_amount: 0,
       remaining_amount: 5

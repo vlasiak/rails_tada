@@ -5,11 +5,11 @@ class DailyProgressDigest
   end
 
   def all_items_completed?
-    options[:remaining_amount] == 0
+    remaining_number.zero?
   end
 
   def no_items_done?
-    options[:completed_amount] == 0
+    completed_number.zero?
   end
 
   def completed_number

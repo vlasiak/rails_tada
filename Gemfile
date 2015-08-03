@@ -18,6 +18,7 @@ gem 'acts_as_list'
 gem 'devise'
 gem 'mandrill-rails'
 gem 'figaro'
+gem 'whenever', :require => false
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use jqueru ui

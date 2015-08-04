@@ -17,20 +17,4 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-# Learn more: http://github.com/javan/whenever
-
-# every 1.minute do
-#   rake 'notification:send_digest', :environment => 'development'
-# end
-
-# every '0 0 * * * *' do
-#   rake 'notification:send-digest', :environment => 'production'
-# end
-#
-# every 1.day, :at => '3:00 pm' do
-#   rake 'notification:send-digest', :environment => 'staging'
-# end
-
-every 1.minute do
-  rake 'notification:send-digest', :environment => 'production'
-end
+# Learn more: http://github.com/javan/wheneverd

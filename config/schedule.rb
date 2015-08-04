@@ -18,3 +18,11 @@
 # end
 
 # Learn more: http://github.com/javan/wheneverd
+
+every '0 0 * * * *' do
+  rake 'notification:send_digest', :environment => 'production'
+end
+
+every 1.day, :at => '3:00 pm' do
+  rake 'notification:send_digest', :environment => 'staging'
+end

@@ -6,6 +6,8 @@ class Item < ActiveRecord::Base
 
   scope :incompleted, -> { where.not('done') }
   scope :completed, -> { where('done') }
+  scope :with_list, -> { includes(:list) }
+  scope :ordered, -> { order('lists.created_at, items.completed_at') }
   scope :completed_today, -> do
     where completed_at: (Time.now.beginning_of_day..Time.now.end_of_day)
   end

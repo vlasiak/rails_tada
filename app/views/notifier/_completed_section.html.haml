@@ -1,0 +1,10 @@
+%hr{style: 'clear: both; background: #CCCCCC; border: 0 none; height: 1px; width: 100%;'}
+%div{style: 'margin: 0 10% 0 10%;'}
+  %p{style: 'color: #34ad00; font-size: 18px; margin-left: 5%;'}
+    = t 'digest.email_body.completed_todos'
+  - @daily_statistic.completed_todos.each_pair do |list, items|
+    = link_to list.title, root_url(:anchor => "list-#{list.id}"), style: 'font-size: 16px; margin-left: 7%;'
+    %ul{style: 'list-style-type:none; margin-top: 0;'}
+      - items.each do |item|
+        %li{style: 'font-size: 12px; margin-left: 5%; margin-top: 5px;'}
+          = item.text

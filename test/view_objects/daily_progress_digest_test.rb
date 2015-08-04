@@ -3,8 +3,13 @@ require 'test_helper'
 class DailyProgressDigestTest < ActiveSupport::TestCase
 
   def setup
-    recipients = User.all.pluck :email
-    options = {recipients: recipients, completed: 0, remaining: 5}
+    options = {
+      recipients: ['vasyll@tada.com'],
+      completed_todos: {},
+      completed_amount: 0,
+      remaining_amount: 5
+    }
+
     @daily_statistic = DailyProgressDigest.new options
   end
 

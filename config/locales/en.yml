@@ -33,10 +33,11 @@ en:
       nothing_was_done: Nothing was done today.
       remaining: '%{count} todos remaining.'
       completed: '%{count} todos completed.'
+      completed_todos: Completed todos
     email_footer_html: TaDa &copy;2015
   formats:
     list_creation_date: '%B %d, %Y'
-    email_digest_date: '%a, %e %B'
+    email_digest_date: '%a,%e %B'
   list:
     all: All ToDo lists
     new:

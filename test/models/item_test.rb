@@ -39,6 +39,22 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal [item], Item.completed_today
   end
 
+  test "should return items including their lists" do
+    item = Item.with_list.first
+
+    counter = count_sql_queries_to_load do
+      item.list
+    end
+
+    assert_equal 0, counter
+  end
+
+  test "items are ordered by list and completed_at" do
+    items = Item.completed.with_list.ordered
+
+    assert_equal [items(:third), items(:second)], items
+  end
+
   test "should unset item position on checking" do
     first_item = items(:first)
     first_item.mark

@@ -11,7 +11,7 @@ class DailyDigestTest < ActionMailer::TestCase
   test "should return statistic" do
     list = lists(:first)
 
-    digest.expects(:completed_for_today).returns(list.items.completed)
+    Item.expects(:completed_today).returns(list.items.completed)
     digest.perform
 
     assert_equal ({

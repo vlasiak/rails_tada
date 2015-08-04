@@ -49,6 +49,12 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal 0, counter
   end
 
+  test "items are ordered by list and completed_at" do
+    items = Item.completed.with_list.ordered
+
+    assert_equal [items(:third), items(:second)], items
+  end
+
   test "should unset item position on checking" do
     first_item = items(:first)
     first_item.mark

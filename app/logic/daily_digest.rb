@@ -16,7 +16,7 @@ class DailyDigest
 
     @statistic = {
       recipients: get_recipients,
-      completed_todos: completed.sort_by(&:completed_at).group_by(&:list),
+      completed_todos: completed.group_by(&:list),
       completed_amount: completed.size,
       remaining_amount: incompleted_amount
     }
@@ -27,7 +27,7 @@ class DailyDigest
   end
 
   def completed_for_today
-    Item.with_list.completed_today
+    Item.completed_today.with_list.ordered
   end
 
   def incompleted_amount

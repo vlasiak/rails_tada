@@ -7,6 +7,7 @@
       %span= @daily_statistic.for_today
   %div
     = render partial: 'statistic_container'
+    = render partial: 'completed_section' unless @daily_statistic.no_items_done?
   %div{style: 'color: #1e8cd4; clear: both; padding-top: 30px;'}
     %hr{style: 'background: #CCCCCC; border: 0 none; height: 1px; width: 100%;'}
     = t 'digest.email_footer_html'

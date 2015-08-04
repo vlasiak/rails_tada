@@ -1,10 +1,18 @@
 require 'test_helper'
 
 class NotifierTest < ActionMailer::TestCase
+  fixtures :lists
 
   def setup
-    recipients = User.all.pluck :email
-    options = {recipients: recipients, completed: 0, remaining: 5}
+    list = lists(:first)
+
+    options = {
+      recipients: ['vasyll@tada.com'],
+      completed_todos: {list => list.items},
+      completed_amount: 4,
+      remaining_amount: 5
+    }
+
     @daily_statistic = DailyProgressDigest.new options
     @mail = Notifier.digest @daily_statistic
   end
@@ -15,9 +23,19 @@ class NotifierTest < ActionMailer::TestCase
     assert_equal ['no-reply@tada.com'], mail.from
   end
 
-  test "email body" do
-    assert_match /Nothing was done today./, mail.body.encoded
+  test "email body contains statistic" do
+    assert_match /4 todos completed./, mail.body.encoded
     assert_match /5 todos remaining./, mail.body.encoded
+  end
+
+  test "email body contains completed items details" do
+    mail.deliver
+
+    assert_select_email do
+      assert_select 'ul' do |element|
+        assert_select element, 'li', 4
+      end
+    end
   end
 
   private

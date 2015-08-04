@@ -19,6 +19,7 @@ gem 'devise'
 gem 'mandrill-rails'
 gem 'figaro'
 gem 'whenever', :require => false
+gem 'mocha'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use jqueru ui

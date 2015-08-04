@@ -1,7 +1,9 @@
 class DailyDigest
 
+  attr_reader :statistic
+
   def perform
-    options = get_statistic
+    options = gather_statistic
     daily_statistic = DailyProgressDigest.new options
 
     Notifier.digest(daily_statistic).deliver
@@ -9,20 +11,23 @@ class DailyDigest
 
   private
 
-  def get_statistic
-    recipients = get_recipients
-    completed = completed_amount
-    remaining = incompleted_amount
+  def gather_statistic
+    completed = completed_for_today
 
-    { recipients: recipients, completed: completed, remaining: remaining }
+    @statistic = {
+      recipients: get_recipients,
+      completed_todos: completed.group_by(&:list),
+      completed_amount: completed.size,
+      remaining_amount: incompleted_amount
+    }
   end
 
   def get_recipients
     User.all.pluck :email
   end
 
-  def completed_amount
-    Item.completed_today.count
+  def completed_for_today
+    Item.completed_today.with_list.ordered
   end
 
   def incompleted_amount

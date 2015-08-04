@@ -5,19 +5,19 @@ class DailyProgressDigest
   end
 
   def all_items_completed?
-    options[:remaining] == 0
+    remaining_number.zero?
   end
 
   def no_items_done?
-    options[:completed] == 0
+    completed_number.zero?
   end
 
   def completed_number
-    options[:completed]
+    options[:completed_amount]
   end
 
   def remaining_number
-    options[:remaining]
+    options[:remaining_amount]
   end
 
   def for_today
@@ -27,6 +27,10 @@ class DailyProgressDigest
 
   def recipients
     options[:recipients]
+  end
+
+  def completed_todos
+    options[:completed_todos]
   end
 
   private

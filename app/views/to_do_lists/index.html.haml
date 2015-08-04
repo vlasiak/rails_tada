@@ -1,4 +1,5 @@
 %h1= t 'list.all'
+= render partial: 'search'
 = link_to t('list.new.create_button'), new_to_do_list_path, id: 'add-list-button', class: 'btn btn-warning'
 = render partial: 'users/auth_info'
 = render partial: 'to_do_items/error_alert', locals: {id: 'new-list', type: '', message: t('list.new_error')}

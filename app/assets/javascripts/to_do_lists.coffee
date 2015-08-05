@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 class @TodoList
-  initialize: () ->
+  @initialize: () ->
     bindAddEvent()
 
   onCreate: (options) ->
@@ -11,11 +11,19 @@ class @TodoList
     message = detectCreateListAlertMessage()
     showCheckAlert message
 
+  onSearch: (options) ->
+    detectListsContainer().html(options.html)
+    TodoItem.initialize()
+    TodoList.initialize()
+
   detectAddButton = () ->
     $('#add-list-button')
 
   detectContainer = () ->
     $('div.container')
+
+  detectListsContainer = () ->
+    $('div#lists-container')
 
   detectPopUp = () ->
     $('#add-list-modal')
@@ -130,5 +138,4 @@ class @TodoList
         renderPopUp response
 
 $ ->
-  todoList = new TodoList
-  todoList.initialize()
+  TodoList.initialize()

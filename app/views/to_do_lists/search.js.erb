@@ -1,0 +1,10 @@
+var options = {
+    <% unless @lists.empty? %>
+        html: "<%=j render partial: 'lists' %>",
+    <% else %>
+        html: "<%=j render partial: 'no_matches' %>"
+    <% end %>
+};
+
+var todoList = new TodoList();
+todoList.onSearch(options);

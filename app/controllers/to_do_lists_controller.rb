@@ -19,13 +19,13 @@ class ToDoListsController < ApplicationController
   end
 
   def search
-    @search = List.search(include: [:items, :user]) do
-      fulltext 'basecamp' do
+    search = List.search(include: [:items, :user]) do
+      fulltext params[:search] do
         fields(:title, :items)
       end
     end
 
-    render json: @search.results
+    @lists = search.results.map { |list| SingleListPresenter.new list }
   end
 
   private

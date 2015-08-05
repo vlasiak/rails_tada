@@ -41,6 +41,7 @@ en:
   search:
     filters: Filters
     placeholder: 'is: done author:vasyll@interlink-ua.com send'
+    no_results: No results matched your search
   list:
     all: All ToDo lists
     new:

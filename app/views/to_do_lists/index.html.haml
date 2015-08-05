@@ -5,4 +5,5 @@
 = render partial: 'to_do_items/error_alert', locals: {id: 'new-list', type: '', message: t('list.new_error')}
 %hr
 
-= render partial: @lists_presentation.partial
+#lists-container
+  = render partial: @lists_presentation.partial

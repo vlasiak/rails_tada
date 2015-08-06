@@ -20,11 +20,6 @@ gem 'mandrill-rails'
 gem 'figaro'
 gem 'whenever', :require => false
 gem 'mocha'
-gem 'sunspot_rails'
-gem 'sunspot_test'
-group :development do
-  gem 'sunspot_solr'
-end
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use jqueru ui

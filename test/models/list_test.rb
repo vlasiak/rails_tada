@@ -37,6 +37,21 @@ class ListTest < ActiveSupport::TestCase
     assert_equal users(:first), list_with_items.user
   end
 
+  test "search lists by author" do
+    lists = List.with_creator.created_by 'vasyll@tada.com'
+    assert_equal [lists(:first), lists(:second)], lists
+  end
+
+  test "search lists by items text" do
+    lists = List.including_items.find_items 'Read'
+    assert_equal [lists(:first)], lists
+  end
+
+  test "search lists by items status" do
+    lists = List.including_items.with_status true
+    assert_equal [lists(:first)], lists
+  end
+
   test "list items are destroyed when destroy list" do
     list_with_items.destroy
 

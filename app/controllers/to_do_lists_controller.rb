@@ -19,13 +19,10 @@ class ToDoListsController < ApplicationController
   end
 
   def search
-    search = List.search(include: [:items, :user]) do
-      fulltext params[:search] do
-        fields(:title, :items)
-      end
-    end
+    options = Parser.new(params[:search]).perform
+    matched_lists = Filter.new(options).perform
 
-    @lists = search.results.map { |list| SingleListPresenter.new list }
+    @lists = matched_lists.map { |list| SingleListPresenter.new list }
   end
 
   private

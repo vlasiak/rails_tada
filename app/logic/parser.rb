@@ -5,25 +5,31 @@ class Parser
   end
 
   def perform
-    q = query
-    status_regex = /(\b)is\s*:\s*(\w+)/
-    author_regex = /(\b)author\s*:\s*(\S+)/
-    s = q.match(status_regex)[2]
-    q = q.sub(status_regex, '\1')
-    author = query.match(author_regex)[2]
-    q = q.sub(author_regex, '\1')
-    phrase = q.strip
-
-    { status: status(s), author: author, phrase: phrase }
+    { status: status, author: author, phrase: query.strip }
   end
 
   private
 
   attr_reader :query
 
-  def status patern
-    return true if patern == 'done'
-    false if patern == 'todo'
+  def status
+    status_regex = /\bis\s*:\s*(\w+)/
+    match = keyword_value status_regex
+
+    return true if match == 'done'
+    false if match == 'todo'
+  end
+
+  def author
+    author_regex = /\bauthor\s*:\s*(\S+)/
+    keyword_value author_regex
+  end
+
+  def keyword_value regex
+    match = query.match(regex)[1]
+    query.gsub! regex, ''
+
+    match
   end
 
 end

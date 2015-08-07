@@ -1,7 +1,7 @@
-class Filter
+class Search
 
   def initialize options
-    @options = options
+    @options = Parser.new(options).perform
   end
 
   def perform

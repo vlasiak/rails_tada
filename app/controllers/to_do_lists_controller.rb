@@ -19,9 +19,7 @@ class ToDoListsController < ApplicationController
   end
 
   def search
-    options = Parser.new(params[:search]).perform
-    matched_lists = Filter.new(options).perform
-
+    matched_lists = Search.new(params[:search]).perform
     @lists = matched_lists.map { |list| SingleListPresenter.new list }
   end
 

@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 class @TodoList
-  @initialize: () ->
+  initialize: () ->
     bindAddEvent()
 
   onCreate: (options) ->
@@ -14,7 +14,6 @@ class @TodoList
   onSearch: (options) ->
     detectListsContainer().html(options.html)
     TodoItem.initialize()
-    TodoList.initialize()
 
   detectAddButton = () ->
     $('#add-list-button')
@@ -138,4 +137,5 @@ class @TodoList
         renderPopUp response
 
 $ ->
-  TodoList.initialize()
+  todoList = new TodoList
+  todoList.initialize()

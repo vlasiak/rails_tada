@@ -1,6 +1,8 @@
 class Parser
 
   def initialize query
+    @status_regex = /\bis\s*:\s*(\w+)/i
+    @author_regex = /\bauthor\s*:\s*(\S+)/i
     @query = query
   end
 
@@ -10,19 +12,26 @@ class Parser
 
   private
 
-  attr_reader :query
+  attr_reader :status_regex, :author_regex, :query
 
   def status
-    status_regex = /\bis\s*:\s*(\w+)/
-    match = keyword_value status_regex
+    return unless status_present?
 
-    return true if match == 'done'
-    false if match == 'todo'
+    match = keyword_value(status_regex)
+    return true if match.downcase == 'done'
+    false if match.downcase == 'todo'
   end
 
   def author
-    author_regex = /\bauthor\s*:\s*(\S+)/
-    keyword_value author_regex
+    keyword_value(author_regex) if author_present?
+  end
+
+  def status_present?
+    query =~ status_regex
+  end
+
+  def author_present?
+    query =~ author_regex
   end
 
   def keyword_value regex

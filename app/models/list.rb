@@ -8,7 +8,6 @@ class List < ActiveRecord::Base
   scope :including_items, -> { includes(:items).order(:created_at) }
   scope :with_creator, -> { includes(:user) }
   scope :created_by, -> (email) { where(users: {email: email}) }
-  scope :find_items, -> (text) { where('items.text LIKE ?', "%#{text}%").order('items.position') }
+  scope :find_items, -> (text) { where('items.text ILIKE ?', "%#{text}%").order('items.position') }
   scope :with_status, -> (status) { where(items: {done: status }) }
-
 end

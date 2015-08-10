@@ -7,8 +7,10 @@ class Finder
   def perform
     @query = find_all
     @query = filter_by_author if options[:author]
-    @query = filter_by_phrase if options[:phrase]
+    @query = filter_by_phrase if options[:phrase].present?
     @query = filter_by_status unless options[:status].nil?
+
+    @query
   end
 
   private
@@ -24,7 +26,7 @@ class Finder
   end
 
   def filter_by_phrase
-    query.where('items.text ILIKE ?', "%#{options[:phrase]}%")
+    query.joins(:items).where('items.text ILIKE ?', "%#{options[:phrase]}%")
   end
 
   def filter_by_status

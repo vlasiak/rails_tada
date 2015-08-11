@@ -49,7 +49,7 @@ class @TodoList
     $('#alert-box-create-list')
 
   appendNewOne = (html) ->
-    detectContainer().append html
+    detectListsContainer().append html
 
   showCheckAlert = (alertBox) ->
     return unless alertBox.css('display') == 'none'

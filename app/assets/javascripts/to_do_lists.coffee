@@ -4,6 +4,7 @@
 
 class @TodoList
   initialize: () ->
+    applyFilter()
     bindAddEvent()
 
   onCreate: (options) ->
@@ -11,12 +12,15 @@ class @TodoList
     message = detectCreateListAlertMessage()
     showCheckAlert message
 
-  onSearch: (options) ->
-    detectListsContainer().html(options.html)
+  onSearch: (html) ->
+    detectListsContainer().html(html)
     TodoItem.initialize()
 
   detectAddButton = () ->
     $('#add-list-button')
+
+  detectSearchInput = () ->
+    $('#search')
 
   detectContainer = () ->
     $('div.container')
@@ -47,6 +51,11 @@ class @TodoList
 
   detectCreateListAlertMessage = () ->
     $('#alert-box-create-list')
+
+  applyFilter = () ->
+    url = $('#search-form').attr('action')
+    pattern = detectSearchInput().val().trim()
+    doSearchRequest url, pattern if pattern
 
   appendNewOne = (html) ->
     detectListsContainer().append html
@@ -125,6 +134,14 @@ class @TodoList
       else
         doPopUpRequest $(element).attr('href')
       return false
+
+  doSearchRequest = (url, pattern) ->
+    $.ajax
+      url: url
+      method: 'GET'
+      data: {search: pattern}
+      error: () ->
+        detectSearchInput().val('')
 
   doPopUpRequest = (url) ->
     $.ajax

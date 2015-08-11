@@ -32,7 +32,7 @@ class ToDoListsControllerTest < ActionController::TestCase
   end
 
   test "should search through the lists" do
-    xhr :post, :search, search: 'is:todo author:vasyll@tada.com Read'
+    xhr :get, :search, search: 'is:todo author:vasyll@tada.com Read'
 
     assert_response :success
     assert_not_nil assigns(:lists)

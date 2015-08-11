@@ -11,11 +11,18 @@ class @TodoList
     message = detectCreateListAlertMessage()
     showCheckAlert message
 
+  onSearch: (options) ->
+    detectListsContainer().html(options.html)
+    TodoItem.initialize()
+
   detectAddButton = () ->
     $('#add-list-button')
 
   detectContainer = () ->
     $('div.container')
+
+  detectListsContainer = () ->
+    $('div#lists-container')
 
   detectPopUp = () ->
     $('#add-list-modal')
@@ -42,7 +49,7 @@ class @TodoList
     $('#alert-box-create-list')
 
   appendNewOne = (html) ->
-    detectContainer().append html
+    detectListsContainer().append html
 
   showCheckAlert = (alertBox) ->
     return unless alertBox.css('display') == 'none'

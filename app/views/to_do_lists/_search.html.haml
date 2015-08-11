@@ -1,0 +1,9 @@
+.input-group.left-inner-addon
+  .input-group-btn
+    %span.glyphicon.glyphicon-search
+    %button.btn.btn-default.disabled
+      = t 'search.filters'
+      %span.caret
+  = form_tag search_to_do_lists_path, method: :get, remote: true do
+    = text_field_tag :search, nil, class: 'form-control', placeholder: t('search.placeholder')
+.delimiter

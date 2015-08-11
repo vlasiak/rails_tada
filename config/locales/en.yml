@@ -38,6 +38,10 @@ en:
   formats:
     list_creation_date: '%B %d, %Y'
     email_digest_date: '%a,%e %B'
+  search:
+    filters: Filters
+    placeholder: 'is: done author:vasyll@interlink-ua.com send'
+    no_results: No results matched your search
   list:
     all: All ToDo lists
     new:

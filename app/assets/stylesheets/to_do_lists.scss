@@ -76,6 +76,45 @@ body {
     margin-bottom: 4px;
   }
 
+  .delimiter {
+    border-left: 1px solid #CCCCCC;
+    display: inline-block;
+    height: 36px;
+    margin: 0 5px;
+    position: relative;
+    top: 12px;
+  }
+
+  .left-inner-addon {
+    display: inline-table;
+    margin-left: -10px;
+    position: relative;
+    top: 10px;
+    width: 55%;
+
+    input {
+      font-size: 12px;
+      height: 31px;
+      padding-left: 30px;
+    }
+
+    .btn {
+      font-size: 12px;
+      height: 31px;
+      font-weight: bold;
+    }
+
+    .glyphicon {
+      font-size: 14px;
+      bottom: 2px;
+      margin-left: 70px;
+      position: absolute;
+      padding: 10px 12px;
+      pointer-events: none;
+      z-index: 3;
+    }
+  }
+
   .modal {
     max-width: 600px;
     margin: 0 auto;

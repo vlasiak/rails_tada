@@ -18,6 +18,11 @@ class ToDoListsController < ApplicationController
     @list= SingleListPresenter.new list
   end
 
+  def search
+    matched_lists = Finder.new(params[:search]).perform
+    @lists = matched_lists.map { |list| SingleListPresenter.new list }
+  end
+
   private
 
   def list_params

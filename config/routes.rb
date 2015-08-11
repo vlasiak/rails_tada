@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users, path: 'auth', path_names: {sign_in: 'login', sign_out: 'logout'},
     controllers: { sessions: 'users/sessions' }
-  resources :to_do_lists, only: [:index, :new, :create]
+  resources :to_do_lists, only: [:index, :new, :create] do
+    get 'search', on: :collection
+  end
   resources :to_do_items, only: [:new, :create, :update] do
     patch 'move', on: :member
   end

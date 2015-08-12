@@ -1,10 +1,10 @@
 class ToDoListsController < ApplicationController
 
   def index
-    all_lists = List.including_items.with_creator
-    @lists_presentation = ListsPresentation.new all_lists
+    @lists_per_page = List.including_items.with_creator.paginate(page: params[:page])
+    @lists_presentation = ListsPresentation.new @lists_per_page
 
-    @lists = all_lists.map { |list| SingleListPresenter.new list }
+    @lists = @lists_per_page.map { |list| SingleListPresenter.new list }
   end
 
   def new

@@ -1,0 +1,9 @@
+var html =
+    <% if @lists.present? %>
+        "<%=j render partial: 'lists' %>"
+    <% else %>
+        "<%=j render partial: 'no_matches' %>"
+    <% end %>
+
+var todoList = new TodoList;
+todoList.onSearch(html);

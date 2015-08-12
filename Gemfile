@@ -25,6 +25,8 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'jquery-rails'
 # Use jqueru ui
 gem 'jquery-ui-rails'
+# Use jqueru cookie
+gem 'jquery-cookie-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

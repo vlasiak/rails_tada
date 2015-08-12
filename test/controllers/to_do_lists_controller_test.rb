@@ -10,8 +10,9 @@ class ToDoListsControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
+
     assert_response :success
-    assert_not_nil assigns(:lists)
+    assert_equal 3, assigns(:lists).count
   end
 
   test "should instantiate a new list" do
@@ -29,13 +30,6 @@ class ToDoListsControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_not_nil assigns(:list)
-  end
-
-  test "should search through the lists" do
-    xhr :get, :search, search: 'is:todo author:vasyll@tada.com Read'
-
-    assert_response :success
-    assert_not_nil assigns(:lists)
   end
 
   test "newly created list belongs to current user" do

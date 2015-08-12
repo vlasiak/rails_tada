@@ -5,18 +5,23 @@
 class @TodoList
   initialize: () ->
     bindAddEvent()
+    bindFilterSaving()
+    showFilter()
 
   onCreate: (options) ->
     return renderList options unless options.error
     message = detectCreateListAlertMessage()
     showCheckAlert message
 
-  onSearch: (options) ->
-    detectListsContainer().html(options.html)
+  onSearch: (html) ->
+    detectListsContainer().html(html)
     TodoItem.initialize()
 
   detectAddButton = () ->
     $('#add-list-button')
+
+  detectSearchInput = () ->
+    $('#search')
 
   detectContainer = () ->
     $('div.container')
@@ -48,6 +53,10 @@ class @TodoList
   detectCreateListAlertMessage = () ->
     $('#alert-box-create-list')
 
+  showFilter = () ->
+    pattern = $.cookie 'filter'
+    detectSearchInput().val(pattern) if pattern
+
   appendNewOne = (html) ->
     detectListsContainer().append html
 
@@ -76,6 +85,10 @@ class @TodoList
     detectNewListSubmitButton().addClass('disabled')
     detectNewListDescription().val('')
     detectNewListTitle().val('')
+
+  bindFilterSaving = () ->
+    $('#search-form').submit ->
+      $.cookie 'filter', detectSearchInput().val().trim()
 
   bindAddEvent = () ->
     expandOnClick detectAddButton()

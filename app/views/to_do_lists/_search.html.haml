@@ -4,6 +4,6 @@
     %button.btn.btn-default.disabled
       = t 'search.filters'
       %span.caret
-  = form_tag search_to_do_lists_path, id: 'search-form', method: :get, remote: true do
+  = form_tag root_path, id: 'search-form', method: :get, remote: true do
     = text_field_tag :search, nil, class: 'form-control', placeholder: t('search.placeholder')
 .delimiter

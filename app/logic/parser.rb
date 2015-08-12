@@ -3,7 +3,7 @@ class Parser
   def initialize query
     @status_regex = /\bis\s*:\s*(\w+)/i
     @author_regex = /\bauthor\s*:\s*(\S+)/i
-    @query = query
+    @query = query || ''
   end
 
   def perform

@@ -1,10 +1,10 @@
 class ToDoListsController < ApplicationController
 
   def index
-    all_lists = List.including_items.with_creator
-    @lists_presentation = ListsPresentation.new all_lists
+    lists = Finder.new(cookies[:filter]).perform
+    @lists_presentation = ListsPresentation.new lists
 
-    @lists = all_lists.map { |list| SingleListPresenter.new list }
+    @lists = lists.map { |list| SingleListPresenter.new list }
   end
 
   def new
@@ -16,11 +16,6 @@ class ToDoListsController < ApplicationController
   def create
     list = current_user.lists.create list_params
     @list= SingleListPresenter.new list
-  end
-
-  def search
-    matched_lists = Finder.new(params[:search]).perform
-    @lists = matched_lists.map { |list| SingleListPresenter.new list }
   end
 
   private

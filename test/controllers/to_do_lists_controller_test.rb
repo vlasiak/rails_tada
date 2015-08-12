@@ -31,13 +31,6 @@ class ToDoListsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:list)
   end
 
-  test "should search through the lists" do
-    xhr :get, :search, search: 'is:todo author:vasyll@tada.com Read'
-
-    assert_response :success
-    assert_not_nil assigns(:lists)
-  end
-
   test "newly created list belongs to current user" do
     xhr :post, :create, list: {title: 'title', description: 'description'}
 

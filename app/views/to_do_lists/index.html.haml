@@ -8,4 +8,5 @@
 #lists-container
   = render partial: @lists_presentation.partial
 
-= will_paginate @lists_per_page
+.pagination-container
+  = will_paginate @lists_per_page, renderer: BootstrapPagination::Rails, inner_window: 1, outer_window: 1

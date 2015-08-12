@@ -20,7 +20,7 @@ gem 'mandrill-rails'
 gem 'figaro'
 gem 'whenever', :require => false
 gem 'mocha'
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Use jqueru ui

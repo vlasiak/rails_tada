@@ -4,8 +4,9 @@
 
 class @TodoList
   initialize: () ->
-    applyFilter()
     bindAddEvent()
+    bindFilterSaving()
+    applyFilter()
 
   onCreate: (options) ->
     return renderList options unless options.error
@@ -54,7 +55,8 @@ class @TodoList
 
   applyFilter = () ->
     url = $('#search-form').attr('action')
-    pattern = detectSearchInput().val().trim()
+    pattern = $.cookie 'filter'
+    detectSearchInput().val(pattern)
     doSearchRequest url, pattern if pattern
 
   appendNewOne = (html) ->
@@ -85,6 +87,10 @@ class @TodoList
     detectNewListSubmitButton().addClass('disabled')
     detectNewListDescription().val('')
     detectNewListTitle().val('')
+
+  bindFilterSaving = () ->
+    $(window).unload () ->
+      $.cookie 'filter', detectSearchInput().val().trim()
 
   bindAddEvent = () ->
     expandOnClick detectAddButton()
@@ -140,8 +146,8 @@ class @TodoList
       url: url
       method: 'GET'
       data: {search: pattern}
-      error: () ->
-        detectSearchInput().val('')
+      success: () ->
+        $.removeCookie 'filter'
 
   doPopUpRequest = (url) ->
     $.ajax

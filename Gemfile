@@ -25,6 +25,8 @@ gem 'will_paginate-bootstrap'
 gem 'jquery-rails'
 # Use jqueru ui
 gem 'jquery-ui-rails'
+# Use jqueru turbolinks
+gem 'jquery-turbolinks'
 # Use jqueru cookie
 gem 'jquery-cookie-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -65,4 +67,3 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

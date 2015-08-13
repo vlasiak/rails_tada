@@ -31,6 +31,41 @@ second_list = List.create(
   user_id: first_user.id
 )
 
+List.create(
+    title: 'Explore Basecamp! — Create other items by yourself',
+    user_id: first_user.id
+)
+
+List.create(
+    title: 'Explore Basecamp! — Create a new list',
+    user_id: first_user.id
+)
+
+List.create(
+    title: 'Explore Basecamp! — Search items',
+    user_id: first_user.id
+)
+
+List.create(
+    title: 'Explore Basecamp! — Use filtering',
+    user_id: first_user.id
+)
+
+List.create(
+    title: 'Explore Basecamp! — Try pagination',
+    user_id: first_user.id
+)
+
+List.create(
+    title: 'Explore Basecamp! — Do not forget to complete items',
+    user_id: first_user.id
+)
+
+List.create(
+    title: 'Explore Basecamp! — Always try some new features',
+    user_id: first_user.id
+)
+
 
 Item.create(
   text: %{ Click the "Invite more people" link at the top right corner

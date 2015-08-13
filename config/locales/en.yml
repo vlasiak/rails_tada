@@ -35,6 +35,9 @@ en:
       completed: '%{count} todos completed.'
       completed_todos: Completed todos
     email_footer_html: TaDa &copy;2015
+  pagination:
+    previous: Previous
+    next: Next
   formats:
     list_creation_date: '%B %d, %Y'
     email_digest_date: '%a,%e %B'

@@ -1,0 +1,7 @@
+.pagination-container
+  = will_paginate @lists_per_page,
+    renderer: BootstrapPagination::Rails,
+    previous_label: t('pagination.previous'),
+    next_label: t('pagination.next'),
+    inner_window: 1,
+    outer_window: 1

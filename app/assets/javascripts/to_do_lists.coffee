@@ -4,11 +4,13 @@
 
 class @TodoList
   initialize: () ->
+#    bindContainerChanging()
     bindAddEvent()
     bindFilterSaving()
     showFilter()
 
   onCreate: (options) ->
+    return closePopUp() unless $('div.list').length < options.per_page
     return renderList options unless options.error
     message = detectCreateListAlertMessage()
     showCheckAlert message
@@ -85,6 +87,10 @@ class @TodoList
     detectNewListSubmitButton().addClass('disabled')
     detectNewListDescription().val('')
     detectNewListTitle().val('')
+
+#  bindContainerChanging = () ->
+#    $('html').on 'DOMSubtreeModified', ()->
+#      $('#lists-container').html('')
 
   bindFilterSaving = () ->
     $('#search-form').submit ->

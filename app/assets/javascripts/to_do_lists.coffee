@@ -4,19 +4,19 @@
 
 class @TodoList
   initialize: () ->
-#    bindContainerChanging()
     bindAddEvent()
     bindFilterSaving()
     showFilter()
 
   onCreate: (options) ->
-    return closePopUp() unless $('div.list').length < options.per_page
-    return renderList options unless options.error
     message = detectCreateListAlertMessage()
-    showCheckAlert message
+    return showCheckAlert message if options.error
+    return appendOnCurrentPage options if $('div.list').length < options.per_page
+    showCreateSuccessMessage options.message
 
   onSearch: (html) ->
-    detectListsContainer().html(html)
+    restorePagination()
+    detectListsContainer().replaceWith html
     TodoItem.initialize()
 
   detectAddButton = () ->
@@ -55,9 +55,21 @@ class @TodoList
   detectCreateListAlertMessage = () ->
     $('#alert-box-create-list')
 
+  showCreateSuccessMessage = (html) ->
+    closePopUp()
+    renderMessage html
+
   showFilter = () ->
     pattern = $.cookie 'filter'
     detectSearchInput().val(pattern) if pattern
+
+  renderMessage = (html) ->
+    detectListsContainer().before html
+    $('.alert-success').fadeIn(1000)
+
+  restorePagination = () ->
+    $('.pagination-container').remove()
+    history.pushState {}, '', '/?page=1'
 
   appendNewOne = (html) ->
     detectListsContainer().append html
@@ -75,7 +87,7 @@ class @TodoList
     invitation = $('div.empty')
     invitation.remove()
 
-  renderList = (options) ->
+  appendOnCurrentPage = (options) ->
     removeInvitation()
     closePopUp()
     appendNewOne options.html
@@ -87,10 +99,6 @@ class @TodoList
     detectNewListSubmitButton().addClass('disabled')
     detectNewListDescription().val('')
     detectNewListTitle().val('')
-
-#  bindContainerChanging = () ->
-#    $('html').on 'DOMSubtreeModified', ()->
-#      $('#lists-container').html('')
 
   bindFilterSaving = () ->
     $('#search-form').submit ->

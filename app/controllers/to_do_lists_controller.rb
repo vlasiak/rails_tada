@@ -3,7 +3,7 @@ class ToDoListsController < ApplicationController
   def index
     @lists_per_page = Finder.new(cookies[:filter]).perform
     @lists_per_page = @lists_per_page.paginate(page: params[:page])
-    @lists_presentation = ListsPresentation.new @lists_per_page
+    @lists_presentation = ListsPresentation.new current_user, @lists_per_page
 
     @lists = @lists_per_page.map { |list| SingleListPresenter.new list }
   end

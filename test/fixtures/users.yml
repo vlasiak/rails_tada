@@ -9,8 +9,3 @@ second:
   id: 2
   email: vasyll@interlink-ua.com
   encrypted_password: password
-
-third:
-  id: 3
-  email: steve@tada.com
-  encrypted_password: other_password

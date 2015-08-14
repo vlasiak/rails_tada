@@ -58,6 +58,7 @@ class @TodoList
   showCreateSuccessMessage = (html) ->
     closePopUp()
     renderMessage html
+    removeFilter
 
   showFilter = () ->
     pattern = $.cookie 'filter'
@@ -86,6 +87,11 @@ class @TodoList
   removeInvitation = () ->
     invitation = $('div.empty')
     invitation.remove()
+
+  removeFilter = () ->
+    return unless $.cookie 'filter'
+    $('a.navigator').click () ->
+      $.removeCookie 'filter'
 
   appendOnCurrentPage = (options) ->
     removeInvitation()

@@ -15,7 +15,7 @@ class DailyDigestTest < ActionMailer::TestCase
     digest.perform
 
     assert_equal ({
-       :recipients => ['vasyll@tada.com', 'vasyll@interlink-ua.com', 'steve@tada.com'],
+       :recipients => ['vasyll@tada.com', 'vasyll@interlink-ua.com'],
        :completed_todos => {
            list => [items(:third), items(:second)]
        },

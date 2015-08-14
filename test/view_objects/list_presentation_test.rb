@@ -3,26 +3,20 @@ require 'test_helper'
 class ListPresentationTest < ActionController::TestCase
   fixtures :lists
 
-  def setup
-    @user = users(:first)
-  end
-
   test "should return invitation message" do
-    lists = ListsPresentation.new users(:third), lists(:first)
+    List.expects(:count).returns(0)
+    lists = ListsPresentation.new lists(:first)
     assert_equal 'no_lists', lists.partial
   end
 
   test "should return no matches message" do
-    lists = ListsPresentation.new user, []
+    lists = ListsPresentation.new []
     assert_equal 'no_matches', lists.partial
   end
 
   test "should return list of todos" do
-    lists = ListsPresentation.new user, lists(:first)
+    lists = ListsPresentation.new lists(:first)
     assert_equal 'lists', lists.partial
   end
 
-  private
-
-  attr_reader :user
 end

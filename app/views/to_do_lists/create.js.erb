@@ -1,13 +1,12 @@
 var options = {
     <% if @list.persisted? %>
         html: "<%=j render partial: 'list', locals: {list: @list} %>",
-        message: "<%=j render partial: 'create_success' %>",
+        message: "<%=j render partial: 'create_success', locals: {page: @pager[:on_page]} %>",
+        per_page: <%= @pager[:per_page] %>,
         id: <%= @list.id %>,
     <% else %>
-        error: true,
+        error: true
     <% end %>
-        per_page: 3,
-        on_page: 4
 };
 
 var todoList = new TodoList();

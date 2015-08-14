@@ -3,4 +3,9 @@
 first:
   id: 1
   email: vasyll@tada.com
+  encrypted_password: new_password
+
+second:
+  id: 2
+  email: vasyll@interlink-ua.com
   encrypted_password: password

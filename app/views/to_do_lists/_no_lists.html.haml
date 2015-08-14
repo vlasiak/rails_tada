@@ -1,4 +1,1 @@
-.empty
-  = image_tag 'blank_lists.jpg', size: '200x206', alt: 'No lists icon'
-  %h2= t 'list.new.empty'
-  %h4= t 'list.new.invitation'
+= render partial: 'no_content', locals:{title: t('list.new.empty'), body: t('list.new.invitation')}

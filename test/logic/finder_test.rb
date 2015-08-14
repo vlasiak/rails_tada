@@ -7,7 +7,7 @@ class FinderTest < ActionMailer::TestCase
     Parser.any_instance.stubs(:perform).returns({status: nil, author: nil, phrase: ''})
     search = Finder.new('')
 
-    assert_equal [lists(:second), lists(:first)], search.perform
+    assert_equal [lists(:second), lists(:fourth), lists(:third), lists(:first), lists(:fifth)], search.perform
   end
 
   test "should return matched lists by all parameters" do

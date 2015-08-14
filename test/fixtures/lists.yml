@@ -12,3 +12,21 @@ second:
   title: Explore Basecamp! — To-do list basics
   created_at: 2015-06-22 11:04:55
   user_id: 1
+
+third:
+  id: 3
+  title: Explore Basecamp! — Do something else
+  created_at: 2015-06-28 12:19:23
+  user_id: 2
+
+fourth:
+  id: 4
+  title: Explore Basecamp! — Finish
+  created_at: 2015-06-27 23:11:11
+  user_id: 2
+
+fifth:
+  id: 5
+  title: Explore Basecamp! — Accept license terms
+  created_at: 2015-07-01 12:34:56
+  user_id: 2

@@ -1,3 +1,1 @@
-.empty
-  = image_tag 'blank_lists.jpg', size: '200x206', alt: 'No lists icon'
-  %h2= t 'search.no_results'
+= render partial: 'no_content', locals:{title: t('search.no_results'), body: ''}

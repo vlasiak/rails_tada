@@ -58,6 +58,10 @@ body {
     border-left-color: #aa6708;
   }
 
+  .close {
+    right: 0;
+  }
+
   .glyphicon {
     color: #999;
     font-size: 12px;
@@ -74,6 +78,10 @@ body {
 
   .btn {
     margin-bottom: 4px;
+  }
+
+  .pagination-container {
+    text-align: center;
   }
 
   .delimiter {

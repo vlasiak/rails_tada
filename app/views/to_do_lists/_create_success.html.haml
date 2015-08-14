@@ -1,0 +1,6 @@
+.alert.alert-success.alert-dismissible
+  %button.close{data: {dismiss: 'alert'}}
+    %span &times;
+  %p
+    = t 'list.new.create_success'
+    = link_to t('list.new.navigate'), root_path(page: page), class: 'navigator'

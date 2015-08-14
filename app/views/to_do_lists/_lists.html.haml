@@ -1,2 +1,5 @@
-- @lists.each do |list|
-  = render partial: 'list', locals: {list: list}
+#lists-container
+  - @lists.each do |list|
+    = render partial: 'list', locals: {list: list}
+
+= render partial: 'pager'

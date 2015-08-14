@@ -9,12 +9,14 @@ class @TodoList
     showFilter()
 
   onCreate: (options) ->
-    return renderList options unless options.error
     message = detectCreateListAlertMessage()
-    showCheckAlert message
+    return showCheckAlert message if options.error
+    return appendOnCurrentPage options if pageMatchesConditions options
+    showCreateSuccessMessage options.message
 
   onSearch: (html) ->
-    detectListsContainer().html(html)
+    restorePagination()
+    detectListsContainer().replaceWith html
     TodoItem.initialize()
 
   detectAddButton = () ->
@@ -53,9 +55,29 @@ class @TodoList
   detectCreateListAlertMessage = () ->
     $('#alert-box-create-list')
 
+  showCreateSuccessMessage = (html) ->
+    closePopUp()
+    renderMessage html
+    removeFilter()
+
   showFilter = () ->
     pattern = $.cookie 'filter'
     detectSearchInput().val(pattern) if pattern
+
+  pageIsFull = (listsLimit) ->
+    $('div.list').length == listsLimit
+
+  pageMatchesConditions = (options) ->
+    return if pageIsFull options.per_page
+    true unless $.cookie 'filter'
+
+  renderMessage = (html) ->
+    detectListsContainer().before html
+    $('.alert-success').fadeIn(1000)
+
+  restorePagination = () ->
+    $('.pagination-container').remove()
+    history.pushState {}, '', '/?page=1'
 
   appendNewOne = (html) ->
     detectListsContainer().append html
@@ -73,7 +95,12 @@ class @TodoList
     invitation = $('div.empty')
     invitation.remove()
 
-  renderList = (options) ->
+  removeFilter = () ->
+    return unless $.cookie 'filter'
+    $('a.navigator').click () ->
+      $.removeCookie 'filter'
+
+  appendOnCurrentPage = (options) ->
     removeInvitation()
     closePopUp()
     appendNewOne options.html
@@ -150,5 +177,6 @@ class @TodoList
         renderPopUp response
 
 $ ->
+  Turbolinks.pagesCached 0
   todoList = new TodoList
   todoList.initialize()

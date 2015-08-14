@@ -58,7 +58,7 @@ class @TodoList
   showCreateSuccessMessage = (html) ->
     closePopUp()
     renderMessage html
-    removeFilter
+    removeFilter()
 
   showFilter = () ->
     pattern = $.cookie 'filter'

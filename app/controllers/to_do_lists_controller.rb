@@ -1,9 +1,9 @@
 class ToDoListsController < ApplicationController
 
   def index
-    @lists_per_page = Finder.new(cookies[:filter]).perform
-    @lists_per_page = @lists_per_page.paginate(page: params[:page])
-    @lists_presentation = ListsPresentation.new @lists_per_page
+    lists_per_page = Finder.new(cookies[:filter]).perform
+    @lists_per_page = lists_per_page.paginate(page: params[:page])
+    @lists_presentation = ListsPresentation.new List.exists?, @lists_per_page
 
     @lists = @lists_per_page.map { |list| SingleListPresenter.new list }
   end
@@ -15,7 +15,7 @@ class ToDoListsController < ApplicationController
   end
 
   def create
-    @pager = Pager.new.info
+    @pager = PagerAttributes.new List.count
 
     list = current_user.lists.create list_params
     @list = SingleListPresenter.new list

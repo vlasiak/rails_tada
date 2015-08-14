@@ -11,7 +11,7 @@ class @TodoList
   onCreate: (options) ->
     message = detectCreateListAlertMessage()
     return showCheckAlert message if options.error
-    return appendOnCurrentPage options if $('div.list').length < options.per_page
+    return appendOnCurrentPage options if pageMatchesConditions options
     showCreateSuccessMessage options.message
 
   onSearch: (html) ->
@@ -63,6 +63,13 @@ class @TodoList
   showFilter = () ->
     pattern = $.cookie 'filter'
     detectSearchInput().val(pattern) if pattern
+
+  pageIsFull = (listsLimit) ->
+    $('div.list').length == listsLimit
+
+  pageMatchesConditions = (options) ->
+    return if pageIsFull options.per_page
+    true unless $.cookie 'filter'
 
   renderMessage = (html) ->
     detectListsContainer().before html
@@ -170,5 +177,6 @@ class @TodoList
         renderPopUp response
 
 $ ->
+  Turbolinks.pagesCached 0
   todoList = new TodoList
   todoList.initialize()

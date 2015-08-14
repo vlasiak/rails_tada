@@ -12,7 +12,14 @@ class ToDoListsControllerTest < ActionController::TestCase
     get :index
 
     assert_response :success
-    assert_equal 3, assigns(:lists).count
+    assert_not_nil assigns(:lists)
+  end
+
+  test "should return lists on a second page" do
+    xhr :get, :index, page: 2, cookies: {filter: ''}
+
+    assert_response :success
+    assert_equal [lists(:first), lists(:fifth)], assigns(:lists_per_page)
   end
 
   test "should instantiate a new list" do

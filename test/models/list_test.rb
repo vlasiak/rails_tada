@@ -25,7 +25,7 @@ class ListTest < ActiveSupport::TestCase
 
   test "lists are ordered by created_at column" do
     lists = List.including_items
-    assert_equal [lists(:second), lists(:fourth), lists(:third), lists(:first)], lists
+    assert_equal [lists(:second), lists(:fourth), lists(:third), lists(:first), lists(:fifth)], lists
   end
 
   test "list contains it's items" do
